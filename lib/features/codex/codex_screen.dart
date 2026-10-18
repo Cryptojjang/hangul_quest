@@ -199,7 +199,8 @@ class _CardDetail extends StatelessWidget {
             ),
           const SizedBox(height: 16),
           HqButton(
-            label: '🔊 발음 듣기',
+            label: '발음 듣기',
+            icon: Icons.volume_up_rounded,
             color: HqColors.dancheongBlue,
             onPressed: () => state.playJamo(jamo),
           ),

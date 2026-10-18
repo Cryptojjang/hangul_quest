@@ -99,9 +99,13 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       ?.copyWith(fontSize: 30)),
               const SizedBox(height: 16),
               // Value summary: what competitors don't have (spec §5.3).
-              const _ValueRow(emoji: '🎤', text: '내 발음을 채점해주는 유일한 한글 앱'),
-              const _ValueRow(emoji: '🧠', text: '틀린 소리만 골라주는 개인화 복습'),
-              const _ValueRow(emoji: '🧩', text: '글자 조립부터 단어 읽기까지 전체 스테이지'),
+              const _ValueRow(
+                  icon: Icons.mic_rounded, text: '내 발음을 채점해주는 유일한 한글 앱'),
+              const _ValueRow(
+                  icon: Icons.psychology_rounded, text: '틀린 소리만 골라주는 개인화 복습'),
+              const _ValueRow(
+                  icon: Icons.extension_rounded,
+                  text: '글자 조립부터 단어 읽기까지 전체 스테이지'),
               const SizedBox(height: 20),
               if (_error != null)
                 Padding(
@@ -188,9 +192,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
 }
 
 class _ValueRow extends StatelessWidget {
-  const _ValueRow({required this.emoji, required this.text});
+  const _ValueRow({required this.icon, required this.text});
 
-  final String emoji;
+  final IconData icon;
   final String text;
 
   @override
@@ -199,7 +203,7 @@ class _ValueRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Text(emoji, style: const TextStyle(fontSize: 22)),
+          HqIconTile(icon: icon, color: HqColors.dancheongRed, size: 36),
           const SizedBox(width: 12),
           Expanded(
               child: Text(text,

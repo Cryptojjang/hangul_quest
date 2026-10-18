@@ -180,7 +180,10 @@ class _NotifPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('🔥', style: TextStyle(fontSize: 80)),
+          const HqIconTile(
+              icon: Icons.local_fire_department_rounded,
+              color: HqColors.obangYellow,
+              size: 112),
           const SizedBox(height: 24),
           Text('하루 5분, 스트릭을 지켜요',
               style: Theme.of(context).textTheme.headlineMedium),

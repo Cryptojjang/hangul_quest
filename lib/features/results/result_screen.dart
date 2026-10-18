@@ -101,7 +101,8 @@ class _ResultScreenState extends State<ResultScreen> {
                   color: HqColors.celadon.withValues(alpha: 0.4),
                   child: Row(
                     children: [
-                      const Text('🎴', style: TextStyle(fontSize: 26)),
+                      const HqIconTile(
+                          icon: Icons.style_rounded, size: 40),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(

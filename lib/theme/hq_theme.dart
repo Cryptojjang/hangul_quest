@@ -86,6 +86,36 @@ class HqCard extends StatelessWidget {
   }
 }
 
+/// Glazed tile holding a rounded line icon — replaces emoji-as-icon so
+/// glyphs render identically on every platform and stay on-palette.
+class HqIconTile extends StatelessWidget {
+  const HqIconTile({
+    super.key,
+    required this.icon,
+    this.color = HqColors.ink,
+    this.size = 48,
+  });
+
+  final IconData icon;
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color == HqColors.ink
+            ? HqColors.celadon.withValues(alpha: 0.35)
+            : color.withValues(alpha: 0.14),
+        borderRadius: BorderRadius.circular(size * 0.3),
+      ),
+      child: Icon(icon, size: size * 0.55, color: color),
+    );
+  }
+}
+
 class HqButton extends StatefulWidget {
   const HqButton({
     super.key,
@@ -94,6 +124,7 @@ class HqButton extends StatefulWidget {
     this.color = HqColors.dancheongRed,
     this.textColor = Colors.white,
     this.expanded = false,
+    this.icon,
   });
 
   final String label;
@@ -101,6 +132,7 @@ class HqButton extends StatefulWidget {
   final Color color;
   final Color textColor;
   final bool expanded;
+  final IconData? icon;
 
   @override
   State<HqButton> createState() => _HqButtonState();
@@ -125,11 +157,25 @@ class _HqButtonState extends State<HqButton> {
             ? const []
             : const [BoxShadow(color: Color(0x332B2622), offset: Offset(2, 3))],
       ),
-      child: Text(
-        widget.label,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            color: widget.textColor, fontWeight: FontWeight.w700, fontSize: 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (widget.icon != null) ...[
+            Icon(widget.icon, size: 20, color: widget.textColor),
+            const SizedBox(width: 8),
+          ],
+          Flexible(
+            child: Text(
+              widget.label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: widget.textColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16),
+            ),
+          ),
+        ],
       ),
     );
     return GestureDetector(

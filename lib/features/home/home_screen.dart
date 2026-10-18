@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                         .push(HqPageRoute(page: const CodexScreen())),
                     child: Column(
                       children: [
-                        const Text('📖', style: TextStyle(fontSize: 32)),
+                        const HqIconTile(icon: Icons.menu_book_rounded),
                         const SizedBox(height: 4),
                         const Text('자모 도감',
                             style: TextStyle(fontWeight: FontWeight.w700)),
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () => _openReview(context),
                     child: Column(
                       children: [
-                        const Text('🧠', style: TextStyle(fontSize: 32)),
+                        const HqIconTile(icon: Icons.psychology_rounded),
                         const SizedBox(height: 4),
                         const Text('스마트 복습',
                             style: TextStyle(fontWeight: FontWeight.w700)),
@@ -147,9 +147,17 @@ class _StreakFlame extends StatelessWidget {
         color: HqColors.obangYellow.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(14),
       ),
-      child: Text('🔥 $days',
-          style: const TextStyle(
-              fontWeight: FontWeight.w800, color: HqColors.ink)),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.local_fire_department_rounded,
+              size: 18, color: HqColors.obangYellow),
+          const SizedBox(width: 2),
+          Text('$days',
+              style: const TextStyle(
+                  fontWeight: FontWeight.w800, color: HqColors.ink)),
+        ],
+      ),
     );
   }
 }
@@ -207,7 +215,8 @@ class _DailyChallengeCard extends StatelessWidget {
     return HqCard(
       child: Row(
         children: [
-          const Text('⚡', style: TextStyle(fontSize: 32)),
+          const HqIconTile(
+              icon: Icons.bolt_rounded, color: HqColors.obangYellow),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -220,6 +229,7 @@ class _DailyChallengeCard extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(width: 8),
           HqButton(label: '도전', onPressed: onPlay),
         ],
       ),
@@ -233,16 +243,16 @@ class _StageNode extends StatelessWidget {
   final StageId stage;
 
   static const _meta = {
-    StageId.jamoHunt: ('🎯', '자모 사냥', '발음 듣고 자모 맞히기'),
-    StageId.blockBuilder: ('🧩', '글자 조립', '초성+중성+종성 퍼즐'),
-    StageId.wordRush: ('🚀', '단어 러시', '단어 읽고 이미지 매칭'),
-    StageId.pronunciation: ('🎤', '발음 도전', '내 발음 채점받기'),
+    StageId.jamoHunt: (Icons.hearing_rounded, '자모 사냥', '발음 듣고 자모 맞히기'),
+    StageId.blockBuilder: (Icons.extension_rounded, '글자 조립', '초성+중성+종성 퍼즐'),
+    StageId.wordRush: (Icons.image_search_rounded, '단어 러시', '단어 읽고 이미지 매칭'),
+    StageId.pronunciation: (Icons.mic_rounded, '발음 도전', '내 발음 채점받기'),
   };
 
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
-    final (emoji, title, subtitle) = _meta[stage]!;
+    final (icon, title, subtitle) = _meta[stage]!;
     final levels = levelsFor(stage);
     final cleared = state.progress.cleared(stage.name);
     final nextLevel = (cleared + 1).clamp(1, levels.length);
@@ -256,7 +266,8 @@ class _StageNode extends StatelessWidget {
       color: locked ? const Color(0xFFEFE9DC) : Colors.white,
       child: Row(
         children: [
-          Text(emoji, style: const TextStyle(fontSize: 30)),
+          HqIconTile(
+              icon: icon, color: locked ? HqColors.inkSoft : HqColors.ink),
           const SizedBox(width: 12),
           Expanded(
             child: Column(

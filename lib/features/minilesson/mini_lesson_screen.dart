@@ -48,7 +48,7 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
     StageId.pronunciation: (
       '이제 소리 내어 볼까요?',
       '듣고 → 조립하고 → 읽었다면, 마지막은 말하기예요.\n마이크에 대고 발음하면 기기 안에서만 분석해\n어떤 소리가 좋았는지 알려드려요.',
-      '🎤 안녕',
+      '안녕',
     ),
   };
 
