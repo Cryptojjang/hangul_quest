@@ -232,3 +232,48 @@ class PrivacyPolicyScreen extends StatelessWidget {
     );
   }
 }
+
+/// Terms of Use (EULA) — required next to subscription offers (guideline
+/// 3.1.2). Uses Apple's standard EULA until a custom one exists; keep this
+/// URL in sync with App Store Connect metadata.
+class TermsOfUseScreen extends StatelessWidget {
+  const TermsOfUseScreen({super.key});
+
+  static const termsUrl =
+      'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: HqColors.ink,
+        title: const Text('이용약관'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          Text('요약', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 8),
+          const Text(
+            '· 한글퀘스트 이용에는 Apple 표준 최종 사용자 사용권 계약(EULA)이 '
+            '적용돼요.\n\n'
+            '· 프리미엄 구독은 기간이 끝나기 24시간 전까지 해지하지 않으면 '
+            '같은 가격으로 자동 갱신돼요.\n\n'
+            '· 무료 체험 중 해지하면 요금이 청구되지 않아요.',
+          ),
+          const SizedBox(height: 24),
+          HqButton(
+            label: '전문 보기 (웹)',
+            color: HqColors.dancheongBlue,
+            onPressed: () {
+              // TODO(release): url_launcher로 termsUrl 열기.
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text(termsUrl)));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

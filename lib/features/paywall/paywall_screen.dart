@@ -147,8 +147,8 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   ),
                 ),
               const SizedBox(height: 6),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
                 children: [
                   TextButton(
                     onPressed: _restore,
@@ -160,6 +160,13 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     onPressed: () => Navigator.of(context).push(
                         HqPageRoute(page: const ManageSubscriptionScreen())),
                     child: const Text('해지 안내',
+                        style:
+                            TextStyle(fontSize: 12, color: HqColors.inkSoft)),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context)
+                        .push(HqPageRoute(page: const TermsOfUseScreen())),
+                    child: const Text('이용약관',
                         style:
                             TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),

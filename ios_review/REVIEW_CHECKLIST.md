@@ -16,7 +16,9 @@
 - 구독 해지 안내: `lib/features/settings/settings_screen.dart` → `ManageSubscriptionScreen`
 - 개인정보 처리방침(인앱 + 외부 URL 연결 지점): 동일 파일 → `PrivacyPolicyScreen`
   (`policyUrl = https://hangulquest.app/privacy` — App Store Connect 메타데이터와 일치시킬 것)
-- 페이월 고지: 가격/기간/자동갱신/해지/복원 — `lib/features/paywall/paywall_screen.dart`
+- 이용약관(EULA, guideline 3.1.2): 동일 파일 → `TermsOfUseScreen`
+  (`termsUrl` = Apple 표준 EULA — 자체 약관을 만들면 교체, App Store Connect와 일치시킬 것)
+- 페이월 고지: 가격/기간/자동갱신/해지/복원/이용약관 — `lib/features/paywall/paywall_screen.dart`
 
 ## 3. 결제 규정 (guideline 3.1.1)
 - 스토어 빌드에서 외부 결제 유도 문구·링크 금지 — 코드 레벨 가드:

@@ -106,7 +106,14 @@ void main() {
     expect(find.text('구매 복원'), findsOneWidget);
     expect(find.text('해지 안내'), findsOneWidget);
     expect(find.text('개인정보 처리방침'), findsOneWidget);
+    expect(find.text('이용약관'), findsOneWidget);
     expect(find.text('연간 플랜'), findsOneWidget);
+
+    await tester.tap(find.text('이용약관'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('자동 갱신'), findsOneWidget);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
     expect(find.text('SAVE 52%'), findsOneWidget);
 
     await tester.tap(find.text('7일 무료로 시작하기'));
