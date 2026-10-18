@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../core/data/curriculum.dart';
+import '../../core/hangul/hangul.dart';
 import '../../theme/hq_theme.dart';
 import '../stage1/jamo_hunt_screen.dart';
 import '../stage2/block_builder_screen.dart';
@@ -29,26 +30,32 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
   Timer? _timer;
   int _elapsed = 0;
 
+  /// (title, body, demo frames, demo prompt). Frames are stepped through by
+  /// tapping; single jamo/syllable frames play their sound.
   static const _lessons = {
     StageId.jamoHunt: (
       '소리를 그린 문자',
-      'ㄱ은 혀뿌리가 목을 막는 모양, ㅁ은 입술 모양이에요.\n한글 자음은 발음 기관을 그린 그림이에요.\n\n지금부터 들리는 소리의 "모양"을 찾아보세요.',
-      'ㄱ ㄴ ㅁ ㅅ ㅇ',
+      'ㄱ은 혀뿌리가 목을 막는 모양, ㅁ은 입술 모양이에요.\n한글 자음은 발음 기관을 그린 그림이에요.',
+      ['ㄱ', 'ㄴ', 'ㅁ', 'ㅅ', 'ㅇ'],
+      '탭해서 소리를 들어 보세요',
     ),
     StageId.blockBuilder: (
       '한글은 왜 블록처럼 조립될까?',
-      '한글은 알파벳처럼 옆으로 늘어놓지 않고,\n첫소리(초성) + 가운뎃소리(중성) + 받침(종성)을\n한 칸에 쌓아요.\n\nㄱ + ㅏ = 가.  ㄱ + ㅏ + ㅇ = 강.\n모음 모양에 따라 블록이 놓이는 자리가 달라져요.',
-      '가 → 강',
+      '첫소리 + 가운뎃소리 + 받침을 옆으로 늘어놓지 않고\n한 칸에 쌓아요. 모음 모양에 따라 자리가 달라져요.',
+      ['ㄱ', 'ㄱ + ㅏ', '가', '가 + ㅇ', '강'],
+      '탭해서 글자를 조립해 보세요',
     ),
     StageId.wordRush: (
       '이제 진짜 단어를 읽어요',
-      '조립할 수 있으면 읽을 수 있어요.\n김치 = 김 + 치. 이미 아는 글자들이에요.\n\n최대한 빨리 읽고 맞는 그림을 고르세요.',
-      '김치 · 사랑 · 안녕',
+      '조립할 수 있으면 읽을 수 있어요.\n최대한 빨리 읽고 맞는 그림을 고르세요.',
+      ['김', '김 + 치', '김치'],
+      '탭해서 단어를 만들어 보세요',
     ),
     StageId.pronunciation: (
       '이제 소리 내어 볼까요?',
-      '듣고 → 조립하고 → 읽었다면, 마지막은 말하기예요.\n마이크에 대고 발음하면 기기 안에서만 분석해\n어떤 소리가 좋았는지 알려드려요.',
-      '안녕',
+      '마지막은 말하기예요. 마이크에 대고 발음하면\n기기 안에서만 분석해 어떤 소리가 좋았는지 알려드려요.',
+      ['안', '녕', '안녕'],
+      '탭해서 먼저 들어 보세요',
     ),
   };
 
@@ -80,7 +87,7 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final (title, body, sample) = _lessons[widget.stage]!;
+    final (title, body, frames, prompt) = _lessons[widget.stage]!;
     AppScope.of(context).onStageStart(widget.stage, widget.level);
     return Scaffold(
       body: SafeArea(
@@ -98,12 +105,8 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
                 ),
               ),
               const Spacer(),
-              Text(sample,
-                  style: const TextStyle(
-                      fontSize: 56,
-                      fontWeight: FontWeight.w800,
-                      color: HqColors.dancheongBlue)),
-              const SizedBox(height: 20),
+              _TapDemo(frames: frames, prompt: prompt),
+              const SizedBox(height: 24),
               Text(title, style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 12),
               Text(body, style: Theme.of(context).textTheme.bodyMedium),
@@ -118,6 +121,89 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Tap-to-step demo: each tap reveals the next frame (ㄱ → ㄱ + ㅏ → 가) with
+/// a scale-in, and plays the frame's sound when it is a single jamo or
+/// syllable. Loops back to the start after the last frame.
+class _TapDemo extends StatefulWidget {
+  const _TapDemo({required this.frames, required this.prompt});
+
+  final List<String> frames;
+  final String prompt;
+
+  @override
+  State<_TapDemo> createState() => _TapDemoState();
+}
+
+class _TapDemoState extends State<_TapDemo> {
+  int _i = 0;
+
+  void _play(String frame) {
+    final state = AppScope.of(context);
+    final jamo = [...choseongTable, ...jungseongTable]
+        .where((j) => j.char == frame)
+        .firstOrNull;
+    if (jamo != null) {
+      state.playJamo(jamo);
+    } else if (frame.runes.length == 1 && isSyllable(frame.runes.first)) {
+      state.playSyllable(decompose(frame.runes.first));
+    }
+  }
+
+  void _next() {
+    setState(() => _i = (_i + 1) % widget.frames.length);
+    _play(widget.frames[_i]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final frame = widget.frames[_i];
+    final last = _i == widget.frames.length - 1;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        HqCard(
+          onTap: _next,
+          padding: const EdgeInsets.symmetric(vertical: 28),
+          child: Center(
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 220),
+              transitionBuilder: (child, anim) => ScaleTransition(
+                scale: Tween(begin: 0.85, end: 1.0).animate(
+                    CurvedAnimation(parent: anim, curve: Curves.easeOutBack)),
+                child: FadeTransition(opacity: anim, child: child),
+              ),
+              child: Text(
+                frame,
+                key: ValueKey(_i),
+                style: TextStyle(
+                    fontSize: 56,
+                    fontWeight: FontWeight.w800,
+                    color: last
+                        ? HqColors.dancheongGreen
+                        : HqColors.dancheongBlue),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.touch_app_rounded,
+                size: 16, color: HqColors.inkSoft),
+            const SizedBox(width: 4),
+            Text(
+                last
+                    ? '다시 보려면 탭'
+                    : '${widget.prompt}  ${_i + 1}/${widget.frames.length}',
+                style: Theme.of(context).textTheme.bodySmall),
+          ],
+        ),
+      ],
     );
   }
 }
