@@ -15,28 +15,110 @@ class CodexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
-    final all = [...choseongTable, ...jungseongTable, ...jongseongTable];
+    final codex = state.progress.codex;
+    // Grouped by role so the 67 cards read as three sets to complete,
+    // not one undifferentiated wall.
+    const sections = [
+      ('첫소리', 'Initial consonants', choseongTable),
+      ('가운뎃소리', 'Vowels', jungseongTable),
+      ('받침', 'Final consonants', jongseongTable),
+    ];
+    final total = sections.fold(0, (n, s) => n + s.$3.length);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: Text('자모 도감  ${state.progress.codex.length}/${all.length}'),
+        title: Text('자모 도감  ${codex.length}/$total'),
       ),
-      body: GridView.count(
-        padding: const EdgeInsets.all(16),
-        crossAxisCount: 3,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        childAspectRatio: 3 / 4,
-        children: [
-          for (final jamo in all)
-            _CodexCard(
-              jamo: jamo,
-              tier: state.progress.codex[jamo.id] ?? 0,
+      body: CustomScrollView(
+        slivers: [
+          if (codex.isEmpty)
+            const SliverPadding(
+              padding: EdgeInsets.fromLTRB(16, 4, 16, 0),
+              sliver: SliverToBoxAdapter(child: _EmptyHint()),
             ),
+          for (final (title, subtitle, table) in sections) ...[
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              sliver: SliverToBoxAdapter(
+                child: _SectionHeader(
+                  title: title,
+                  subtitle: subtitle,
+                  found: table.where((j) => codex.containsKey(j.id)).length,
+                  total: table.length,
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              sliver: SliverGrid.count(
+                crossAxisCount: 4,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 3 / 4,
+                children: [
+                  for (final jamo in table)
+                    _CodexCard(jamo: jamo, tier: codex[jamo.id] ?? 0),
+                ],
+              ),
+            ),
+          ],
+          const SliverToBoxAdapter(child: SizedBox(height: 24)),
         ],
       ),
+    );
+  }
+}
+
+class _EmptyHint extends StatelessWidget {
+  const _EmptyHint();
+
+  @override
+  Widget build(BuildContext context) {
+    return HqCard(
+      color: HqColors.celadon.withValues(alpha: 0.35),
+      child: Row(
+        children: [
+          const HqIconTile(icon: Icons.style_rounded, size: 40),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text('자모 사냥에서 소리를 맞히면 첫 카드가 열려요.',
+                style: Theme.of(context).textTheme.bodyMedium),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  const _SectionHeader({
+    required this.title,
+    required this.subtitle,
+    required this.found,
+    required this.total,
+  });
+
+  final String title;
+  final String subtitle;
+  final int found;
+  final int total;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(title, style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
+        ),
+        Text('$found/$total',
+            style: const TextStyle(
+                fontWeight: FontWeight.w800, color: HqColors.dancheongGreen)),
+      ],
     );
   }
 }
@@ -74,7 +156,9 @@ class _CodexCard extends StatelessWidget {
               width: tier == 2 ? 2 : 1),
           boxShadow: locked
               ? const []
-              : const [BoxShadow(color: Color(0x1A2B2622), offset: Offset(2, 3))],
+              : const [
+                  BoxShadow(color: Color(0x1A2B2622), offset: Offset(2, 3))
+                ],
           gradient: tier == 2
               ? LinearGradient(
                   begin: Alignment.topLeft,
@@ -90,18 +174,21 @@ class _CodexCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Locked cards show a faint silhouette — a sticker-album gap that
+            // invites collecting, instead of a wall of identical "?".
             Text(
-              locked ? '?' : jamo.char,
+              jamo.char,
               style: TextStyle(
-                fontSize: 44,
+                fontSize: 36,
                 fontWeight: FontWeight.w800,
-                color: locked ? HqColors.inkSoft : HqColors.ink,
+                color: locked
+                    ? HqColors.ink.withValues(alpha: 0.12)
+                    : HqColors.ink,
               ),
             ),
             const SizedBox(height: 4),
             Text(locked ? '미발견' : jamo.nameKo,
-                style: const TextStyle(
-                    fontSize: 11, color: HqColors.inkSoft)),
+                style: const TextStyle(fontSize: 11, color: HqColors.inkSoft)),
             if (tier == 2)
               const Padding(
                 padding: EdgeInsets.only(top: 4),
@@ -192,8 +279,8 @@ class _CardDetail extends StatelessWidget {
                   Chip(
                     backgroundColor: Colors.white,
                     label: Text(w),
-                    side: BorderSide(
-                        color: HqColors.ink.withValues(alpha: 0.1)),
+                    side:
+                        BorderSide(color: HqColors.ink.withValues(alpha: 0.1)),
                   ),
               ],
             ),
