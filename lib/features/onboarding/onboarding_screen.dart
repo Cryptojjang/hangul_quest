@@ -38,7 +38,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               alignment: Alignment.topRight,
               child: TextButton(
                 onPressed: _finish,
-                child: const Text('건너뛰기',
+                child: const Text('Skip',
                     style: TextStyle(color: HqColors.inkSoft)),
               ),
             ),
@@ -77,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 16),
                   HqButton(
-                    label: _page == 2 ? '시작하기' : '다음',
+                    label: _page == 2 ? 'Get started' : 'Next',
                     expanded: true,
                     onPressed: () {
                       if (_page == 2) {
@@ -99,6 +99,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
+/// The same line in Korean, shown small under the English copy — a first
+/// glimpse of the script, not something the learner must read yet.
+class _KoreanEcho extends StatelessWidget {
+  const _KoreanEcho(this.text);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: HqColors.dancheongRed));
+  }
+}
+
 class _HookPage extends StatelessWidget {
   const _HookPage();
 
@@ -111,13 +129,17 @@ class _HookPage extends StatelessWidget {
         children: [
           const Text('한', style: TextStyle(fontSize: 120, fontWeight: FontWeight.w800, color: HqColors.dancheongRed)),
           const SizedBox(height: 24),
-          Text('좋아하는 그 노래 제목,\n직접 읽고 싶지 않나요?',
+          Text('Read the songs you love\nin their own letters',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 12),
-          Text('한글은 세상에서 가장 배우기 쉬운 문자예요.\n블록처럼 조립되거든요.',
+          Text(
+              "Hangul is the world's easiest script to learn — "
+              'its letters snap together like blocks.',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall),
+              style: Theme.of(context).textTheme.bodyMedium),
+          const SizedBox(height: 16),
+          const _KoreanEcho('좋아하는 노래 제목, 직접 읽어 보세요'),
         ],
       ),
     );
@@ -134,10 +156,12 @@ class _PromisePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('7일이면\n한글을 읽습니다',
+          Text('Read Hangul\nin 7 days',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontSize: 32, color: HqColors.dancheongBlue)),
+          const SizedBox(height: 8),
+          const _KoreanEcho('7일이면 한글을 읽습니다'),
           const SizedBox(height: 24),
           for (final day in sevenDayTracker)
             Padding(
@@ -156,13 +180,24 @@ class _PromisePage extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                      child: Text('${day.title} — ${day.goal}',
-                          style: Theme.of(context).textTheme.bodySmall)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(day.titleEn,
+                            style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: HqColors.ink)),
+                        Text(day.goalEn,
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           const SizedBox(height: 16),
-          Text('게임만 하세요. 나머지는 저희가 할게요.',
+          Text('Just play. We handle the rest.',
               style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
@@ -185,15 +220,18 @@ class _NotifPage extends StatelessWidget {
               color: HqColors.obangYellow,
               size: 112),
           const SizedBox(height: 24),
-          Text('하루 5분, 스트릭을 지켜요',
+          Text('5 minutes a day\nkeeps your streak alive',
+              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 12),
-          Text('원하시면 매일 저녁 살짝 알려드릴게요.\n(선택 사항이에요)',
+          Text("Want a gentle evening reminder? It's optional.",
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall),
+              style: Theme.of(context).textTheme.bodyMedium),
+          const SizedBox(height: 8),
+          const _KoreanEcho('하루 5분, 스트릭을 지켜요'),
           const SizedBox(height: 24),
           HqButton(
-            label: '알림 허용',
+            label: 'Allow reminders',
             color: HqColors.dancheongBlue,
             onPressed: () async {
               await AppScope.of(context).services.push.requestPermission();

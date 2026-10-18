@@ -37,12 +37,13 @@ void main() {
   testWidgets('onboarding → home', (tester) async {
     final state = await pumpApp(tester, onboarded: false);
 
-    expect(find.text('건너뛰기'), findsOneWidget);
-    await tester.tap(find.text('다음'));
+    expect(find.text('Skip'), findsOneWidget);
+    await tester.tap(find.text('Next'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('7일이면'), findsOneWidget);
+    expect(find.textContaining('in 7 days'), findsOneWidget);
+    expect(find.text('Fluent reader'), findsOneWidget);
 
-    await tester.tap(find.text('건너뛰기'));
+    await tester.tap(find.text('Skip'));
     await tester.pumpAndSettle();
 
     expect(find.text('한글퀘스트'), findsOneWidget);

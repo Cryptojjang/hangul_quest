@@ -106,6 +106,8 @@ class TrackerDay {
     required this.day,
     required this.title,
     required this.goal,
+    required this.titleEn,
+    required this.goalEn,
     required this.requiredStage1Level,
     required this.requiredStage2Level,
   });
@@ -113,18 +115,22 @@ class TrackerDay {
   final int day;
   final String title;
   final String goal;
+
+  /// English copy for learners who can't read Hangul yet (onboarding).
+  final String titleEn;
+  final String goalEn;
   final int requiredStage1Level;
   final int requiredStage2Level;
 }
 
 const List<TrackerDay> sevenDayTracker = [
-  TrackerDay(day: 1, title: '자음과 만나기', goal: '기본 자음 10개 인식', requiredStage1Level: 2, requiredStage2Level: 0),
-  TrackerDay(day: 2, title: '모음의 원리', goal: '기본 모음 6개 + 첫 글자 조립', requiredStage1Level: 4, requiredStage2Level: 1),
-  TrackerDay(day: 3, title: '글자 조립 I', goal: '세로·가로 모음 글자 조립', requiredStage1Level: 5, requiredStage2Level: 3),
-  TrackerDay(day: 4, title: '받침의 발견', goal: '받침 있는 글자 조립', requiredStage1Level: 5, requiredStage2Level: 5),
-  TrackerDay(day: 5, title: '어려운 소리', goal: '쌍자음·거센소리 마스터', requiredStage1Level: 7, requiredStage2Level: 7),
-  TrackerDay(day: 6, title: '단어 읽기', goal: '첫 단어 12개 읽기', requiredStage1Level: 7, requiredStage2Level: 8),
-  TrackerDay(day: 7, title: '한글 완독', goal: '어떤 글자든 소리 내어 읽기', requiredStage1Level: 7, requiredStage2Level: 9),
+  TrackerDay(day: 1, title: '자음과 만나기', goal: '기본 자음 10개 인식', titleEn: 'Meet the consonants', goalEn: 'Recognize 10 basic consonants', requiredStage1Level: 2, requiredStage2Level: 0),
+  TrackerDay(day: 2, title: '모음의 원리', goal: '기본 모음 6개 + 첫 글자 조립', titleEn: 'How vowels work', goalEn: '6 basic vowels + your first syllable', requiredStage1Level: 4, requiredStage2Level: 1),
+  TrackerDay(day: 3, title: '글자 조립 I', goal: '세로·가로 모음 글자 조립', titleEn: 'Building blocks', goalEn: 'Stack vertical & horizontal vowels', requiredStage1Level: 5, requiredStage2Level: 3),
+  TrackerDay(day: 4, title: '받침의 발견', goal: '받침 있는 글자 조립', titleEn: 'Final consonants', goalEn: 'Syllables with a batchim', requiredStage1Level: 5, requiredStage2Level: 5),
+  TrackerDay(day: 5, title: '어려운 소리', goal: '쌍자음·거센소리 마스터', titleEn: 'Tricky sounds', goalEn: 'Tense & aspirated consonants', requiredStage1Level: 7, requiredStage2Level: 7),
+  TrackerDay(day: 6, title: '단어 읽기', goal: '첫 단어 12개 읽기', titleEn: 'Reading words', goalEn: 'Read your first 12 words', requiredStage1Level: 7, requiredStage2Level: 8),
+  TrackerDay(day: 7, title: '한글 완독', goal: '어떤 글자든 소리 내어 읽기', titleEn: 'Fluent reader', goalEn: 'Sound out any syllable', requiredStage1Level: 7, requiredStage2Level: 9),
 ];
 
 /// Progress (0..1) toward completing [day], given highest cleared levels.
