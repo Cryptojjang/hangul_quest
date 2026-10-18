@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="게임 플레이만으로 한글을 읽는다 — 자모 인식부터 단어 읽기까지, 7일 한글 완독.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="한글퀘스트">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>한글퀘스트 — HangulQuest</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; padding: 0; background: #F7F1E5; }
+    #hq-splash {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      font-family: sans-serif; color: #2B2622; background: #F7F1E5;
+      transition: opacity .4s; z-index: 10;
+    }
+    #hq-splash .glyph { font-size: 88px; font-weight: 800; color: #C4463A; }
+  </style>
+</head>
+<body>
+  <div id="hq-splash"><div class="glyph">한</div><div>한글퀘스트 로딩 중…</div></div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var s = document.getElementById('hq-splash');
+      if (s) { s.style.opacity = '0'; setTimeout(function () { s.remove(); }, 450); }
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

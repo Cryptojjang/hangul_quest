@@ -1,0 +1,757 @@
+﻿[
+  {
+    "slot": "voice/jamo/c_giyeok",
+    "text": "기역, 가",
+    "file": "assets/audio/voice/jamo/c_giyeok.wav"
+  },
+  {
+    "slot": "voice/jamo/c_ssanggiyeok",
+    "text": "쌍기역, 까",
+    "file": "assets/audio/voice/jamo/c_ssanggiyeok.wav"
+  },
+  {
+    "slot": "voice/jamo/c_nieun",
+    "text": "니은, 나",
+    "file": "assets/audio/voice/jamo/c_nieun.wav"
+  },
+  {
+    "slot": "voice/jamo/c_digeut",
+    "text": "디귿, 다",
+    "file": "assets/audio/voice/jamo/c_digeut.wav"
+  },
+  {
+    "slot": "voice/jamo/c_ssangdigeut",
+    "text": "쌍디귿, 따",
+    "file": "assets/audio/voice/jamo/c_ssangdigeut.wav"
+  },
+  {
+    "slot": "voice/jamo/c_rieul",
+    "text": "리을, 라",
+    "file": "assets/audio/voice/jamo/c_rieul.wav"
+  },
+  {
+    "slot": "voice/jamo/c_mieum",
+    "text": "미음, 마",
+    "file": "assets/audio/voice/jamo/c_mieum.wav"
+  },
+  {
+    "slot": "voice/jamo/c_bieup",
+    "text": "비읍, 바",
+    "file": "assets/audio/voice/jamo/c_bieup.wav"
+  },
+  {
+    "slot": "voice/jamo/c_ssangbieup",
+    "text": "쌍비읍, 빠",
+    "file": "assets/audio/voice/jamo/c_ssangbieup.wav"
+  },
+  {
+    "slot": "voice/jamo/c_siot",
+    "text": "시옷, 사",
+    "file": "assets/audio/voice/jamo/c_siot.wav"
+  },
+  {
+    "slot": "voice/jamo/c_ssangsiot",
+    "text": "쌍시옷, 싸",
+    "file": "assets/audio/voice/jamo/c_ssangsiot.wav"
+  },
+  {
+    "slot": "voice/jamo/c_ieung",
+    "text": "이응, 아",
+    "file": "assets/audio/voice/jamo/c_ieung.wav"
+  },
+  {
+    "slot": "voice/jamo/c_jieut",
+    "text": "지읒, 자",
+    "file": "assets/audio/voice/jamo/c_jieut.wav"
+  },
+  {
+    "slot": "voice/jamo/c_ssangjieut",
+    "text": "쌍지읒, 짜",
+    "file": "assets/audio/voice/jamo/c_ssangjieut.wav"
+  },
+  {
+    "slot": "voice/jamo/c_chieut",
+    "text": "치읓, 차",
+    "file": "assets/audio/voice/jamo/c_chieut.wav"
+  },
+  {
+    "slot": "voice/jamo/c_kieuk",
+    "text": "키읔, 카",
+    "file": "assets/audio/voice/jamo/c_kieuk.wav"
+  },
+  {
+    "slot": "voice/jamo/c_tieut",
+    "text": "티읕, 타",
+    "file": "assets/audio/voice/jamo/c_tieut.wav"
+  },
+  {
+    "slot": "voice/jamo/c_pieup",
+    "text": "피읖, 파",
+    "file": "assets/audio/voice/jamo/c_pieup.wav"
+  },
+  {
+    "slot": "voice/jamo/c_hieut",
+    "text": "히읗, 하",
+    "file": "assets/audio/voice/jamo/c_hieut.wav"
+  },
+  {
+    "slot": "voice/jamo/v_a",
+    "text": "아",
+    "file": "assets/audio/voice/jamo/v_a.wav"
+  },
+  {
+    "slot": "voice/jamo/v_ae",
+    "text": "애",
+    "file": "assets/audio/voice/jamo/v_ae.wav"
+  },
+  {
+    "slot": "voice/jamo/v_ya",
+    "text": "야",
+    "file": "assets/audio/voice/jamo/v_ya.wav"
+  },
+  {
+    "slot": "voice/jamo/v_yae",
+    "text": "얘",
+    "file": "assets/audio/voice/jamo/v_yae.wav"
+  },
+  {
+    "slot": "voice/jamo/v_eo",
+    "text": "어",
+    "file": "assets/audio/voice/jamo/v_eo.wav"
+  },
+  {
+    "slot": "voice/jamo/v_e",
+    "text": "에",
+    "file": "assets/audio/voice/jamo/v_e.wav"
+  },
+  {
+    "slot": "voice/jamo/v_yeo",
+    "text": "여",
+    "file": "assets/audio/voice/jamo/v_yeo.wav"
+  },
+  {
+    "slot": "voice/jamo/v_ye",
+    "text": "예",
+    "file": "assets/audio/voice/jamo/v_ye.wav"
+  },
+  {
+    "slot": "voice/jamo/v_o",
+    "text": "오",
+    "file": "assets/audio/voice/jamo/v_o.wav"
+  },
+  {
+    "slot": "voice/jamo/v_wa",
+    "text": "와",
+    "file": "assets/audio/voice/jamo/v_wa.wav"
+  },
+  {
+    "slot": "voice/jamo/v_wae",
+    "text": "왜",
+    "file": "assets/audio/voice/jamo/v_wae.wav"
+  },
+  {
+    "slot": "voice/jamo/v_oe",
+    "text": "외",
+    "file": "assets/audio/voice/jamo/v_oe.wav"
+  },
+  {
+    "slot": "voice/jamo/v_yo",
+    "text": "요",
+    "file": "assets/audio/voice/jamo/v_yo.wav"
+  },
+  {
+    "slot": "voice/jamo/v_u",
+    "text": "우",
+    "file": "assets/audio/voice/jamo/v_u.wav"
+  },
+  {
+    "slot": "voice/jamo/v_wo",
+    "text": "워",
+    "file": "assets/audio/voice/jamo/v_wo.wav"
+  },
+  {
+    "slot": "voice/jamo/v_we",
+    "text": "웨",
+    "file": "assets/audio/voice/jamo/v_we.wav"
+  },
+  {
+    "slot": "voice/jamo/v_wi",
+    "text": "위",
+    "file": "assets/audio/voice/jamo/v_wi.wav"
+  },
+  {
+    "slot": "voice/jamo/v_yu",
+    "text": "유",
+    "file": "assets/audio/voice/jamo/v_yu.wav"
+  },
+  {
+    "slot": "voice/jamo/v_eu",
+    "text": "으",
+    "file": "assets/audio/voice/jamo/v_eu.wav"
+  },
+  {
+    "slot": "voice/jamo/v_ui",
+    "text": "의",
+    "file": "assets/audio/voice/jamo/v_ui.wav"
+  },
+  {
+    "slot": "voice/jamo/v_i",
+    "text": "이",
+    "file": "assets/audio/voice/jamo/v_i.wav"
+  },
+  {
+    "slot": "voice/jamo/f_giyeok",
+    "text": "기역 받침",
+    "file": "assets/audio/voice/jamo/f_giyeok.wav"
+  },
+  {
+    "slot": "voice/jamo/f_ssanggiyeok",
+    "text": "쌍기역 받침",
+    "file": "assets/audio/voice/jamo/f_ssanggiyeok.wav"
+  },
+  {
+    "slot": "voice/jamo/f_gs",
+    "text": "기역시옷 받침",
+    "file": "assets/audio/voice/jamo/f_gs.wav"
+  },
+  {
+    "slot": "voice/jamo/f_nieun",
+    "text": "니은 받침",
+    "file": "assets/audio/voice/jamo/f_nieun.wav"
+  },
+  {
+    "slot": "voice/jamo/f_nj",
+    "text": "니은지읒 받침",
+    "file": "assets/audio/voice/jamo/f_nj.wav"
+  },
+  {
+    "slot": "voice/jamo/f_nh",
+    "text": "니은히읗 받침",
+    "file": "assets/audio/voice/jamo/f_nh.wav"
+  },
+  {
+    "slot": "voice/jamo/f_digeut",
+    "text": "디귿 받침",
+    "file": "assets/audio/voice/jamo/f_digeut.wav"
+  },
+  {
+    "slot": "voice/jamo/f_rieul",
+    "text": "리을 받침",
+    "file": "assets/audio/voice/jamo/f_rieul.wav"
+  },
+  {
+    "slot": "voice/jamo/f_lg",
+    "text": "리을기역 받침",
+    "file": "assets/audio/voice/jamo/f_lg.wav"
+  },
+  {
+    "slot": "voice/jamo/f_lm",
+    "text": "리을미음 받침",
+    "file": "assets/audio/voice/jamo/f_lm.wav"
+  },
+  {
+    "slot": "voice/jamo/f_lb",
+    "text": "리을비읍 받침",
+    "file": "assets/audio/voice/jamo/f_lb.wav"
+  },
+  {
+    "slot": "voice/jamo/f_ls",
+    "text": "리을시옷 받침",
+    "file": "assets/audio/voice/jamo/f_ls.wav"
+  },
+  {
+    "slot": "voice/jamo/f_lt",
+    "text": "리을티읕 받침",
+    "file": "assets/audio/voice/jamo/f_lt.wav"
+  },
+  {
+    "slot": "voice/jamo/f_lp",
+    "text": "리을피읖 받침",
+    "file": "assets/audio/voice/jamo/f_lp.wav"
+  },
+  {
+    "slot": "voice/jamo/f_lh",
+    "text": "리을히읗 받침",
+    "file": "assets/audio/voice/jamo/f_lh.wav"
+  },
+  {
+    "slot": "voice/jamo/f_mieum",
+    "text": "미음 받침",
+    "file": "assets/audio/voice/jamo/f_mieum.wav"
+  },
+  {
+    "slot": "voice/jamo/f_bieup",
+    "text": "비읍 받침",
+    "file": "assets/audio/voice/jamo/f_bieup.wav"
+  },
+  {
+    "slot": "voice/jamo/f_bs",
+    "text": "비읍시옷 받침",
+    "file": "assets/audio/voice/jamo/f_bs.wav"
+  },
+  {
+    "slot": "voice/jamo/f_siot",
+    "text": "시옷 받침",
+    "file": "assets/audio/voice/jamo/f_siot.wav"
+  },
+  {
+    "slot": "voice/jamo/f_ssangsiot",
+    "text": "쌍시옷 받침",
+    "file": "assets/audio/voice/jamo/f_ssangsiot.wav"
+  },
+  {
+    "slot": "voice/jamo/f_ieung",
+    "text": "이응 받침",
+    "file": "assets/audio/voice/jamo/f_ieung.wav"
+  },
+  {
+    "slot": "voice/jamo/f_jieut",
+    "text": "지읒 받침",
+    "file": "assets/audio/voice/jamo/f_jieut.wav"
+  },
+  {
+    "slot": "voice/jamo/f_chieut",
+    "text": "치읓 받침",
+    "file": "assets/audio/voice/jamo/f_chieut.wav"
+  },
+  {
+    "slot": "voice/jamo/f_kieuk",
+    "text": "키읔 받침",
+    "file": "assets/audio/voice/jamo/f_kieuk.wav"
+  },
+  {
+    "slot": "voice/jamo/f_tieut",
+    "text": "티읕 받침",
+    "file": "assets/audio/voice/jamo/f_tieut.wav"
+  },
+  {
+    "slot": "voice/jamo/f_pieup",
+    "text": "피읖 받침",
+    "file": "assets/audio/voice/jamo/f_pieup.wav"
+  },
+  {
+    "slot": "voice/jamo/f_hieut",
+    "text": "히읗 받침",
+    "file": "assets/audio/voice/jamo/f_hieut.wav"
+  },
+  {
+    "slot": "voice/syllable/44032",
+    "text": "가",
+    "file": "assets/audio/voice/syllable/44032.wav"
+  },
+  {
+    "slot": "voice/syllable/45208",
+    "text": "나",
+    "file": "assets/audio/voice/syllable/45208.wav"
+  },
+  {
+    "slot": "voice/syllable/44592",
+    "text": "기",
+    "file": "assets/audio/voice/syllable/44592.wav"
+  },
+  {
+    "slot": "voice/syllable/45768",
+    "text": "니",
+    "file": "assets/audio/voice/syllable/45768.wav"
+  },
+  {
+    "slot": "voice/syllable/47560",
+    "text": "마",
+    "file": "assets/audio/voice/syllable/47560.wav"
+  },
+  {
+    "slot": "voice/syllable/48260",
+    "text": "버",
+    "file": "assets/audio/voice/syllable/48260.wav"
+  },
+  {
+    "slot": "voice/syllable/48120",
+    "text": "미",
+    "file": "assets/audio/voice/syllable/48120.wav"
+  },
+  {
+    "slot": "voice/syllable/48708",
+    "text": "비",
+    "file": "assets/audio/voice/syllable/48708.wav"
+  },
+  {
+    "slot": "voice/syllable/47672",
+    "text": "머",
+    "file": "assets/audio/voice/syllable/47672.wav"
+  },
+  {
+    "slot": "voice/syllable/44256",
+    "text": "고",
+    "file": "assets/audio/voice/syllable/44256.wav"
+  },
+  {
+    "slot": "voice/syllable/44396",
+    "text": "구",
+    "file": "assets/audio/voice/syllable/44396.wav"
+  },
+  {
+    "slot": "voice/syllable/49548",
+    "text": "소",
+    "file": "assets/audio/voice/syllable/49548.wav"
+  },
+  {
+    "slot": "voice/syllable/49688",
+    "text": "수",
+    "file": "assets/audio/voice/syllable/49688.wav"
+  },
+  {
+    "slot": "voice/syllable/49828",
+    "text": "스",
+    "file": "assets/audio/voice/syllable/49828.wav"
+  },
+  {
+    "slot": "voice/syllable/44036",
+    "text": "간",
+    "file": "assets/audio/voice/syllable/44036.wav"
+  },
+  {
+    "slot": "voice/syllable/44600",
+    "text": "길",
+    "file": "assets/audio/voice/syllable/44600.wav"
+  },
+  {
+    "slot": "voice/syllable/44608",
+    "text": "김",
+    "file": "assets/audio/voice/syllable/44608.wav"
+  },
+  {
+    "slot": "voice/syllable/47932",
+    "text": "물",
+    "file": "assets/audio/voice/syllable/47932.wav"
+  },
+  {
+    "slot": "voice/syllable/47928",
+    "text": "문",
+    "file": "assets/audio/voice/syllable/47928.wav"
+  },
+  {
+    "slot": "voice/syllable/44053",
+    "text": "강",
+    "file": "assets/audio/voice/syllable/44053.wav"
+  },
+  {
+    "slot": "voice/syllable/48169",
+    "text": "방",
+    "file": "assets/audio/voice/syllable/48169.wav"
+  },
+  {
+    "slot": "voice/syllable/51665",
+    "text": "집",
+    "file": "assets/audio/voice/syllable/51665.wav"
+  },
+  {
+    "slot": "voice/syllable/48165",
+    "text": "밥",
+    "file": "assets/audio/voice/syllable/48165.wav"
+  },
+  {
+    "slot": "voice/syllable/49345",
+    "text": "상",
+    "file": "assets/audio/voice/syllable/49345.wav"
+  },
+  {
+    "slot": "voice/syllable/52264",
+    "text": "차",
+    "file": "assets/audio/voice/syllable/52264.wav"
+  },
+  {
+    "slot": "voice/syllable/53076",
+    "text": "코",
+    "file": "assets/audio/voice/syllable/53076.wav"
+  },
+  {
+    "slot": "voice/syllable/53664",
+    "text": "토",
+    "file": "assets/audio/voice/syllable/53664.wav"
+  },
+  {
+    "slot": "voice/syllable/54028",
+    "text": "파",
+    "file": "assets/audio/voice/syllable/54028.wav"
+  },
+  {
+    "slot": "voice/syllable/54588",
+    "text": "피",
+    "file": "assets/audio/voice/syllable/54588.wav"
+  },
+  {
+    "slot": "voice/syllable/44620",
+    "text": "까",
+    "file": "assets/audio/voice/syllable/44620.wav"
+  },
+  {
+    "slot": "voice/syllable/46497",
+    "text": "떡",
+    "file": "assets/audio/voice/syllable/46497.wav"
+  },
+  {
+    "slot": "voice/syllable/48757",
+    "text": "빵",
+    "file": "assets/audio/voice/syllable/48757.wav"
+  },
+  {
+    "slot": "voice/syllable/49920",
+    "text": "쌀",
+    "file": "assets/audio/voice/syllable/49920.wav"
+  },
+  {
+    "slot": "voice/syllable/52236",
+    "text": "찌",
+    "file": "assets/audio/voice/syllable/52236.wav"
+  },
+  {
+    "slot": "voice/syllable/44284",
+    "text": "과",
+    "file": "assets/audio/voice/syllable/44284.wav"
+  },
+  {
+    "slot": "voice/syllable/44480",
+    "text": "귀",
+    "file": "assets/audio/voice/syllable/44480.wav"
+  },
+  {
+    "slot": "voice/syllable/44060",
+    "text": "개",
+    "file": "assets/audio/voice/syllable/44060.wav"
+  },
+  {
+    "slot": "voice/syllable/44172",
+    "text": "게",
+    "file": "assets/audio/voice/syllable/44172.wav"
+  },
+  {
+    "slot": "voice/syllable/50780",
+    "text": "왜",
+    "file": "assets/audio/voice/syllable/50780.wav"
+  },
+  {
+    "slot": "voice/syllable/45805",
+    "text": "닭",
+    "file": "assets/audio/voice/syllable/45805.wav"
+  },
+  {
+    "slot": "voice/syllable/44050",
+    "text": "값",
+    "file": "assets/audio/voice/syllable/44050.wav"
+  },
+  {
+    "slot": "voice/syllable/47566",
+    "text": "많",
+    "file": "assets/audio/voice/syllable/47566.wav"
+  },
+  {
+    "slot": "voice/word/w_kimchi",
+    "text": "김치",
+    "file": "assets/audio/voice/word/w_kimchi.wav"
+  },
+  {
+    "slot": "voice/word/w_bibimbap",
+    "text": "비빔밥",
+    "file": "assets/audio/voice/word/w_bibimbap.wav"
+  },
+  {
+    "slot": "voice/word/w_bap",
+    "text": "밥",
+    "file": "assets/audio/voice/word/w_bap.wav"
+  },
+  {
+    "slot": "voice/word/w_mul",
+    "text": "물",
+    "file": "assets/audio/voice/word/w_mul.wav"
+  },
+  {
+    "slot": "voice/word/w_uyu",
+    "text": "우유",
+    "file": "assets/audio/voice/word/w_uyu.wav"
+  },
+  {
+    "slot": "voice/word/w_bulgogi",
+    "text": "불고기",
+    "file": "assets/audio/voice/word/w_bulgogi.wav"
+  },
+  {
+    "slot": "voice/word/w_tteok",
+    "text": "떡",
+    "file": "assets/audio/voice/word/w_tteok.wav"
+  },
+  {
+    "slot": "voice/word/w_ramyeon",
+    "text": "라면",
+    "file": "assets/audio/voice/word/w_ramyeon.wav"
+  },
+  {
+    "slot": "voice/word/w_gimbap",
+    "text": "김밥",
+    "file": "assets/audio/voice/word/w_gimbap.wav"
+  },
+  {
+    "slot": "voice/word/w_sagwa",
+    "text": "사과",
+    "file": "assets/audio/voice/word/w_sagwa.wav"
+  },
+  {
+    "slot": "voice/word/w_chimaek",
+    "text": "치킨",
+    "file": "assets/audio/voice/word/w_chimaek.wav"
+  },
+  {
+    "slot": "voice/word/w_coffee",
+    "text": "커피",
+    "file": "assets/audio/voice/word/w_coffee.wav"
+  },
+  {
+    "slot": "voice/word/w_sarang",
+    "text": "사랑",
+    "file": "assets/audio/voice/word/w_sarang.wav"
+  },
+  {
+    "slot": "voice/word/w_haengbok",
+    "text": "행복",
+    "file": "assets/audio/voice/word/w_haengbok.wav"
+  },
+  {
+    "slot": "voice/word/w_gibun",
+    "text": "기분",
+    "file": "assets/audio/voice/word/w_gibun.wav"
+  },
+  {
+    "slot": "voice/word/w_nunmul",
+    "text": "눈물",
+    "file": "assets/audio/voice/word/w_nunmul.wav"
+  },
+  {
+    "slot": "voice/word/w_useum",
+    "text": "웃음",
+    "file": "assets/audio/voice/word/w_useum.wav"
+  },
+  {
+    "slot": "voice/word/w_maeum",
+    "text": "마음",
+    "file": "assets/audio/voice/word/w_maeum.wav"
+  },
+  {
+    "slot": "voice/word/w_kkum",
+    "text": "꿈",
+    "file": "assets/audio/voice/word/w_kkum.wav"
+  },
+  {
+    "slot": "voice/word/w_annyeong",
+    "text": "안녕",
+    "file": "assets/audio/voice/word/w_annyeong.wav"
+  },
+  {
+    "slot": "voice/word/w_gamsa",
+    "text": "감사",
+    "file": "assets/audio/voice/word/w_gamsa.wav"
+  },
+  {
+    "slot": "voice/word/w_chingu",
+    "text": "친구",
+    "file": "assets/audio/voice/word/w_chingu.wav"
+  },
+  {
+    "slot": "voice/word/w_jip",
+    "text": "집",
+    "file": "assets/audio/voice/word/w_jip.wav"
+  },
+  {
+    "slot": "voice/word/w_hakgyo",
+    "text": "학교",
+    "file": "assets/audio/voice/word/w_hakgyo.wav"
+  },
+  {
+    "slot": "voice/word/w_beoseu",
+    "text": "버스",
+    "file": "assets/audio/voice/word/w_beoseu.wav"
+  },
+  {
+    "slot": "voice/word/w_jeonhwa",
+    "text": "전화",
+    "file": "assets/audio/voice/word/w_jeonhwa.wav"
+  },
+  {
+    "slot": "voice/word/w_norae",
+    "text": "노래",
+    "file": "assets/audio/voice/word/w_norae.wav"
+  },
+  {
+    "slot": "voice/word/w_chum",
+    "text": "춤",
+    "file": "assets/audio/voice/word/w_chum.wav"
+  },
+  {
+    "slot": "voice/word/w_haneul",
+    "text": "하늘",
+    "file": "assets/audio/voice/word/w_haneul.wav"
+  },
+  {
+    "slot": "voice/word/w_bada",
+    "text": "바다",
+    "file": "assets/audio/voice/word/w_bada.wav"
+  },
+  {
+    "slot": "voice/word/w_hanbok",
+    "text": "한복",
+    "file": "assets/audio/voice/word/w_hanbok.wav"
+  },
+  {
+    "slot": "voice/word/w_deurama",
+    "text": "드라마",
+    "file": "assets/audio/voice/word/w_deurama.wav"
+  },
+  {
+    "slot": "voice/word/w_yeonghwa",
+    "text": "영화",
+    "file": "assets/audio/voice/word/w_yeonghwa.wav"
+  },
+  {
+    "slot": "voice/word/w_gasu",
+    "text": "가수",
+    "file": "assets/audio/voice/word/w_gasu.wav"
+  },
+  {
+    "slot": "voice/word/w_baeu",
+    "text": "배우",
+    "file": "assets/audio/voice/word/w_baeu.wav"
+  },
+  {
+    "slot": "voice/word/w_eungwon",
+    "text": "응원",
+    "file": "assets/audio/voice/word/w_eungwon.wav"
+  },
+  {
+    "slot": "voice/word/w_mudae",
+    "text": "무대",
+    "file": "assets/audio/voice/word/w_mudae.wav"
+  },
+  {
+    "slot": "voice/word/w_paen",
+    "text": "팬",
+    "file": "assets/audio/voice/word/w_paen.wav"
+  },
+  {
+    "slot": "voice/ui/great",
+    "text": "잘했어요!",
+    "file": "assets/audio/voice/ui/great.wav"
+  },
+  {
+    "slot": "voice/ui/perfect",
+    "text": "완벽해요!",
+    "file": "assets/audio/voice/ui/perfect.wav"
+  },
+  {
+    "slot": "voice/ui/almost",
+    "text": "아깝다!",
+    "file": "assets/audio/voice/ui/almost.wav"
+  },
+  {
+    "slot": "voice/ui/combo",
+    "text": "대단해요!",
+    "file": "assets/audio/voice/ui/combo.wav"
+  }
+]
