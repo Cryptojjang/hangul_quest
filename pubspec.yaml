@@ -29,3 +29,15 @@ flutter:
     - assets/audio/voice/syllable/
     - assets/audio/voice/word/
     - assets/audio/voice/ui/
+  fonts:
+    # Pretendard (SIL OFL 1.1, assets/fonts/OFL.txt) — only the weights the
+    # UI uses; add a weight here before using it in a TextStyle.
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Regular.otf
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Pretendard-ExtraBold.otf
+          weight: 800
