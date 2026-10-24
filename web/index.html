@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <base href="$FLUTTER_BASE_HREF">
 
@@ -54,6 +54,26 @@
     }
   </script>
   <script src="https://app.lemonsqueezy.com/js/lemon.js" defer onload="hqLemonReady()"></script>
+  <!-- Always-visible legal/pricing links (store review + consumer info).
+       Kept tiny and inside the bottom safe padding so it never covers UI. -->
+  <style>
+    #hq-legal {
+      position: fixed; left: 50%; bottom: 0; transform: translateX(-50%);
+      z-index: 20; display: flex; gap: 10px; padding: 2px 10px;
+      font: 11px/16px sans-serif; background: rgba(247, 241, 229, .85);
+      border-radius: 8px 8px 0 0; white-space: nowrap;
+    }
+    #hq-legal a { color: #6B625A; text-decoration: none; }
+    #hq-legal a:hover { text-decoration: underline; }
+  </style>
+  <nav id="hq-legal" aria-label="HangulQuest links">
+    <a href="/about">About</a><a href="/about#pricing">Pricing</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/refund">Refunds</a>
+  </nav>
+  <noscript>
+    <h1>HangulQuest — learn to read Korean (Hangul) in 7 days through play</h1>
+    <p>HangulQuest is a browser game that teaches the Korean alphabet. Free to start; Premium is $6.99/month or $39.99/year with a 7-day free trial.</p>
+    <p><a href="/about">About &amp; pricing</a> · <a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a> · <a href="/refund">Refund Policy</a></p>
+  </noscript>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
