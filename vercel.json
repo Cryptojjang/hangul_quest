@@ -2,11 +2,15 @@
   "buildCommand": "bash vercel_build.sh",
   "outputDirectory": "build/web",
   "framework": null,
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
       ]
     }
   ]
