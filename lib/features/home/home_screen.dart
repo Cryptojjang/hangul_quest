@@ -8,6 +8,7 @@ import '../../core/data/curriculum.dart';
 import '../../core/economy/content_gate.dart';
 import '../../theme/hq_theme.dart';
 import '../codex/codex_screen.dart';
+import '../learn/learn_screen.dart';
 import '../minilesson/mini_lesson_screen.dart';
 import '../paywall/paywall_screen.dart';
 import '../review/review_screen.dart';
@@ -35,7 +36,8 @@ class HomeScreen extends StatelessWidget {
                 _StreakFlame(days: state.progress.streakDays),
                 const SizedBox(width: 8),
                 IconButton(
-                  icon: const Icon(Icons.settings_outlined, color: HqColors.inkSoft),
+                  icon: const Icon(Icons.settings_outlined,
+                      color: HqColors.inkSoft),
                   onPressed: () => Navigator.of(context)
                       .push(HqPageRoute(page: const SettingsScreen())),
                 ),
@@ -44,9 +46,11 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 12),
             _TrackerCard(day: trackerDay, pct: trackerPct),
             const SizedBox(height: 16),
-            _DailyChallengeCard(onPlay: () => _openStage(
-                context, StageId.jamoHunt,
-                level: state.progress.cleared(StageId.jamoHunt.name) + 1)),
+            const _LearnCard(),
+            const SizedBox(height: 16),
+            _DailyChallengeCard(
+                onPlay: () => _openStage(context, StageId.jamoHunt,
+                    level: state.progress.cleared(StageId.jamoHunt.name) + 1)),
             const SizedBox(height: 16),
             Text('Stages', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
@@ -114,7 +118,8 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  static void _openStage(BuildContext context, StageId stage, {required int level}) {
+  static void _openStage(BuildContext context, StageId stage,
+      {required int level}) {
     final state = AppScope.of(context);
     final levels = levelsFor(stage);
     final capped = level.clamp(1, levels.length);
@@ -129,8 +134,8 @@ class HomeScreen extends StatelessWidget {
       }
       return;
     }
-    Navigator.of(context).push(HqPageRoute(
-        page: MiniLessonScreen(stage: stage, level: capped)));
+    Navigator.of(context)
+        .push(HqPageRoute(page: MiniLessonScreen(stage: stage, level: capped)));
   }
 }
 
@@ -195,10 +200,42 @@ class _TrackerCard extends StatelessWidget {
               value: pct,
               minHeight: 10,
               backgroundColor: Colors.white24,
-              valueColor:
-                  const AlwaysStoppedAnimation(HqColors.obangYellow),
+              valueColor: const AlwaysStoppedAnimation(HqColors.obangYellow),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Entry to the free Learn Hangul course — placed above the stages so new
+/// learners find the explanations before the games.
+class _LearnCard extends StatelessWidget {
+  const _LearnCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return HqCard(
+      onTap: () =>
+          Navigator.of(context).push(HqPageRoute(page: const LearnScreen())),
+      child: Row(
+        children: [
+          const HqIconTile(
+              icon: Icons.school_rounded, color: HqColors.dancheongBlue),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Learn Hangul · 한글 배우기',
+                    style: TextStyle(fontWeight: FontWeight.w700)),
+                Text('Every letter to reading rules · 8 free lessons',
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded, color: HqColors.inkSoft),
         ],
       ),
     );
@@ -306,7 +343,11 @@ class _LeagueCard extends StatelessWidget {
 
   /// Local bot league (spec §3.3) — deterministic weekly rivals, no server.
   static const _bots = [
-    ('Mina', 820), ('Jae', 640), ('Sky', 450), ('Yuna', 300), ('Leo', 150),
+    ('Mina', 820),
+    ('Jae', 640),
+    ('Sky', 450),
+    ('Yuna', 300),
+    ('Leo', 150),
   ];
 
   @override
