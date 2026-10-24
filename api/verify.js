@@ -58,6 +58,19 @@ module.exports = async (req, res) => {
       res.status(200).json({ ...NONE });
       return;
     }
+    // One-time lifetime unlock: a paid, non-refunded order for the lifetime
+    // variant grants premium with no expiry.
+    const item = o.first_order_item || {};
+    if (String(item.variant_id) === String(e.variantLifetime)) {
+      const active = o.status === 'paid' && !o.refunded;
+      res.status(200).json({
+        isActive: active,
+        plan: active ? 'lifetime' : undefined,
+        inTrial: false,
+        token,
+      });
+      return;
+    }
     const subs = await ls(
       e.apiKey,
       `/subscriptions?filter[store_id]=${e.storeId}&filter[order_id]=${orderId}`,

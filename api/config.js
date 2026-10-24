@@ -7,7 +7,7 @@ module.exports = (req, res) => {
     paymentsEnabled: Boolean(
       process.env.LEMONSQUEEZY_API_KEY &&
         process.env.LEMONSQUEEZY_STORE_ID &&
-        process.env.LEMONSQUEEZY_VARIANT_YEARLY &&
+        process.env.LEMONSQUEEZY_VARIANT_LIFETIME &&
         process.env.LEMONSQUEEZY_VARIANT_MONTHLY,
     ),
   });
