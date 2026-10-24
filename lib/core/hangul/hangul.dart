@@ -76,25 +76,25 @@ class Jamo {
 // ---------------------------------------------------------------------------
 
 const List<Jamo> choseongTable = [
-  Jamo(id: 'c_giyeok', char: 'ㄱ', index: 0, role: JamoRole.choseong, nameKo: '기역', romanization: 'g/k', articulator: Articulator.velar, exampleWords: ['가방', '고기'], hint: '혀뿌리가 목구멍을 막는 모양이에요'),
+  Jamo(id: 'c_giyeok', char: 'ㄱ', index: 0, role: JamoRole.choseong, nameKo: '기역', romanization: 'g/k', articulator: Articulator.velar, exampleWords: ['가방', '고기'], hint: 'Shaped like the tongue root blocking the throat'),
   Jamo(id: 'c_ssanggiyeok', char: 'ㄲ', index: 1, role: JamoRole.choseong, nameKo: '쌍기역', romanization: 'kk', articulator: Articulator.velar, exampleWords: ['까치', '꿈']),
-  Jamo(id: 'c_nieun', char: 'ㄴ', index: 2, role: JamoRole.choseong, nameKo: '니은', romanization: 'n', articulator: Articulator.alveolar, exampleWords: ['나무', '노래'], hint: '혀끝이 윗잇몸에 닿는 모양이에요'),
+  Jamo(id: 'c_nieun', char: 'ㄴ', index: 2, role: JamoRole.choseong, nameKo: '니은', romanization: 'n', articulator: Articulator.alveolar, exampleWords: ['나무', '노래'], hint: 'Shaped like the tongue tip touching the gum ridge'),
   Jamo(id: 'c_digeut', char: 'ㄷ', index: 3, role: JamoRole.choseong, nameKo: '디귿', romanization: 'd/t', articulator: Articulator.alveolar, exampleWords: ['달', '두부']),
   Jamo(id: 'c_ssangdigeut', char: 'ㄸ', index: 4, role: JamoRole.choseong, nameKo: '쌍디귿', romanization: 'tt', articulator: Articulator.alveolar, exampleWords: ['딸기', '떡']),
   Jamo(id: 'c_rieul', char: 'ㄹ', index: 5, role: JamoRole.choseong, nameKo: '리을', romanization: 'r/l', articulator: Articulator.alveolar, exampleWords: ['라면', '노을']),
-  Jamo(id: 'c_mieum', char: 'ㅁ', index: 6, role: JamoRole.choseong, nameKo: '미음', romanization: 'm', articulator: Articulator.labial, exampleWords: ['물', '마음'], hint: '입술 모양을 본뜬 글자예요'),
+  Jamo(id: 'c_mieum', char: 'ㅁ', index: 6, role: JamoRole.choseong, nameKo: '미음', romanization: 'm', articulator: Articulator.labial, exampleWords: ['물', '마음'], hint: 'Shaped like closed lips'),
   Jamo(id: 'c_bieup', char: 'ㅂ', index: 7, role: JamoRole.choseong, nameKo: '비읍', romanization: 'b/p', articulator: Articulator.labial, exampleWords: ['바다', '비빔밥']),
   Jamo(id: 'c_ssangbieup', char: 'ㅃ', index: 8, role: JamoRole.choseong, nameKo: '쌍비읍', romanization: 'pp', articulator: Articulator.labial, exampleWords: ['빵', '뽀뽀']),
-  Jamo(id: 'c_siot', char: 'ㅅ', index: 9, role: JamoRole.choseong, nameKo: '시옷', romanization: 's', articulator: Articulator.dental, exampleWords: ['사랑', '수박'], hint: '이(치아) 모양을 본뜬 글자예요'),
+  Jamo(id: 'c_siot', char: 'ㅅ', index: 9, role: JamoRole.choseong, nameKo: '시옷', romanization: 's', articulator: Articulator.dental, exampleWords: ['사랑', '수박'], hint: 'Shaped like a tooth'),
   Jamo(id: 'c_ssangsiot', char: 'ㅆ', index: 10, role: JamoRole.choseong, nameKo: '쌍시옷', romanization: 'ss', articulator: Articulator.dental, exampleWords: ['쌀', '씨앗']),
-  Jamo(id: 'c_ieung', char: 'ㅇ', index: 11, role: JamoRole.choseong, nameKo: '이응', romanization: '(silent)/ng', articulator: Articulator.glottal, exampleWords: ['아침', '우유'], hint: '첫소리에서는 소리가 없고, 받침에서는 "응" 소리가 나요'),
+  Jamo(id: 'c_ieung', char: 'ㅇ', index: 11, role: JamoRole.choseong, nameKo: '이응', romanization: '(silent)/ng', articulator: Articulator.glottal, exampleWords: ['아침', '우유'], hint: 'Silent at the start, "ng" as a final consonant'),
   Jamo(id: 'c_jieut', char: 'ㅈ', index: 12, role: JamoRole.choseong, nameKo: '지읒', romanization: 'j', articulator: Articulator.dental, exampleWords: ['자전거', '주스']),
   Jamo(id: 'c_ssangjieut', char: 'ㅉ', index: 13, role: JamoRole.choseong, nameKo: '쌍지읒', romanization: 'jj', articulator: Articulator.dental, exampleWords: ['짜장면', '찌개']),
   Jamo(id: 'c_chieut', char: 'ㅊ', index: 14, role: JamoRole.choseong, nameKo: '치읓', romanization: 'ch', articulator: Articulator.dental, exampleWords: ['치즈', '춤']),
   Jamo(id: 'c_kieuk', char: 'ㅋ', index: 15, role: JamoRole.choseong, nameKo: '키읔', romanization: 'k', articulator: Articulator.velar, exampleWords: ['커피', '코']),
   Jamo(id: 'c_tieut', char: 'ㅌ', index: 16, role: JamoRole.choseong, nameKo: '티읕', romanization: 't', articulator: Articulator.alveolar, exampleWords: ['토마토', '태양']),
   Jamo(id: 'c_pieup', char: 'ㅍ', index: 17, role: JamoRole.choseong, nameKo: '피읖', romanization: 'p', articulator: Articulator.labial, exampleWords: ['포도', '피자']),
-  Jamo(id: 'c_hieut', char: 'ㅎ', index: 18, role: JamoRole.choseong, nameKo: '히읗', romanization: 'h', articulator: Articulator.glottal, exampleWords: ['하늘', '행복'], hint: '목구멍에서 나오는 숨소리를 본뜬 글자예요'),
+  Jamo(id: 'c_hieut', char: 'ㅎ', index: 18, role: JamoRole.choseong, nameKo: '히읗', romanization: 'h', articulator: Articulator.glottal, exampleWords: ['하늘', '행복'], hint: 'Shaped after breath from the throat'),
 ];
 
 const List<Jamo> jungseongTable = [
@@ -144,7 +144,7 @@ const List<Jamo> jongseongTable = [
   Jamo(id: 'f_bs', char: 'ㅄ', index: 18, role: JamoRole.jongseong, nameKo: '비읍시옷 받침', romanization: 'p', exampleWords: ['값']),
   Jamo(id: 'f_siot', char: 'ㅅ', index: 19, role: JamoRole.jongseong, nameKo: '시옷 받침', romanization: 't', exampleWords: ['옷', '맛']),
   Jamo(id: 'f_ssangsiot', char: 'ㅆ', index: 20, role: JamoRole.jongseong, nameKo: '쌍시옷 받침', romanization: 't', exampleWords: ['있다']),
-  Jamo(id: 'f_ieung', char: 'ㅇ', index: 21, role: JamoRole.jongseong, nameKo: '이응 받침', romanization: 'ng', exampleWords: ['강', '사랑'], hint: 'ㅇ은 받침 자리에서 "응" 소리가 나요'),
+  Jamo(id: 'f_ieung', char: 'ㅇ', index: 21, role: JamoRole.jongseong, nameKo: '이응 받침', romanization: 'ng', exampleWords: ['강', '사랑'], hint: 'As a final consonant, ㅇ sounds like "ng"'),
   Jamo(id: 'f_jieut', char: 'ㅈ', index: 22, role: JamoRole.jongseong, nameKo: '지읒 받침', romanization: 't', exampleWords: ['낮']),
   Jamo(id: 'f_chieut', char: 'ㅊ', index: 23, role: JamoRole.jongseong, nameKo: '치읓 받침', romanization: 't', exampleWords: ['꽃']),
   Jamo(id: 'f_kieuk', char: 'ㅋ', index: 24, role: JamoRole.jongseong, nameKo: '키읔 받침', romanization: 'k', exampleWords: ['부엌']),
