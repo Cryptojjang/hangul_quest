@@ -45,7 +45,7 @@ void main() {
       final p = puzzleFor('가');
       final vowel = jungseongTable[0];
       expect(p.place(vowel, SlotKind.choseong), PlacementResult.rejectedRole);
-      expect(p.hintFor(vowel, SlotKind.choseong), contains('모음'));
+      expect(p.hintFor(vowel, SlotKind.choseong), contains('Vowels'));
       expect(p.mistakes, 1);
     });
 

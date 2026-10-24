@@ -146,9 +146,7 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
                     style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 Text(
-                  'The mic is used only for scoring and
-recordings are never stored.
-Please allow the microphone in your browser or device settings.',
+                  'The mic is used only for scoring and\nrecordings are never stored.\nPlease allow the microphone in your browser or device settings.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),

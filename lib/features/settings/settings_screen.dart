@@ -79,8 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       HqPageRoute(page: const ManageSubscriptionScreen())),
                 ),
                 ListTile(
-                  leading:
-                      const Icon(Icons.restore, color: HqColors.inkSoft),
+                  leading: const Icon(Icons.restore, color: HqColors.inkSoft),
                   title: const Text('Restore purchase'),
                   onTap: () async {
                     final status = await state.services.billing.restore();
@@ -97,8 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 16),
           HqCard(
             child: ListTile(
-              leading:
-                  const Icon(Icons.privacy_tip, color: HqColors.inkSoft),
+              leading: const Icon(Icons.privacy_tip, color: HqColors.inkSoft),
               title: const Text('Privacy Policy'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context)
@@ -172,8 +170,9 @@ class ManageSubscriptionScreen extends StatelessWidget {
               onPressed: () {
                 // TODO(ios): open itms-apps://apps.apple.com/account/subscriptions
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Store builds open the OS subscription settings '
-                        '(current channel: dev)')));
+                    content:
+                        Text('Store builds open the OS subscription settings '
+                            '(current channel: dev)')));
               },
             ),
             const SizedBox(height: 8),
@@ -211,31 +210,22 @@ class PrivacyPolicyScreen extends StatelessWidget {
           // Web and iOS process speech and payments differently — each build
           // must describe its own behaviour truthfully.
           const Text(kIsWeb
-              ? '· Your progress and mistakes are saved only in this browser. No account needed.
-
-'
-                  '· For pronunciation scoring, your voice is sent to the browser's speech '
-                  'service (Google in Chrome, Apple in Safari) to be turned into text. It never '
-                  'reaches Hangul Bricks servers and recordings are not stored.
-
-'
-                  '· The microphone is used only for pronunciation scoring. If you deny it, '
-                  'everything else still works.
-
-'
-                  '· Payments are handled by our reseller Lemon Squeezy, and the app never '
-                  'sees your card details.'
-              : '· Your progress and mistakes are saved only on this device. No account needed.
-
-'
+              ? '· Your progress and mistakes are saved only in this browser. '
+                  'No account needed.\n\n'
+                  "· For pronunciation scoring, your voice is sent to the browser's "
+                  'speech service (Google in Chrome, Apple in Safari) to be turned '
+                  'into text. It never reaches Hangul Bricks servers and recordings '
+                  'are not stored.\n\n'
+                  '· The microphone is used only for pronunciation scoring. If you '
+                  'deny it, everything else still works.\n\n'
+                  '· Payments are handled by our reseller Lemon Squeezy, and the '
+                  'app never sees your card details.'
+              : '· Your progress and mistakes are saved only on this device. '
+                  'No account needed.\n\n'
                   '· Pronunciation audio is analyzed on-device only, and '
-                  'recordings are never stored or uploaded.
-
-'
-                  '· The microphone is used only for pronunciation scoring. If you deny it, '
-                  'everything else still works.
-
-'
+                  'recordings are never stored or uploaded.\n\n'
+                  '· The microphone is used only for pronunciation scoring. If you '
+                  'deny it, everything else still works.\n\n'
                   '· Payments go through App Store in-app purchase, and '
                   'the app never sees your card details.'),
           const SizedBox(height: 24),
@@ -279,8 +269,9 @@ class TermsOfUseScreen extends StatelessWidget {
           const Text(
             '· Use of Hangul Bricks is covered by the Apple standard EULA '
             'and our web Terms of Service.\n\n'
-            '· Premium renews automatically at the same price unless cancelled '
-            'at least 24 hours before the period ends.\n\n'
+            '· Lifetime: One-time payment — no subscription, no renewal.\n\n'
+            '· The monthly plan renews automatically at the same price unless '
+            'cancelled at least 24 hours before the period ends.\n\n'
             '· Cancel during the free trial and you will not be charged.',
           ),
           const SizedBox(height: 24),

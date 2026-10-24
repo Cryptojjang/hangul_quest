@@ -53,8 +53,7 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
     ),
     StageId.pronunciation: (
       'Ready to say it out loud?',
-      'Last comes speaking. Say it into the mic and
-we score which sounds you nailed.',
+      'Last comes speaking. Say it into the mic and\nwe score which sounds you nailed.',
       ['안', '녕', '안녕'],
       'Tap to listen first',
     ),
