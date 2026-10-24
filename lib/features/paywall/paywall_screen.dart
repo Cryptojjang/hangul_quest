@@ -3,6 +3,7 @@
 /// restore. No dark patterns: close button always visible.
 library;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
@@ -99,13 +100,30 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       ?.copyWith(fontSize: 30)),
               const SizedBox(height: 16),
               // Value summary: what competitors don't have (spec §5.3).
-              const _ValueRow(
-                  icon: Icons.mic_rounded, text: '내 발음을 채점해주는 유일한 한글 앱'),
-              const _ValueRow(
-                  icon: Icons.psychology_rounded, text: '틀린 소리만 골라주는 개인화 복습'),
-              const _ValueRow(
-                  icon: Icons.extension_rounded,
-                  text: '글자 조립부터 단어 읽기까지 전체 스테이지'),
+              // Web has no speech recognition (stage 4 is disabled there), so
+              // never advertise pronunciation scoring on the web paywall.
+              if (kIsWeb)
+                ...const [
+                  _ValueRow(
+                      icon: Icons.psychology_rounded,
+                      text: '틀린 소리만 골라주는 개인화 복습 무제한'),
+                  _ValueRow(
+                      icon: Icons.extension_rounded,
+                      text: '글자 조립 전 레벨 + 단어 러시까지 전체 스테이지'),
+                  _ValueRow(
+                      icon: Icons.local_fire_department_rounded,
+                      text: '스트릭 복구로 연속 기록 지키기'),
+                ]
+              else
+                ...const [
+                  _ValueRow(
+                      icon: Icons.mic_rounded, text: '내 발음을 채점해주는 유일한 한글 앱'),
+                  _ValueRow(
+                      icon: Icons.psychology_rounded, text: '틀린 소리만 골라주는 개인화 복습'),
+                  _ValueRow(
+                      icon: Icons.extension_rounded,
+                      text: '글자 조립부터 단어 읽기까지 전체 스테이지'),
+                ],
               const SizedBox(height: 20),
               if (_error != null)
                 Padding(
