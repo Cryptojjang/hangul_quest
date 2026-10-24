@@ -40,9 +40,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
       if (!mounted) return;
       setState(() {
         _products = products;
-        // Yearly preselected (conversion optimization, spec §5.3).
+        // Best-value plan (lifetime, else yearly) preselected (spec §5.3).
         _selected = products.firstWhere(
-            (p) => p.plan == SubscriptionPlan.yearly,
+            (p) => p.plan != SubscriptionPlan.monthly,
             orElse: () => products.first);
       });
     }).catchError((Object e) {
@@ -144,7 +144,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
               HqButton(
                 label: _busy
                     ? 'Processing…'
-                    : 'Start 7-day free trial',
+                    : (_selected != null && _selected!.trialDays > 0
+                        ? 'Start ${_selected!.trialDays}-day free trial'
+                        : 'Unlock Premium'),
                 expanded: true,
                 onPressed: _busy || _products == null ? null : _buy,
               ),
@@ -152,7 +154,11 @@ class _PaywallScreenState extends State<PaywallScreen> {
               Text(
                 _selected == null
                     ? ''
-                    : 'Then ${_selected!.priceLabel}, auto-renews · Cancel anytime',
+                    : _selected!.plan == SubscriptionPlan.lifetime
+                        ? 'One-time payment · No subscription · Yours forever'
+                        : _selected!.trialDays > 0
+                            ? 'Then ${_selected!.priceLabel}, auto-renews · Cancel anytime'
+                            : '${_selected!.priceLabel}, auto-renews · Cancel anytime',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -268,7 +274,11 @@ class _PlanTile extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                product.plan == SubscriptionPlan.yearly ? 'Yearly' : 'Monthly',
+                switch (product.plan) {
+                  SubscriptionPlan.lifetime => 'Lifetime',
+                  SubscriptionPlan.yearly => 'Yearly',
+                  SubscriptionPlan.monthly => 'Monthly',
+                },
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
