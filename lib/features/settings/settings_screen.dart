@@ -193,7 +193,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   /// Hosted policy URL — surfaced in App Store Connect metadata too.
-  static const policyUrl = 'https://hangulquest.app/privacy';
+  static const policyUrl = 'https://hangulquest-phi.vercel.app/privacy';
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +214,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
             '녹음이 저장되거나 서버로 전송되지 않아요.\n\n'
             '· 마이크 권한은 발음 채점에만 사용돼요. 거부해도 다른 기능은 '
             '모두 이용할 수 있어요.\n\n'
-            '· 결제는 App Store 인앱 결제로 처리되며, 카드 정보는 앱이 '
-            '접근할 수 없어요.',
+            '· 결제는 App Store 인앱 결제(웹은 Lemon Squeezy)로 처리되며, '
+            '카드 정보는 앱이 접근할 수 없어요.',
           ),
           const SizedBox(height: 24),
           HqButton(
