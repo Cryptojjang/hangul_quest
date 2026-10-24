@@ -74,17 +74,17 @@ class WebBillingGateway implements BillingGateway {
     if (_demo != null) return _demo!.fetchProducts();
     return const [
       Product(
-        id: 'hq_premium_yearly',
-        plan: SubscriptionPlan.yearly,
-        priceLabel: r'$39.99/yr',
-        trialDays: 7,
-        savingsLabel: 'SAVE 52%',
+        id: 'hq_premium_lifetime',
+        plan: SubscriptionPlan.lifetime,
+        priceLabel: r'$12.99 once',
+        trialDays: 0,
+        savingsLabel: 'BEST VALUE',
       ),
       Product(
         id: 'hq_premium_monthly',
         plan: SubscriptionPlan.monthly,
-        priceLabel: r'$6.99/mo',
-        trialDays: 7,
+        priceLabel: r'$4.99/mo',
+        trialDays: 0,
       ),
     ];
   }
@@ -180,6 +180,7 @@ class WebBillingGateway implements BillingGateway {
       SubscriptionStatus(
         isActive: m['isActive'] == true,
         plan: switch (m['plan'] as String?) {
+          'lifetime' => SubscriptionPlan.lifetime,
           'yearly' => SubscriptionPlan.yearly,
           'monthly' => SubscriptionPlan.monthly,
           _ => null,
