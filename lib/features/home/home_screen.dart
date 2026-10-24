@@ -9,6 +9,7 @@ import '../../core/economy/content_gate.dart';
 import '../../theme/hq_theme.dart';
 import '../codex/codex_screen.dart';
 import '../conversation/conversation_screen.dart';
+import '../explore/explore_screen.dart';
 import '../learn/learn_screen.dart';
 import '../minilesson/mini_lesson_screen.dart';
 import '../paywall/paywall_screen.dart';
@@ -50,6 +51,8 @@ class HomeScreen extends StatelessWidget {
             const _LearnCard(),
             const SizedBox(height: 10),
             const _TalkCard(),
+            const SizedBox(height: 10),
+            const _ExploreCard(),
             const SizedBox(height: 16),
             _DailyChallengeCard(
                 onPlay: () => _openStage(context, StageId.jamoHunt,
@@ -270,6 +273,38 @@ class _TalkCard extends StatelessWidget {
                     premium
                         ? 'Café, taxi, K-dramas, fan events and more'
                         : '3 free conversations · more with Premium',
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded, color: HqColors.inkSoft),
+        ],
+      ),
+    );
+  }
+}
+
+/// Entry to the free Explore Korea guide (apps, history, food, saju).
+class _ExploreCard extends StatelessWidget {
+  const _ExploreCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return HqCard(
+      onTap: () => Navigator.of(context)
+          .push(HqPageRoute(page: const ExploreScreen())),
+      child: Row(
+        children: [
+          const HqIconTile(
+              icon: Icons.travel_explore_rounded, color: HqColors.dancheongGreen),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Explore Korea · 한국 둘러보기',
+                    style: TextStyle(fontWeight: FontWeight.w700)),
+                Text('Travel apps, history and food to try',
                     style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
