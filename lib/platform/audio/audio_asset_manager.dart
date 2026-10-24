@@ -32,6 +32,7 @@ class AudioSlots {
   static String jamo(Jamo j) => 'voice/jamo/${j.id}';
   static String syllable(Syllable s) => 'voice/syllable/${s.codePoint}';
   static String word(String wordId) => 'voice/word/$wordId';
+  static String phrase(String slotId) => 'voice/phrase/$slotId';
 
   static const tapCorrect = 'sfx/tap_correct';
   static const tapWrong = 'sfx/tap_wrong';

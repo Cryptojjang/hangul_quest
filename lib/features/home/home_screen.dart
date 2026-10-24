@@ -8,6 +8,7 @@ import '../../core/data/curriculum.dart';
 import '../../core/economy/content_gate.dart';
 import '../../theme/hq_theme.dart';
 import '../codex/codex_screen.dart';
+import '../conversation/conversation_screen.dart';
 import '../learn/learn_screen.dart';
 import '../minilesson/mini_lesson_screen.dart';
 import '../paywall/paywall_screen.dart';
@@ -47,6 +48,8 @@ class HomeScreen extends StatelessWidget {
             _TrackerCard(day: trackerDay, pct: trackerPct),
             const SizedBox(height: 16),
             const _LearnCard(),
+            const SizedBox(height: 10),
+            const _TalkCard(),
             const SizedBox(height: 16),
             _DailyChallengeCard(
                 onPlay: () => _openStage(context, StageId.jamoHunt,
@@ -231,6 +234,42 @@ class _LearnCard extends StatelessWidget {
                 const Text('Learn Hangul · 한글 배우기',
                     style: TextStyle(fontWeight: FontWeight.w700)),
                 Text('Every letter to reading rules · 8 free lessons',
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded, color: HqColors.inkSoft),
+        ],
+      ),
+    );
+  }
+}
+
+/// Entry to the situational conversations (premium; first few free).
+class _TalkCard extends StatelessWidget {
+  const _TalkCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final premium = AppScope.of(context).isPremium;
+    return HqCard(
+      onTap: () => Navigator.of(context)
+          .push(HqPageRoute(page: const ConversationListScreen())),
+      child: Row(
+        children: [
+          const HqIconTile(
+              icon: Icons.forum_rounded, color: HqColors.dancheongRed),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Real-life Korean · 상황별 대화',
+                    style: TextStyle(fontWeight: FontWeight.w700)),
+                Text(
+                    premium
+                        ? 'Café, taxi, K-dramas, fan events and more'
+                        : '3 free conversations · more with Premium',
                     style: Theme.of(context).textTheme.bodySmall),
               ],
             ),

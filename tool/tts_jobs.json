@@ -735,6 +735,1371 @@
     "file": "assets/audio/voice/word/w_paen.wav"
   },
   {
+    "slot": "voice/word/w_tteokbokki",
+    "text": "떡볶이",
+    "file": "assets/audio/voice/word/w_tteokbokki.wav"
+  },
+  {
+    "slot": "voice/word/w_mandu",
+    "text": "만두",
+    "file": "assets/audio/voice/word/w_mandu.wav"
+  },
+  {
+    "slot": "voice/word/w_ppang",
+    "text": "빵",
+    "file": "assets/audio/voice/word/w_ppang.wav"
+  },
+  {
+    "slot": "voice/word/w_gyeran",
+    "text": "계란",
+    "file": "assets/audio/voice/word/w_gyeran.wav"
+  },
+  {
+    "slot": "voice/word/w_aiseukeurim",
+    "text": "아이스크림",
+    "file": "assets/audio/voice/word/w_aiseukeurim.wav"
+  },
+  {
+    "slot": "voice/word/w_keikeu",
+    "text": "케이크",
+    "file": "assets/audio/voice/word/w_keikeu.wav"
+  },
+  {
+    "slot": "voice/word/w_satang",
+    "text": "사탕",
+    "file": "assets/audio/voice/word/w_satang.wav"
+  },
+  {
+    "slot": "voice/word/w_chokollit",
+    "text": "초콜릿",
+    "file": "assets/audio/voice/word/w_chokollit.wav"
+  },
+  {
+    "slot": "voice/word/w_subak",
+    "text": "수박",
+    "file": "assets/audio/voice/word/w_subak.wav"
+  },
+  {
+    "slot": "voice/word/w_ttalgi",
+    "text": "딸기",
+    "file": "assets/audio/voice/word/w_ttalgi.wav"
+  },
+  {
+    "slot": "voice/word/w_banana",
+    "text": "바나나",
+    "file": "assets/audio/voice/word/w_banana.wav"
+  },
+  {
+    "slot": "voice/word/w_podo",
+    "text": "포도",
+    "file": "assets/audio/voice/word/w_podo.wav"
+  },
+  {
+    "slot": "voice/word/w_oksusu",
+    "text": "옥수수",
+    "file": "assets/audio/voice/word/w_oksusu.wav"
+  },
+  {
+    "slot": "voice/word/w_gamja",
+    "text": "감자",
+    "file": "assets/audio/voice/word/w_gamja.wav"
+  },
+  {
+    "slot": "voice/word/w_danggeun",
+    "text": "당근",
+    "file": "assets/audio/voice/word/w_danggeun.wav"
+  },
+  {
+    "slot": "voice/word/w_juseu",
+    "text": "주스",
+    "file": "assets/audio/voice/word/w_juseu.wav"
+  },
+  {
+    "slot": "voice/word/w_cha",
+    "text": "차",
+    "file": "assets/audio/voice/word/w_cha.wav"
+  },
+  {
+    "slot": "voice/word/w_maekju",
+    "text": "맥주",
+    "file": "assets/audio/voice/word/w_maekju.wav"
+  },
+  {
+    "slot": "voice/word/w_soju",
+    "text": "소주",
+    "file": "assets/audio/voice/word/w_soju.wav"
+  },
+  {
+    "slot": "voice/word/w_pija",
+    "text": "피자",
+    "file": "assets/audio/voice/word/w_pija.wav"
+  },
+  {
+    "slot": "voice/word/w_haembeogeo",
+    "text": "햄버거",
+    "file": "assets/audio/voice/word/w_haembeogeo.wav"
+  },
+  {
+    "slot": "voice/word/w_samgyeopsal",
+    "text": "삼겹살",
+    "file": "assets/audio/voice/word/w_samgyeopsal.wav"
+  },
+  {
+    "slot": "voice/word/w_saengseon",
+    "text": "생선",
+    "file": "assets/audio/voice/word/w_saengseon.wav"
+  },
+  {
+    "slot": "voice/word/w_goyangi",
+    "text": "고양이",
+    "file": "assets/audio/voice/word/w_goyangi.wav"
+  },
+  {
+    "slot": "voice/word/w_gangaji",
+    "text": "강아지",
+    "file": "assets/audio/voice/word/w_gangaji.wav"
+  },
+  {
+    "slot": "voice/word/w_tokki",
+    "text": "토끼",
+    "file": "assets/audio/voice/word/w_tokki.wav"
+  },
+  {
+    "slot": "voice/word/w_dwaeji",
+    "text": "돼지",
+    "file": "assets/audio/voice/word/w_dwaeji.wav"
+  },
+  {
+    "slot": "voice/word/w_so",
+    "text": "소",
+    "file": "assets/audio/voice/word/w_so.wav"
+  },
+  {
+    "slot": "voice/word/w_dak",
+    "text": "닭",
+    "file": "assets/audio/voice/word/w_dak.wav"
+  },
+  {
+    "slot": "voice/word/w_ori",
+    "text": "오리",
+    "file": "assets/audio/voice/word/w_ori.wav"
+  },
+  {
+    "slot": "voice/word/w_mal",
+    "text": "말",
+    "file": "assets/audio/voice/word/w_mal.wav"
+  },
+  {
+    "slot": "voice/word/w_yang",
+    "text": "양",
+    "file": "assets/audio/voice/word/w_yang.wav"
+  },
+  {
+    "slot": "voice/word/w_gom",
+    "text": "곰",
+    "file": "assets/audio/voice/word/w_gom.wav"
+  },
+  {
+    "slot": "voice/word/w_horangi",
+    "text": "호랑이",
+    "file": "assets/audio/voice/word/w_horangi.wav"
+  },
+  {
+    "slot": "voice/word/w_saja",
+    "text": "사자",
+    "file": "assets/audio/voice/word/w_saja.wav"
+  },
+  {
+    "slot": "voice/word/w_wonsungi",
+    "text": "원숭이",
+    "file": "assets/audio/voice/word/w_wonsungi.wav"
+  },
+  {
+    "slot": "voice/word/w_kokkiri",
+    "text": "코끼리",
+    "file": "assets/audio/voice/word/w_kokkiri.wav"
+  },
+  {
+    "slot": "voice/word/w_panda",
+    "text": "판다",
+    "file": "assets/audio/voice/word/w_panda.wav"
+  },
+  {
+    "slot": "voice/word/w_baem",
+    "text": "뱀",
+    "file": "assets/audio/voice/word/w_baem.wav"
+  },
+  {
+    "slot": "voice/word/w_sae",
+    "text": "새",
+    "file": "assets/audio/voice/word/w_sae.wav"
+  },
+  {
+    "slot": "voice/word/w_mulgogi",
+    "text": "물고기",
+    "file": "assets/audio/voice/word/w_mulgogi.wav"
+  },
+  {
+    "slot": "voice/word/w_nabi",
+    "text": "나비",
+    "file": "assets/audio/voice/word/w_nabi.wav"
+  },
+  {
+    "slot": "voice/word/w_geobugi",
+    "text": "거북이",
+    "file": "assets/audio/voice/word/w_geobugi.wav"
+  },
+  {
+    "slot": "voice/word/w_beol",
+    "text": "벌",
+    "file": "assets/audio/voice/word/w_beol.wav"
+  },
+  {
+    "slot": "voice/word/w_gaemi",
+    "text": "개미",
+    "file": "assets/audio/voice/word/w_gaemi.wav"
+  },
+  {
+    "slot": "voice/word/w_hae",
+    "text": "해",
+    "file": "assets/audio/voice/word/w_hae.wav"
+  },
+  {
+    "slot": "voice/word/w_dal",
+    "text": "달",
+    "file": "assets/audio/voice/word/w_dal.wav"
+  },
+  {
+    "slot": "voice/word/w_byeol",
+    "text": "별",
+    "file": "assets/audio/voice/word/w_byeol.wav"
+  },
+  {
+    "slot": "voice/word/w_bi",
+    "text": "비",
+    "file": "assets/audio/voice/word/w_bi.wav"
+  },
+  {
+    "slot": "voice/word/w_nun",
+    "text": "눈",
+    "file": "assets/audio/voice/word/w_nun.wav"
+  },
+  {
+    "slot": "voice/word/w_gureum",
+    "text": "구름",
+    "file": "assets/audio/voice/word/w_gureum.wav"
+  },
+  {
+    "slot": "voice/word/w_baram",
+    "text": "바람",
+    "file": "assets/audio/voice/word/w_baram.wav"
+  },
+  {
+    "slot": "voice/word/w_mujigae",
+    "text": "무지개",
+    "file": "assets/audio/voice/word/w_mujigae.wav"
+  },
+  {
+    "slot": "voice/word/w_san",
+    "text": "산",
+    "file": "assets/audio/voice/word/w_san.wav"
+  },
+  {
+    "slot": "voice/word/w_kkot",
+    "text": "꽃",
+    "file": "assets/audio/voice/word/w_kkot.wav"
+  },
+  {
+    "slot": "voice/word/w_namu",
+    "text": "나무",
+    "file": "assets/audio/voice/word/w_namu.wav"
+  },
+  {
+    "slot": "voice/word/w_bul",
+    "text": "불",
+    "file": "assets/audio/voice/word/w_bul.wav"
+  },
+  {
+    "slot": "voice/word/w_gang",
+    "text": "강",
+    "file": "assets/audio/voice/word/w_gang.wav"
+  },
+  {
+    "slot": "voice/word/w_seom",
+    "text": "섬",
+    "file": "assets/audio/voice/word/w_seom.wav"
+  },
+  {
+    "slot": "voice/word/w_dol",
+    "text": "돌",
+    "file": "assets/audio/voice/word/w_dol.wav"
+  },
+  {
+    "slot": "voice/word/w_byeongwon",
+    "text": "병원",
+    "file": "assets/audio/voice/word/w_byeongwon.wav"
+  },
+  {
+    "slot": "voice/word/w_eunhaeng",
+    "text": "은행",
+    "file": "assets/audio/voice/word/w_eunhaeng.wav"
+  },
+  {
+    "slot": "voice/word/w_pyeonuijeom",
+    "text": "편의점",
+    "file": "assets/audio/voice/word/w_pyeonuijeom.wav"
+  },
+  {
+    "slot": "voice/word/w_sikdang",
+    "text": "식당",
+    "file": "assets/audio/voice/word/w_sikdang.wav"
+  },
+  {
+    "slot": "voice/word/w_kape",
+    "text": "카페",
+    "file": "assets/audio/voice/word/w_kape.wav"
+  },
+  {
+    "slot": "voice/word/w_doseogwan",
+    "text": "도서관",
+    "file": "assets/audio/voice/word/w_doseogwan.wav"
+  },
+  {
+    "slot": "voice/word/w_gongwon",
+    "text": "공원",
+    "file": "assets/audio/voice/word/w_gongwon.wav"
+  },
+  {
+    "slot": "voice/word/w_gonghang",
+    "text": "공항",
+    "file": "assets/audio/voice/word/w_gonghang.wav"
+  },
+  {
+    "slot": "voice/word/w_hotel",
+    "text": "호텔",
+    "file": "assets/audio/voice/word/w_hotel.wav"
+  },
+  {
+    "slot": "voice/word/w_jeol",
+    "text": "절",
+    "file": "assets/audio/voice/word/w_jeol.wav"
+  },
+  {
+    "slot": "voice/word/w_sijang",
+    "text": "시장",
+    "file": "assets/audio/voice/word/w_sijang.wav"
+  },
+  {
+    "slot": "voice/word/w_hwajangsil",
+    "text": "화장실",
+    "file": "assets/audio/voice/word/w_hwajangsil.wav"
+  },
+  {
+    "slot": "voice/word/w_ucheguk",
+    "text": "우체국",
+    "file": "assets/audio/voice/word/w_ucheguk.wav"
+  },
+  {
+    "slot": "voice/word/w_gyeongchalseo",
+    "text": "경찰서",
+    "file": "assets/audio/voice/word/w_gyeongchalseo.wav"
+  },
+  {
+    "slot": "voice/word/w_taeksi",
+    "text": "택시",
+    "file": "assets/audio/voice/word/w_taeksi.wav"
+  },
+  {
+    "slot": "voice/word/w_jihacheol",
+    "text": "지하철",
+    "file": "assets/audio/voice/word/w_jihacheol.wav"
+  },
+  {
+    "slot": "voice/word/w_gicha",
+    "text": "기차",
+    "file": "assets/audio/voice/word/w_gicha.wav"
+  },
+  {
+    "slot": "voice/word/w_bihaenggi",
+    "text": "비행기",
+    "file": "assets/audio/voice/word/w_bihaenggi.wav"
+  },
+  {
+    "slot": "voice/word/w_jajeongeo",
+    "text": "자전거",
+    "file": "assets/audio/voice/word/w_jajeongeo.wav"
+  },
+  {
+    "slot": "voice/word/w_bae",
+    "text": "배",
+    "file": "assets/audio/voice/word/w_bae.wav"
+  },
+  {
+    "slot": "voice/word/w_jadongcha",
+    "text": "자동차",
+    "file": "assets/audio/voice/word/w_jadongcha.wav"
+  },
+  {
+    "slot": "voice/word/w_otobai",
+    "text": "오토바이",
+    "file": "assets/audio/voice/word/w_otobai.wav"
+  },
+  {
+    "slot": "voice/word/w_son",
+    "text": "손",
+    "file": "assets/audio/voice/word/w_son.wav"
+  },
+  {
+    "slot": "voice/word/w_bal",
+    "text": "발",
+    "file": "assets/audio/voice/word/w_bal.wav"
+  },
+  {
+    "slot": "voice/word/w_gwi",
+    "text": "귀",
+    "file": "assets/audio/voice/word/w_gwi.wav"
+  },
+  {
+    "slot": "voice/word/w_ko",
+    "text": "코",
+    "file": "assets/audio/voice/word/w_ko.wav"
+  },
+  {
+    "slot": "voice/word/w_ip",
+    "text": "입",
+    "file": "assets/audio/voice/word/w_ip.wav"
+  },
+  {
+    "slot": "voice/word/w_eolgul",
+    "text": "얼굴",
+    "file": "assets/audio/voice/word/w_eolgul.wav"
+  },
+  {
+    "slot": "voice/word/w_i_tooth",
+    "text": "이",
+    "file": "assets/audio/voice/word/w_i_tooth.wav"
+  },
+  {
+    "slot": "voice/word/w_eomma",
+    "text": "엄마",
+    "file": "assets/audio/voice/word/w_eomma.wav"
+  },
+  {
+    "slot": "voice/word/w_appa",
+    "text": "아빠",
+    "file": "assets/audio/voice/word/w_appa.wav"
+  },
+  {
+    "slot": "voice/word/w_agi",
+    "text": "아기",
+    "file": "assets/audio/voice/word/w_agi.wav"
+  },
+  {
+    "slot": "voice/word/w_halmeoni",
+    "text": "할머니",
+    "file": "assets/audio/voice/word/w_halmeoni.wav"
+  },
+  {
+    "slot": "voice/word/w_harabeoji",
+    "text": "할아버지",
+    "file": "assets/audio/voice/word/w_harabeoji.wav"
+  },
+  {
+    "slot": "voice/word/w_oppa",
+    "text": "오빠",
+    "file": "assets/audio/voice/word/w_oppa.wav"
+  },
+  {
+    "slot": "voice/word/w_eonni",
+    "text": "언니",
+    "file": "assets/audio/voice/word/w_eonni.wav"
+  },
+  {
+    "slot": "voice/word/w_seonsaengnim",
+    "text": "선생님",
+    "file": "assets/audio/voice/word/w_seonsaengnim.wav"
+  },
+  {
+    "slot": "voice/word/w_uisa",
+    "text": "의사",
+    "file": "assets/audio/voice/word/w_uisa.wav"
+  },
+  {
+    "slot": "voice/word/w_haksaeng",
+    "text": "학생",
+    "file": "assets/audio/voice/word/w_haksaeng.wav"
+  },
+  {
+    "slot": "voice/word/w_gyeongchal",
+    "text": "경찰",
+    "file": "assets/audio/voice/word/w_gyeongchal.wav"
+  },
+  {
+    "slot": "voice/word/w_yorisa",
+    "text": "요리사",
+    "file": "assets/audio/voice/word/w_yorisa.wav"
+  },
+  {
+    "slot": "voice/word/w_hoesawon",
+    "text": "회사원",
+    "file": "assets/audio/voice/word/w_hoesawon.wav"
+  },
+  {
+    "slot": "voice/word/w_chaek",
+    "text": "책",
+    "file": "assets/audio/voice/word/w_chaek.wav"
+  },
+  {
+    "slot": "voice/word/w_gabang",
+    "text": "가방",
+    "file": "assets/audio/voice/word/w_gabang.wav"
+  },
+  {
+    "slot": "voice/word/w_sigye",
+    "text": "시계",
+    "file": "assets/audio/voice/word/w_sigye.wav"
+  },
+  {
+    "slot": "voice/word/w_usan",
+    "text": "우산",
+    "file": "assets/audio/voice/word/w_usan.wav"
+  },
+  {
+    "slot": "voice/word/w_moja",
+    "text": "모자",
+    "file": "assets/audio/voice/word/w_moja.wav"
+  },
+  {
+    "slot": "voice/word/w_sinbal",
+    "text": "신발",
+    "file": "assets/audio/voice/word/w_sinbal.wav"
+  },
+  {
+    "slot": "voice/word/w_ot",
+    "text": "옷",
+    "file": "assets/audio/voice/word/w_ot.wav"
+  },
+  {
+    "slot": "voice/word/w_angyeong",
+    "text": "안경",
+    "file": "assets/audio/voice/word/w_angyeong.wav"
+  },
+  {
+    "slot": "voice/word/w_yeolsoe",
+    "text": "열쇠",
+    "file": "assets/audio/voice/word/w_yeolsoe.wav"
+  },
+  {
+    "slot": "voice/word/w_keompyuteo",
+    "text": "컴퓨터",
+    "file": "assets/audio/voice/word/w_keompyuteo.wav"
+  },
+  {
+    "slot": "voice/word/w_sajin",
+    "text": "사진",
+    "file": "assets/audio/voice/word/w_sajin.wav"
+  },
+  {
+    "slot": "voice/word/w_don",
+    "text": "돈",
+    "file": "assets/audio/voice/word/w_don.wav"
+  },
+  {
+    "slot": "voice/word/w_pyeonji",
+    "text": "편지",
+    "file": "assets/audio/voice/word/w_pyeonji.wav"
+  },
+  {
+    "slot": "voice/word/w_seonmul",
+    "text": "선물",
+    "file": "assets/audio/voice/word/w_seonmul.wav"
+  },
+  {
+    "slot": "voice/word/w_haendeupon",
+    "text": "핸드폰",
+    "file": "assets/audio/voice/word/w_haendeupon.wav"
+  },
+  {
+    "slot": "voice/word/w_uija",
+    "text": "의자",
+    "file": "assets/audio/voice/word/w_uija.wav"
+  },
+  {
+    "slot": "voice/word/w_chimdae",
+    "text": "침대",
+    "file": "assets/audio/voice/word/w_chimdae.wav"
+  },
+  {
+    "slot": "voice/word/w_mun",
+    "text": "문",
+    "file": "assets/audio/voice/word/w_mun.wav"
+  },
+  {
+    "slot": "voice/word/w_yeonpil",
+    "text": "연필",
+    "file": "assets/audio/voice/word/w_yeonpil.wav"
+  },
+  {
+    "slot": "voice/word/w_gong",
+    "text": "공",
+    "file": "assets/audio/voice/word/w_gong.wav"
+  },
+  {
+    "slot": "voice/word/w_changmun",
+    "text": "창문",
+    "file": "assets/audio/voice/word/w_changmun.wav"
+  },
+  {
+    "slot": "voice/word/w_hwaiting",
+    "text": "화이팅",
+    "file": "assets/audio/voice/word/w_hwaiting.wav"
+  },
+  {
+    "slot": "voice/word/w_daebak",
+    "text": "대박",
+    "file": "assets/audio/voice/word/w_daebak.wav"
+  },
+  {
+    "slot": "voice/word/w_noraebang",
+    "text": "노래방",
+    "file": "assets/audio/voice/word/w_noraebang.wav"
+  },
+  {
+    "slot": "voice/word/w_hangeul",
+    "text": "한글",
+    "file": "assets/audio/voice/word/w_hangeul.wav"
+  },
+  {
+    "slot": "voice/word/w_saengil",
+    "text": "생일",
+    "file": "assets/audio/voice/word/w_saengil.wav"
+  },
+  {
+    "slot": "voice/word/w_chukha",
+    "text": "축하",
+    "file": "assets/audio/voice/word/w_chukha.wav"
+  },
+  {
+    "slot": "voice/word/w_yeohaeng",
+    "text": "여행",
+    "file": "assets/audio/voice/word/w_yeohaeng.wav"
+  },
+  {
+    "slot": "voice/word/w_geim",
+    "text": "게임",
+    "file": "assets/audio/voice/word/w_geim.wav"
+  },
+  {
+    "slot": "voice/word/w_undong",
+    "text": "운동",
+    "file": "assets/audio/voice/word/w_undong.wav"
+  },
+  {
+    "slot": "voice/word/w_gongbu",
+    "text": "공부",
+    "file": "assets/audio/voice/word/w_gongbu.wav"
+  },
+  {
+    "slot": "voice/word/w_syoping",
+    "text": "쇼핑",
+    "file": "assets/audio/voice/word/w_syoping.wav"
+  },
+  {
+    "slot": "voice/word/w_keopeul",
+    "text": "커플",
+    "file": "assets/audio/voice/word/w_keopeul.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_0",
+    "text": "안녕하세요!",
+    "file": "assets/audio/voice/phrase/greetings_0.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_1",
+    "text": "안녕하세요. 처음 뵙겠습니다.",
+    "file": "assets/audio/voice/phrase/greetings_1.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_2",
+    "text": "저는 민수예요. 이름이 뭐예요?",
+    "file": "assets/audio/voice/phrase/greetings_2.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_3",
+    "text": "저는 에마예요. 미국에서 왔어요.",
+    "file": "assets/audio/voice/phrase/greetings_3.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_4",
+    "text": "만나서 반가워요!",
+    "file": "assets/audio/voice/phrase/greetings_4.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_5",
+    "text": "저도 반가워요.",
+    "file": "assets/audio/voice/phrase/greetings_5.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_k0",
+    "text": "안녕하세요",
+    "file": "assets/audio/voice/phrase/greetings_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_k1",
+    "text": "만나서 반가워요",
+    "file": "assets/audio/voice/phrase/greetings_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/greetings_k2",
+    "text": "캐나다에서 왔어요",
+    "file": "assets/audio/voice/phrase/greetings_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_0",
+    "text": "어서 오세요. 주문하시겠어요?",
+    "file": "assets/audio/voice/phrase/cafe_0.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_1",
+    "text": "아이스 아메리카노 한 잔 주세요.",
+    "file": "assets/audio/voice/phrase/cafe_1.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_2",
+    "text": "사이즈는 어떻게 해 드릴까요?",
+    "file": "assets/audio/voice/phrase/cafe_2.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_3",
+    "text": "큰 걸로 주세요.",
+    "file": "assets/audio/voice/phrase/cafe_3.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_4",
+    "text": "드시고 가세요, 가져가세요?",
+    "file": "assets/audio/voice/phrase/cafe_4.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_5",
+    "text": "가져갈게요. 카드 돼요?",
+    "file": "assets/audio/voice/phrase/cafe_5.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_6",
+    "text": "네, 됩니다.",
+    "file": "assets/audio/voice/phrase/cafe_6.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_k0",
+    "text": "주세요",
+    "file": "assets/audio/voice/phrase/cafe_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_k1",
+    "text": "한 잔",
+    "file": "assets/audio/voice/phrase/cafe_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/cafe_k2",
+    "text": "카드 돼요?",
+    "file": "assets/audio/voice/phrase/cafe_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_0",
+    "text": "몇 분이세요?",
+    "file": "assets/audio/voice/phrase/restaurant_0.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_1",
+    "text": "두 명이에요.",
+    "file": "assets/audio/voice/phrase/restaurant_1.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_2",
+    "text": "저기요! 메뉴판 좀 주세요.",
+    "file": "assets/audio/voice/phrase/restaurant_2.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_3",
+    "text": "이거 안 매워요?",
+    "file": "assets/audio/voice/phrase/restaurant_3.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_4",
+    "text": "조금 매워요.",
+    "file": "assets/audio/voice/phrase/restaurant_4.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_5",
+    "text": "그럼 이거 두 개 주세요.",
+    "file": "assets/audio/voice/phrase/restaurant_5.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_6",
+    "text": "잘 먹었습니다! 계산해 주세요.",
+    "file": "assets/audio/voice/phrase/restaurant_6.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_k0",
+    "text": "저기요!",
+    "file": "assets/audio/voice/phrase/restaurant_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_k1",
+    "text": "맛있어요",
+    "file": "assets/audio/voice/phrase/restaurant_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/restaurant_k2",
+    "text": "계산해 주세요",
+    "file": "assets/audio/voice/phrase/restaurant_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_0",
+    "text": "이거 얼마예요?",
+    "file": "assets/audio/voice/phrase/shopping_0.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_1",
+    "text": "만 오천 원이에요.",
+    "file": "assets/audio/voice/phrase/shopping_1.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_2",
+    "text": "좀 깎아 주세요.",
+    "file": "assets/audio/voice/phrase/shopping_2.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_3",
+    "text": "그럼 만 삼천 원에 드릴게요.",
+    "file": "assets/audio/voice/phrase/shopping_3.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_4",
+    "text": "다른 색깔 있어요?",
+    "file": "assets/audio/voice/phrase/shopping_4.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_5",
+    "text": "네, 검은색이랑 흰색 있어요.",
+    "file": "assets/audio/voice/phrase/shopping_5.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_6",
+    "text": "흰색으로 할게요.",
+    "file": "assets/audio/voice/phrase/shopping_6.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_k0",
+    "text": "얼마예요?",
+    "file": "assets/audio/voice/phrase/shopping_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_k1",
+    "text": "입어 봐도 돼요?",
+    "file": "assets/audio/voice/phrase/shopping_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/shopping_k2",
+    "text": "그냥 구경하는 거예요",
+    "file": "assets/audio/voice/phrase/shopping_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_0",
+    "text": "실례합니다. 지하철역이 어디예요?",
+    "file": "assets/audio/voice/phrase/directions_0.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_1",
+    "text": "쭉 가서 오른쪽으로 가세요.",
+    "file": "assets/audio/voice/phrase/directions_1.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_2",
+    "text": "여기서 멀어요?",
+    "file": "assets/audio/voice/phrase/directions_2.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_3",
+    "text": "아니요, 걸어서 오 분이에요.",
+    "file": "assets/audio/voice/phrase/directions_3.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_4",
+    "text": "감사합니다!",
+    "file": "assets/audio/voice/phrase/directions_4.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_k0",
+    "text": "어디예요?",
+    "file": "assets/audio/voice/phrase/directions_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_k1",
+    "text": "왼쪽 / 오른쪽",
+    "file": "assets/audio/voice/phrase/directions_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/directions_k2",
+    "text": "화장실이 어디예요?",
+    "file": "assets/audio/voice/phrase/directions_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_0",
+    "text": "어디로 가세요?",
+    "file": "assets/audio/voice/phrase/transport_0.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_1",
+    "text": "이 주소로 가 주세요.",
+    "file": "assets/audio/voice/phrase/transport_1.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_2",
+    "text": "얼마나 걸려요?",
+    "file": "assets/audio/voice/phrase/transport_2.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_3",
+    "text": "이십 분쯤 걸려요.",
+    "file": "assets/audio/voice/phrase/transport_3.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_4",
+    "text": "여기서 세워 주세요.",
+    "file": "assets/audio/voice/phrase/transport_4.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_5",
+    "text": "이 지하철 시청역 가요?",
+    "file": "assets/audio/voice/phrase/transport_5.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_k0",
+    "text": "로 가 주세요",
+    "file": "assets/audio/voice/phrase/transport_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_k1",
+    "text": "여기서 세워 주세요",
+    "file": "assets/audio/voice/phrase/transport_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/transport_k2",
+    "text": "어디서 갈아타요?",
+    "file": "assets/audio/voice/phrase/transport_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_0",
+    "text": "봉투 필요하세요?",
+    "file": "assets/audio/voice/phrase/convenience_0.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_1",
+    "text": "네, 하나 주세요.",
+    "file": "assets/audio/voice/phrase/convenience_1.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_2",
+    "text": "데워 드릴까요?",
+    "file": "assets/audio/voice/phrase/convenience_2.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_3",
+    "text": "네, 데워 주세요.",
+    "file": "assets/audio/voice/phrase/convenience_3.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_4",
+    "text": "포인트 카드 있으세요?",
+    "file": "assets/audio/voice/phrase/convenience_4.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_5",
+    "text": "아니요, 없어요.",
+    "file": "assets/audio/voice/phrase/convenience_5.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_k0",
+    "text": "봉투",
+    "file": "assets/audio/voice/phrase/convenience_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_k1",
+    "text": "영수증 주세요",
+    "file": "assets/audio/voice/phrase/convenience_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/convenience_k2",
+    "text": "원 플러스 원",
+    "file": "assets/audio/voice/phrase/convenience_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_0",
+    "text": "감사합니다.",
+    "file": "assets/audio/voice/phrase/politeness_0.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_1",
+    "text": "고마워요.",
+    "file": "assets/audio/voice/phrase/politeness_1.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_2",
+    "text": "고마워!",
+    "file": "assets/audio/voice/phrase/politeness_2.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_3",
+    "text": "밥 먹었어?",
+    "file": "assets/audio/voice/phrase/politeness_3.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_4",
+    "text": "응, 먹었어. 너는?",
+    "file": "assets/audio/voice/phrase/politeness_4.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_5",
+    "text": "진지 드셨어요?",
+    "file": "assets/audio/voice/phrase/politeness_5.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_k0",
+    "text": "존댓말",
+    "file": "assets/audio/voice/phrase/politeness_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_k1",
+    "text": "반말",
+    "file": "assets/audio/voice/phrase/politeness_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/politeness_k2",
+    "text": "말 편하게 해도 돼요",
+    "file": "assets/audio/voice/phrase/politeness_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_0",
+    "text": "몇 살이에요?",
+    "file": "assets/audio/voice/phrase/friends_0.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_1",
+    "text": "스물다섯 살이에요.",
+    "file": "assets/audio/voice/phrase/friends_1.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_2",
+    "text": "저보다 언니네요!",
+    "file": "assets/audio/voice/phrase/friends_2.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_3",
+    "text": "우리 말 편하게 할까요?",
+    "file": "assets/audio/voice/phrase/friends_3.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_4",
+    "text": "좋아요! 번호 알려 줄래?",
+    "file": "assets/audio/voice/phrase/friends_4.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_5",
+    "text": "응, 다음에 같이 놀자!",
+    "file": "assets/audio/voice/phrase/friends_5.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_k0",
+    "text": "몇 살이에요?",
+    "file": "assets/audio/voice/phrase/friends_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_k1",
+    "text": "같이 놀래요?",
+    "file": "assets/audio/voice/phrase/friends_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/friends_k2",
+    "text": "연락해!",
+    "file": "assets/audio/voice/phrase/friends_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_0",
+    "text": "사랑해요!",
+    "file": "assets/audio/voice/phrase/fans_0.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_1",
+    "text": "오늘 너무 멋있어요!",
+    "file": "assets/audio/voice/phrase/fans_1.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_2",
+    "text": "항상 응원할게요, 화이팅!",
+    "file": "assets/audio/voice/phrase/fans_2.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_3",
+    "text": "줄 서 주세요.",
+    "file": "assets/audio/voice/phrase/fans_3.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_4",
+    "text": "사진 찍어도 돼요?",
+    "file": "assets/audio/voice/phrase/fans_4.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_5",
+    "text": "촬영은 안 돼요.",
+    "file": "assets/audio/voice/phrase/fans_5.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_k0",
+    "text": "멋있어요 / 예뻐요",
+    "file": "assets/audio/voice/phrase/fans_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_k1",
+    "text": "최고!",
+    "file": "assets/audio/voice/phrase/fans_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/fans_k2",
+    "text": "응원봉",
+    "file": "assets/audio/voice/phrase/fans_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_0",
+    "text": "대박!",
+    "file": "assets/audio/voice/phrase/drama_0.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_1",
+    "text": "진짜?",
+    "file": "assets/audio/voice/phrase/drama_1.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_2",
+    "text": "헐…",
+    "file": "assets/audio/voice/phrase/drama_2.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_3",
+    "text": "아이고!",
+    "file": "assets/audio/voice/phrase/drama_3.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_4",
+    "text": "괜찮아?",
+    "file": "assets/audio/voice/phrase/drama_4.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_5",
+    "text": "보고 싶어.",
+    "file": "assets/audio/voice/phrase/drama_5.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_6",
+    "text": "가지 마!",
+    "file": "assets/audio/voice/phrase/drama_6.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_k0",
+    "text": "어떡해!",
+    "file": "assets/audio/voice/phrase/drama_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_k1",
+    "text": "잠깐만!",
+    "file": "assets/audio/voice/phrase/drama_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/drama_k2",
+    "text": "왜?",
+    "file": "assets/audio/voice/phrase/drama_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_0",
+    "text": "머리가 아파요.",
+    "file": "assets/audio/voice/phrase/pharmacy_0.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_1",
+    "text": "언제부터 아팠어요?",
+    "file": "assets/audio/voice/phrase/pharmacy_1.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_2",
+    "text": "어제부터요. 열도 있어요.",
+    "file": "assets/audio/voice/phrase/pharmacy_2.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_3",
+    "text": "이 약을 하루에 세 번 드세요.",
+    "file": "assets/audio/voice/phrase/pharmacy_3.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_4",
+    "text": "밥 먹고 먹어요?",
+    "file": "assets/audio/voice/phrase/pharmacy_4.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_5",
+    "text": "네, 식후 삼십 분에 드세요.",
+    "file": "assets/audio/voice/phrase/pharmacy_5.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_k0",
+    "text": "이/가 아파요",
+    "file": "assets/audio/voice/phrase/pharmacy_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_k1",
+    "text": "배가 아파요",
+    "file": "assets/audio/voice/phrase/pharmacy_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/pharmacy_k2",
+    "text": "약국",
+    "file": "assets/audio/voice/phrase/pharmacy_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_0",
+    "text": "체크인하려고요. 예약했어요.",
+    "file": "assets/audio/voice/phrase/hotel_0.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_1",
+    "text": "성함이 어떻게 되세요?",
+    "file": "assets/audio/voice/phrase/hotel_1.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_2",
+    "text": "여권 보여 주시겠어요?",
+    "file": "assets/audio/voice/phrase/hotel_2.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_3",
+    "text": "와이파이 비밀번호가 뭐예요?",
+    "file": "assets/audio/voice/phrase/hotel_3.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_4",
+    "text": "체크아웃은 몇 시예요?",
+    "file": "assets/audio/voice/phrase/hotel_4.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_5",
+    "text": "열한 시예요.",
+    "file": "assets/audio/voice/phrase/hotel_5.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_k0",
+    "text": "예약했어요",
+    "file": "assets/audio/voice/phrase/hotel_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_k1",
+    "text": "짐 맡겨도 돼요?",
+    "file": "assets/audio/voice/phrase/hotel_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/hotel_k2",
+    "text": "몇 시예요?",
+    "file": "assets/audio/voice/phrase/hotel_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_0",
+    "text": "도와주세요!",
+    "file": "assets/audio/voice/phrase/emergency_0.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_1",
+    "text": "길을 잃어버렸어요.",
+    "file": "assets/audio/voice/phrase/emergency_1.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_2",
+    "text": "지갑을 잃어버렸어요.",
+    "file": "assets/audio/voice/phrase/emergency_2.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_3",
+    "text": "경찰을 불러 주세요.",
+    "file": "assets/audio/voice/phrase/emergency_3.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_4",
+    "text": "영어 할 수 있는 사람 있어요?",
+    "file": "assets/audio/voice/phrase/emergency_4.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_5",
+    "text": "걱정 마세요. 도와 드릴게요.",
+    "file": "assets/audio/voice/phrase/emergency_5.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_k0",
+    "text": "도와주세요",
+    "file": "assets/audio/voice/phrase/emergency_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_k1",
+    "text": "잃어버렸어요",
+    "file": "assets/audio/voice/phrase/emergency_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/emergency_k2",
+    "text": "병원에 가야 해요",
+    "file": "assets/audio/voice/phrase/emergency_k2.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_0",
+    "text": "잘 먹겠습니다!",
+    "file": "assets/audio/voice/phrase/dining_0.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_1",
+    "text": "많이 드세요.",
+    "file": "assets/audio/voice/phrase/dining_1.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_2",
+    "text": "건배!",
+    "file": "assets/audio/voice/phrase/dining_2.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_3",
+    "text": "한 잔 더 하실래요?",
+    "file": "assets/audio/voice/phrase/dining_3.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_4",
+    "text": "오늘은 제가 살게요.",
+    "file": "assets/audio/voice/phrase/dining_4.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_5",
+    "text": "다음엔 제가 살게요!",
+    "file": "assets/audio/voice/phrase/dining_5.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_k0",
+    "text": "잘 먹겠습니다",
+    "file": "assets/audio/voice/phrase/dining_k0.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_k1",
+    "text": "잘 먹었습니다",
+    "file": "assets/audio/voice/phrase/dining_k1.wav"
+  },
+  {
+    "slot": "voice/phrase/dining_k2",
+    "text": "제가 살게요",
+    "file": "assets/audio/voice/phrase/dining_k2.wav"
+  },
+  {
     "slot": "voice/ui/great",
     "text": "잘했어요!",
     "file": "assets/audio/voice/ui/great.wav"

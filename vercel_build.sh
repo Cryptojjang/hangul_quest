@@ -26,7 +26,7 @@ echo "── pub get…"
 flutter pub get
 
 mkdir -p assets/audio/sfx assets/audio/voice/jamo assets/audio/voice/syllable \
-  assets/audio/voice/word assets/audio/voice/ui
+  assets/audio/voice/word assets/audio/voice/ui assets/audio/voice/phrase
 
 echo "── synthesizing sfx…"
 dart run tool/gen_sfx.dart

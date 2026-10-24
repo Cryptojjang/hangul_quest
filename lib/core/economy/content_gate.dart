@@ -4,6 +4,7 @@
 /// asks this gate. Pure Dart, fully unit-tested in test/paywall_test.dart.
 library;
 
+import '../data/conversations.dart';
 import '../data/curriculum.dart';
 
 /// Stage-2 levels 1..[stage2FreeLevels] are free; later levels are premium.
@@ -19,6 +20,7 @@ enum LockReason {
   pronunciationPremium,
   reviewQuotaExhausted,
   speechUnavailable,
+  conversationPremium,
 }
 
 class GateDecision {
@@ -99,6 +101,13 @@ class ContentGate {
     return const GateDecision(false, LockReason.reviewQuotaExhausted);
   }
 
+  /// Real-life conversations: the first [freeConversationCount] (by list
+  /// position, 0-based [index]) are a free taster; the rest are premium.
+  GateDecision canOpenConversation(EntitlementState e, int index) =>
+      e.isPremium || index < freeConversationCount
+          ? GateDecision.open
+          : const GateDecision(false, LockReason.conversationPremium);
+
   /// Streak repair is a premium perk (spec §5.1) — free users get the offer
   /// as a paywall trigger instead.
   bool canRepairStreak(EntitlementState e) => e.isPremium;
@@ -110,6 +119,7 @@ class ContentGate {
         LockReason.wordRushPremium => 'stage2_lock',
         LockReason.pronunciationPremium => 'pronunciation_entry',
         LockReason.reviewQuotaExhausted => 'review_teaser_end',
+        LockReason.conversationPremium => 'conversation_lock',
         LockReason.speechUnavailable => null,
         LockReason.none => null,
       };

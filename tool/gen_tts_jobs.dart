@@ -8,6 +8,7 @@ library;
 
 import 'dart:convert';
 
+import '../lib/core/data/conversations.dart';
 import '../lib/core/data/curriculum.dart';
 import '../lib/core/data/vocab.dart';
 import '../lib/core/hangul/hangul.dart';
@@ -38,6 +39,18 @@ void main() {
 
   for (final w in vocabWords) {
     add('voice/word/${w.id}', w.korean);
+  }
+
+  // Conversation lines + key phrases. "~" marks a fill-in slot in the
+  // written phrase; it is not spoken.
+  String spoken(String s) => s.replaceAll('~', '').trim();
+  for (final c in conversations) {
+    for (var i = 0; i < c.lines.length; i++) {
+      add('voice/phrase/${c.lineSlot(i)}', spoken(c.lines[i].korean));
+    }
+    for (var i = 0; i < c.phrases.length; i++) {
+      add('voice/phrase/${c.phraseSlot(i)}', spoken(c.phrases[i].korean));
+    }
   }
 
   add('voice/ui/great', '잘했어요!');

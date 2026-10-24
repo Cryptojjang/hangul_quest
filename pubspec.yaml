@@ -29,6 +29,7 @@ flutter:
     - assets/audio/voice/syllable/
     - assets/audio/voice/word/
     - assets/audio/voice/ui/
+    - assets/audio/voice/phrase/
   fonts:
     # Pretendard (SIL OFL 1.1, assets/fonts/OFL.txt) — only the weights the
     # UI uses; add a weight here before using it in a TextStyle.

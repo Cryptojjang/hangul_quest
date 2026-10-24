@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hangul_quest/core/data/conversations.dart';
 import 'package:hangul_quest/core/data/curriculum.dart';
 import 'package:hangul_quest/core/data/vocab.dart';
 import 'package:hangul_quest/core/hangul/hangul.dart';
@@ -26,6 +27,19 @@ void main() {
     for (final j in jamoById.values) {
       expect(manifest, contains(AudioSlots.jamo(j)),
           reason: 'missing voice for ${j.char} (${j.id})');
+    }
+  });
+
+  test('every conversation line and key phrase has a voice asset', () {
+    for (final c in conversations) {
+      for (var i = 0; i < c.lines.length; i++) {
+        expect(manifest, contains(AudioSlots.phrase(c.lineSlot(i))),
+            reason: 'missing voice for ${c.lines[i].korean}');
+      }
+      for (var i = 0; i < c.phrases.length; i++) {
+        expect(manifest, contains(AudioSlots.phrase(c.phraseSlot(i))),
+            reason: 'missing voice for ${c.phrases[i].korean}');
+      }
     }
   });
 
