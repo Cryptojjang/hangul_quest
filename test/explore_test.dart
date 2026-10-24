@@ -21,6 +21,7 @@ void main() {
     const f = FoodPick(
         dish: 'x', dishKo: 'x', why: 'x', whereToTry: 'x', searchKo: '삼겹살');
     expect(Uri.parse(f.googleMapsUrl).queryParameters['query'], '삼겹살');
+    expect(Uri.parse(f.googleMapsUrl).queryParameters['hl'], 'en');
     expect(f.naverMapUrl, endsWith('/search/${Uri.encodeComponent('삼겹살')}'));
   });
 

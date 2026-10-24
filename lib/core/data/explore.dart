@@ -48,8 +48,9 @@ class FoodPick {
 
   String get naverMapUrl =>
       'https://map.naver.com/p/search/${Uri.encodeComponent(searchKo)}';
+  /// `hl=en` opens Google Maps with an English interface (verified).
   String get googleMapsUrl =>
-      'https://www.google.com/maps/search/?api=1&query=${Uri.encodeQueryComponent(searchKo)}';
+      'https://www.google.com/maps/search/?api=1&query=${Uri.encodeQueryComponent(searchKo)}&hl=en';
 }
 
 class ShopLink {
@@ -197,6 +198,37 @@ const List<FoodPick> foodPicks = [
     searchKo: '삼겹살',
   ),
   FoodPick(
+    dish: 'Bulgogi',
+    dishKo: '불고기',
+    why: 'Thin slices of beef marinated in sweet soy sauce, then grilled.',
+    whereToTry: 'Everywhere — Eonyang (Ulsan) and Gwangyang have famous '
+        'local styles.',
+    searchKo: '불고기',
+  ),
+  FoodPick(
+    dish: 'Marinated pork ribs',
+    dishKo: '돼지갈비',
+    why: 'Sweet soy-marinated pork ribs grilled at your table.',
+    whereToTry: 'A classic at neighbourhood barbecue restaurants nationwide.',
+    searchKo: '돼지갈비',
+  ),
+  FoodPick(
+    dish: 'Hanwoo sirloin',
+    dishKo: '한우등심',
+    why: "Korea's prized native beef, richly marbled — grilled simply "
+        'with salt.',
+    whereToTry: 'Hoengseong in Gangwon is famous for its hanwoo.',
+    searchKo: '한우등심',
+  ),
+  FoodPick(
+    dish: 'Grilled beef intestines',
+    dishKo: '곱창구이',
+    why: 'Chewy, savoury and crispy — a late-night favourite with soju.',
+    whereToTry: "Wangsimni's gopchang alley in Seoul; Daegu's Anjirang "
+        'alley for the pork version.',
+    searchKo: '곱창구이',
+  ),
+  FoodPick(
     dish: 'Bibimbap',
     dishKo: '비빔밥',
     why: 'Rice topped with vegetables, egg and chili paste — mix it all.',
@@ -237,6 +269,40 @@ const List<FoodPick> foodPicks = [
     why: 'A whole young chicken stuffed with rice and ginseng.',
     whereToTry: 'Koreans eat it on the hottest summer days for energy.',
     searchKo: '삼계탕',
+  ),
+  FoodPick(
+    dish: 'Whole boiled chicken soup',
+    dishKo: '닭백숙',
+    why: 'A whole chicken simmered with garlic into a mild, healing broth — '
+        'finished with rice porridge.',
+    whereToTry: 'Restaurants by mountain streams, a summer outing classic.',
+    searchKo: '닭백숙',
+  ),
+  FoodPick(
+    dish: 'Korean fried chicken',
+    dishKo: '치킨',
+    why: 'Double-fried for extra crunch, plain or glazed — with beer it is '
+        '치맥 (chimaek).',
+    whereToTry: 'Chicken shops on every street, and delivery until late.',
+    searchKo: '치킨',
+  ),
+  FoodPick(
+    dish: 'Sweet & crispy chicken bites',
+    dishKo: '닭강정',
+    why: 'Crispy chicken pieces tossed in a sticky sweet-spicy glaze — '
+        'great cold too.',
+    whereToTry: "Traditional markets — Sokcho's Jungang Market is famous "
+        'for it.',
+    searchKo: '닭강정',
+  ),
+  FoodPick(
+    dish: 'Korean blood sausage',
+    dishKo: '순대',
+    why: 'Sausage filled with glass noodles and blood — the street-food '
+        'partner of tteokbokki.',
+    whereToTry: "Sillim-dong's Sundae Town in Seoul (stir-fried) and "
+        'Byeongcheon near Cheonan.',
+    searchKo: '순대',
   ),
   FoodPick(
     dish: 'Cold buckwheat noodles',

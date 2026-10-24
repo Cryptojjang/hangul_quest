@@ -181,6 +181,13 @@ class _FoodTab extends StatelessWidget {
             'Must-try dishes. Tap a map button to see top-rated places '
             'near you right now — live ratings, never out of date.',
             style: Theme.of(context).textTheme.bodyMedium),
+        const SizedBox(height: 6),
+        // Google Maps links open in English (hl=en). Naver has no verified
+        // URL language switch; its app follows this setting instead.
+        const Text(
+            'Naver Map in English: in the app go to MY → Settings → '
+            'Language → English.',
+            style: TextStyle(fontSize: 13, color: HqColors.dancheongBlue)),
         const SizedBox(height: 12),
         for (final f in foodPicks)
           Padding(
