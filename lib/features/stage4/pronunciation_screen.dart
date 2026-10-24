@@ -1,5 +1,6 @@
-/// Stage 4 — Pronunciation Challenge (premium): on-device speech recognition
-/// scores the player's jamo/word pronunciation with visual feedback.
+/// Stage 4 — Pronunciation Challenge (premium): speech recognition (on-device
+/// on iOS, the browser's Web Speech API on web) scores the player's jamo/word
+/// pronunciation with visual feedback.
 library;
 
 import 'package:flutter/material.dart';
@@ -145,7 +146,9 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
                     style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 Text(
-                  'Scoring happens on your device and\naudio is never stored or sent.\nPlease allow the microphone in Settings.',
+                  'The mic is used only for scoring and
+recordings are never stored.
+Please allow the microphone in your browser or device settings.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),

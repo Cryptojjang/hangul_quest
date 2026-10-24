@@ -3,6 +3,7 @@
 /// (in-app policy + external URL hook). Spec §8.
 library;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
@@ -82,8 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const Icon(Icons.restore, color: HqColors.inkSoft),
                   title: const Text('Restore purchase'),
                   onTap: () async {
-                    final status =
-                        await state.services.billing.restore();
+                    final status = await state.services.billing.restore();
                     if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(status.isActive
@@ -208,23 +208,44 @@ class PrivacyPolicyScreen extends StatelessWidget {
         children: [
           Text('Summary', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
-          const Text(
-            '· Your progress and mistakes are saved only on this device. No account needed.\n\n'
-            '· Pronunciation audio is analyzed on-device only, and '
-            'recordings are never stored or uploaded.\n\n'
-            '· The microphone is used only for pronunciation scoring. If you deny it, '
-            'everything else still works.\n\n'
-            '· Payments go through App Store in-app purchase (Lemon Squeezy on the web), and '
-            'the app never sees your card details.',
-          ),
+          // Web and iOS process speech and payments differently — each build
+          // must describe its own behaviour truthfully.
+          const Text(kIsWeb
+              ? '· Your progress and mistakes are saved only in this browser. No account needed.
+
+'
+                  '· For pronunciation scoring, your voice is sent to the browser's speech '
+                  'service (Google in Chrome, Apple in Safari) to be turned into text. It never '
+                  'reaches Hangul Bricks servers and recordings are not stored.
+
+'
+                  '· The microphone is used only for pronunciation scoring. If you deny it, '
+                  'everything else still works.
+
+'
+                  '· Payments are handled by our reseller Lemon Squeezy, and the app never '
+                  'sees your card details.'
+              : '· Your progress and mistakes are saved only on this device. No account needed.
+
+'
+                  '· Pronunciation audio is analyzed on-device only, and '
+                  'recordings are never stored or uploaded.
+
+'
+                  '· The microphone is used only for pronunciation scoring. If you deny it, '
+                  'everything else still works.
+
+'
+                  '· Payments go through App Store in-app purchase, and '
+                  'the app never sees your card details.'),
           const SizedBox(height: 24),
           HqButton(
             label: 'Read the full text',
             color: HqColors.dancheongBlue,
             onPressed: () {
               // TODO(release): url_launcher로 policyUrl 열기.
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(policyUrl)));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text(policyUrl)));
             },
           ),
         ],
@@ -268,8 +289,8 @@ class TermsOfUseScreen extends StatelessWidget {
             color: HqColors.dancheongBlue,
             onPressed: () {
               // TODO(release): url_launcher로 termsUrl 열기.
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(termsUrl)));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text(termsUrl)));
             },
           ),
         ],

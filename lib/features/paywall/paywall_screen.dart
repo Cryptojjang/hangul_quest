@@ -105,6 +105,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
               if (kIsWeb)
                 ...const [
                   _ValueRow(
+                      icon: Icons.mic_rounded,
+                      text: 'Pronunciation scoring (Chrome & Safari)'),
+                  _ValueRow(
                       icon: Icons.psychology_rounded,
                       text: 'Unlimited Smart Review of the sounds you miss'),
                   _ValueRow(

@@ -73,8 +73,7 @@ class FakeSpeechRecognizer implements SpeechRecognizer {
     Duration maxDuration = const Duration(seconds: 4),
     String locale = 'ko-KR',
   }) async =>
-      RecognitionResult(
-          transcript: scriptedTranscript, confidence: confidence);
+      RecognitionResult(transcript: scriptedTranscript, confidence: confidence);
 
   @override
   Future<void> stop() async {}

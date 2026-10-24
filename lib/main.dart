@@ -12,6 +12,8 @@ import 'platform/device/device.dart';
 import 'platform/images/word_image_resolver.dart';
 import 'platform/speech/pronunciation_scorer.dart';
 import 'platform/speech/speech.dart';
+import 'platform/speech/web_speech_stub.dart'
+    if (dart.library.html) 'platform/speech/web_speech_recognizer.dart';
 import 'state/app_state.dart';
 import 'state/progress_store.dart';
 import 'state/storage_web_stub.dart'
@@ -56,7 +58,9 @@ Future<void> main() async {
   if (kIsWeb && webBilling != null) {
     services = AppServices(
       billing: webBilling,
-      speech: UnsupportedSpeechRecognizer(), // graceful degradation (spec §6)
+      // Web Speech API where the browser has it; unavailable (Firefox)
+      // still degrades stage 4 gracefully (spec §6).
+      speech: createWebSpeechRecognizer() ?? UnsupportedSpeechRecognizer(),
       scorer: const JamoSimilarityScorer(),
       audio: audio,
       haptics: NoopHaptics(),
