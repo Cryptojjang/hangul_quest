@@ -180,7 +180,7 @@ class _WordRushScreenState extends State<WordRushScreen> {
                         fontSize: 64,
                         fontWeight: FontWeight.w800,
                         color: HqColors.ink)),
-                Text('읽고, 맞는 그림을 고르세요',
+                Text('Read it, then pick the matching picture',
                     style: Theme.of(context).textTheme.bodySmall),
                 const Spacer(),
                 GridView.count(
