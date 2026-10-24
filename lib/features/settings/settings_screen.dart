@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('설정'),
+        title: const Text('Settings'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -34,22 +34,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               children: [
                 _VolumeRow(
-                  label: '배경음악',
+                  label: 'Music',
                   value: audio.bgmVolume,
                   onChanged: (v) => setState(() => audio.bgmVolume = v),
                 ),
                 _VolumeRow(
-                  label: '효과음',
+                  label: 'Sound effects',
                   value: audio.sfxVolume,
                   onChanged: (v) => setState(() => audio.sfxVolume = v),
                 ),
                 _VolumeRow(
-                  label: '발음(음성)',
+                  label: 'Voice',
                   value: audio.voiceVolume,
                   onChanged: (v) => setState(() => audio.voiceVolume = v),
                 ),
                 SwitchListTile(
-                  title: const Text('전체 음소거'),
+                  title: const Text('Mute all'),
                   value: audio.muted,
                   activeColor: HqColors.dancheongRed,
                   onChanged: (v) => setState(() => audio.muted = v),
@@ -64,15 +64,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ListTile(
                   leading: const Icon(Icons.workspace_premium,
                       color: HqColors.obangYellow),
-                  title: Text(state.isPremium ? '프리미엄 이용 중' : '무료 플랜'),
+                  title: Text(state.isPremium ? 'Premium active' : 'Free plan'),
                   subtitle: Text(state.isPremium
-                      ? '결제 채널: ${state.services.billing.backendId}'
-                      : '프리미엄으로 전체 스테이지를 열 수 있어요'),
+                      ? 'Billing: ${state.services.billing.backendId}'
+                      : 'Unlock every stage with Premium'),
                 ),
                 ListTile(
                   leading: const Icon(Icons.manage_accounts,
                       color: HqColors.inkSoft),
-                  title: const Text('구독 관리 · 해지 안내'),
+                  title: const Text('Manage subscription'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Navigator.of(context).push(
                       HqPageRoute(page: const ManageSubscriptionScreen())),
@@ -80,15 +80,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ListTile(
                   leading:
                       const Icon(Icons.restore, color: HqColors.inkSoft),
-                  title: const Text('구매 복원'),
+                  title: const Text('Restore purchase'),
                   onTap: () async {
                     final status =
                         await state.services.billing.restore();
                     if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(status.isActive
-                            ? '구독이 복원되었어요'
-                            : '복원할 구독이 없어요')));
+                            ? 'Subscription restored'
+                            : 'No subscription to restore')));
                   },
                 ),
               ],
@@ -99,7 +99,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: ListTile(
               leading:
                   const Icon(Icons.privacy_tip, color: HqColors.inkSoft),
-              title: const Text('개인정보 처리방침'),
+              title: const Text('Privacy Policy'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context)
                   .push(HqPageRoute(page: const PrivacyPolicyScreen())),
@@ -149,36 +149,36 @@ class ManageSubscriptionScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('구독 관리'),
+        title: const Text('Manage subscription'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('구독은 언제든 해지할 수 있어요',
+            Text('You can cancel anytime',
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 16),
             const Text(
-              '· 구독은 기간 종료 24시간 전에 해지하지 않으면 자동으로 갱신돼요.\n\n'
-              '· iPhone: 설정 → Apple ID → 구독 → HangulQuest → 구독 취소\n\n'
-              '· 해지 후에도 남은 구독 기간까지는 프리미엄을 계속 이용할 수 있어요.\n\n'
-              '· 무료 체험 중 해지하면 요금이 청구되지 않아요.',
+              '· Subscriptions renew automatically unless cancelled at least 24 hours before the period ends.\n\n'
+              '· iPhone: Settings → Apple ID → Subscriptions → Hangul Bricks → Cancel\n· Web: use the link in your Lemon Squeezy receipt email\n\n'
+              '· After cancelling, Premium stays active until the paid period ends.\n\n'
+              '· Cancel during the free trial and you will not be charged.',
             ),
             const Spacer(),
             HqButton(
-              label: '기기 구독 설정 열기',
+              label: 'Open subscription settings',
               expanded: true,
               onPressed: () {
                 // TODO(ios): open itms-apps://apps.apple.com/account/subscriptions
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('스토어 빌드에서 OS 구독 설정으로 이동해요 '
-                        '(현재 채널: dev)')));
+                    content: Text('Store builds open the OS subscription settings '
+                        '(current channel: dev)')));
               },
             ),
             const SizedBox(height: 8),
             Center(
-              child: Text('결제 채널: ${state.services.billing.backendId}',
+              child: Text('Billing: ${state.services.billing.backendId}',
                   style: Theme.of(context).textTheme.bodySmall),
             ),
           ],
@@ -201,25 +201,25 @@ class PrivacyPolicyScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('개인정보 처리방침'),
+        title: const Text('Privacy Policy'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          Text('요약', style: Theme.of(context).textTheme.titleMedium),
+          Text('Summary', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           const Text(
-            '· 학습 진도·오답 기록은 회원가입 없이 기기에만 저장돼요.\n\n'
-            '· 발음 도전의 음성은 기기 안(온디바이스)에서만 분석되며, '
-            '녹음이 저장되거나 서버로 전송되지 않아요.\n\n'
-            '· 마이크 권한은 발음 채점에만 사용돼요. 거부해도 다른 기능은 '
-            '모두 이용할 수 있어요.\n\n'
-            '· 결제는 App Store 인앱 결제(웹은 Lemon Squeezy)로 처리되며, '
-            '카드 정보는 앱이 접근할 수 없어요.',
+            '· Your progress and mistakes are saved only on this device. No account needed.\n\n'
+            '· Pronunciation audio is analyzed on-device only, and '
+            'recordings are never stored or uploaded.\n\n'
+            '· The microphone is used only for pronunciation scoring. If you deny it, '
+            'everything else still works.\n\n'
+            '· Payments go through App Store in-app purchase (Lemon Squeezy on the web), and '
+            'the app never sees your card details.',
           ),
           const SizedBox(height: 24),
           HqButton(
-            label: '전문 보기 (웹)',
+            label: 'Read the full text',
             color: HqColors.dancheongBlue,
             onPressed: () {
               // TODO(release): url_launcher로 policyUrl 열기.
@@ -248,23 +248,23 @@ class TermsOfUseScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('이용약관'),
+        title: const Text('Terms of Use'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          Text('요약', style: Theme.of(context).textTheme.titleMedium),
+          Text('Summary', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           const Text(
-            '· 한글퀘스트 이용에는 Apple 표준 최종 사용자 사용권 계약(EULA)이 '
-            '적용돼요.\n\n'
-            '· 프리미엄 구독은 기간이 끝나기 24시간 전까지 해지하지 않으면 '
-            '같은 가격으로 자동 갱신돼요.\n\n'
-            '· 무료 체험 중 해지하면 요금이 청구되지 않아요.',
+            '· Use of Hangul Bricks is covered by the Apple standard EULA '
+            'and our web Terms of Service.\n\n'
+            '· Premium renews automatically at the same price unless cancelled '
+            'at least 24 hours before the period ends.\n\n'
+            '· Cancel during the free trial and you will not be charged.',
           ),
           const SizedBox(height: 24),
           HqButton(
-            label: '전문 보기 (웹)',
+            label: 'Read the full text',
             color: HqColors.dancheongBlue,
             onPressed: () {
               // TODO(release): url_launcher로 termsUrl 열기.
