@@ -233,7 +233,7 @@ class _JamoHuntScreenState extends State<JamoHuntScreen>
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text('이 소리의 자모를 찾으세요',
+                Text('Find the letter for this sound',
                     style: Theme.of(context).textTheme.bodySmall),
                 const Spacer(),
                 Stack(
@@ -290,7 +290,7 @@ class _ComboBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        active ? 'x${score.multiplier} 콤보 ${score.combo}' : '콤보 ${score.combo}',
+        active ? 'x${score.multiplier} Combo ${score.combo}' : 'Combo ${score.combo}',
         style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w800, fontSize: 12),
       ),
