@@ -46,7 +46,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
             orElse: () => products.first);
       });
     }).catchError((Object e) {
-      if (mounted) setState(() => _error = '상품 정보를 불러오지 못했어요');
+      if (mounted) setState(() => _error = 'Could not load plans');
     });
   }
 
@@ -59,10 +59,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
       if (result.success) {
         Navigator.of(context).pop();
       } else {
-        setState(() => _error = result.error ?? '결제가 완료되지 않았어요');
+        setState(() => _error = result.error ?? 'Payment was not completed');
       }
     } catch (e) {
-      if (mounted) setState(() => _error = '결제 오류: 잠시 후 다시 시도해 주세요');
+      if (mounted) setState(() => _error = 'Payment error. Please try again shortly');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -73,7 +73,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
     final status = await state.services.billing.restore();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(status.isActive ? '구독이 복원되었어요' : '복원할 구독이 없어요')));
+        content: Text(status.isActive ? 'Subscription restored' : 'No subscription to restore')));
     if (status.isActive) Navigator.of(context).pop();
   }
 
@@ -93,7 +93,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              Text('한글, 끝까지 읽어내세요',
+              Text('Read Hangul all the way',
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
@@ -106,23 +106,23 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 ...const [
                   _ValueRow(
                       icon: Icons.psychology_rounded,
-                      text: '틀린 소리만 골라주는 개인화 복습 무제한'),
+                      text: 'Unlimited Smart Review of the sounds you miss'),
                   _ValueRow(
                       icon: Icons.extension_rounded,
-                      text: '글자 조립 전 레벨 + 단어 러시까지 전체 스테이지'),
+                      text: 'Every Letter Builder level plus Word Rush'),
                   _ValueRow(
                       icon: Icons.local_fire_department_rounded,
-                      text: '스트릭 복구로 연속 기록 지키기'),
+                      text: 'Streak repair to protect your streak'),
                 ]
               else
                 ...const [
                   _ValueRow(
-                      icon: Icons.mic_rounded, text: '내 발음을 채점해주는 유일한 한글 앱'),
+                      icon: Icons.mic_rounded, text: 'Pronunciation scoring for every letter'),
                   _ValueRow(
-                      icon: Icons.psychology_rounded, text: '틀린 소리만 골라주는 개인화 복습'),
+                      icon: Icons.psychology_rounded, text: 'Smart Review of the sounds you miss'),
                   _ValueRow(
                       icon: Icons.extension_rounded,
-                      text: '글자 조립부터 단어 읽기까지 전체 스테이지'),
+                      text: 'Every stage, from building letters to reading words'),
                 ],
               const SizedBox(height: 20),
               if (_error != null)
@@ -143,8 +143,8 @@ class _PaywallScreenState extends State<PaywallScreen> {
               const Spacer(),
               HqButton(
                 label: _busy
-                    ? '처리 중…'
-                    : '7일 무료로 시작하기',
+                    ? 'Processing…'
+                    : 'Start 7-day free trial',
                 expanded: true,
                 onPressed: _busy || _products == null ? null : _buy,
               ),
@@ -152,7 +152,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
               Text(
                 _selected == null
                     ? ''
-                    : '무료 체험 후 ${_selected!.priceLabel} 자동 갱신 · 언제든 해지 가능',
+                    : 'Then ${_selected!.priceLabel}, auto-renews · Cancel anytime',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -160,7 +160,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    '데모 결제 — 실제로 청구되지 않습니다',
+                    'Demo checkout: you will not be charged',
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
@@ -174,28 +174,28 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 children: [
                   TextButton(
                     onPressed: _restore,
-                    child: const Text('구매 복원',
+                    child: const Text('Restore purchase',
                         style:
                             TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context).push(
                         HqPageRoute(page: const ManageSubscriptionScreen())),
-                    child: const Text('해지 안내',
+                    child: const Text('How to cancel',
                         style:
                             TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context)
                         .push(HqPageRoute(page: const TermsOfUseScreen())),
-                    child: const Text('이용약관',
+                    child: const Text('Terms of Use',
                         style:
                             TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context)
                         .push(HqPageRoute(page: const PrivacyPolicyScreen())),
-                    child: const Text('개인정보 처리방침',
+                    child: const Text('Privacy Policy',
                         style:
                             TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
@@ -268,7 +268,7 @@ class _PlanTile extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                product.plan == SubscriptionPlan.yearly ? '연간 플랜' : '월간 플랜',
+                product.plan == SubscriptionPlan.yearly ? 'Yearly' : 'Monthly',
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
