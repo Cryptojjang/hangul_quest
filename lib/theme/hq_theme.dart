@@ -1,4 +1,4 @@
-/// HangulQuest visual identity (docs/DESIGN_SPEC.md).
+/// Hangul Bricks visual identity (docs/DESIGN_SPEC.md).
 ///
 /// "Moon-jar minimal + dancheong accents": hanji warm-neutral ground,
 /// restrained five-color accents, tactile ceramic jamo tiles. No stock
