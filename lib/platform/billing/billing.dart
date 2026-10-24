@@ -12,7 +12,7 @@ import 'storekit_billing.dart';
 
 export 'storekit_billing.dart' show StoreKitBillingGateway;
 
-enum SubscriptionPlan { monthly, yearly }
+enum SubscriptionPlan { monthly, yearly, lifetime }
 
 class Product {
   const Product({
@@ -97,18 +97,22 @@ class BillingConfig {
   }
 }
 
+// Web/dev catalog. Hangul takes about a week to learn, so the main offer is
+// a one-time lifetime unlock; monthly stays as a low-commitment option. The
+// free tier (stage 1 + first half of stage 2) is the trial, so no free-trial
+// period is attached.
 const _monthly = Product(
   id: 'hq_premium_monthly',
   plan: SubscriptionPlan.monthly,
-  priceLabel: r'$6.99/mo',
-  trialDays: 7,
+  priceLabel: r'$4.99/mo',
+  trialDays: 0,
 );
-const _yearly = Product(
-  id: 'hq_premium_yearly',
-  plan: SubscriptionPlan.yearly,
-  priceLabel: r'$39.99/yr',
-  trialDays: 7,
-  savingsLabel: 'SAVE 52%',
+const _lifetime = Product(
+  id: 'hq_premium_lifetime',
+  plan: SubscriptionPlan.lifetime,
+  priceLabel: r'$12.99 once',
+  trialDays: 0,
+  savingsLabel: 'BEST VALUE',
 );
 
 /// Dev-phase gateway: in-memory subscription state, instant success.
@@ -127,7 +131,7 @@ class MockBillingGateway implements BillingGateway {
   bool get allowedInStoreBuild => false; // dev only — never ship
 
   @override
-  Future<List<Product>> fetchProducts() async => const [_yearly, _monthly];
+  Future<List<Product>> fetchProducts() async => const [_lifetime, _monthly];
 
   @override
   Future<PurchaseResult> purchase(Product product) async {
@@ -136,10 +140,12 @@ class MockBillingGateway implements BillingGateway {
       isActive: true,
       plan: product.plan,
       inTrial: product.trialDays > 0,
-      expiresAt: now.add(Duration(
-          days: product.trialDays > 0
-              ? product.trialDays
-              : (product.plan == SubscriptionPlan.yearly ? 365 : 30))),
+      expiresAt: product.plan == SubscriptionPlan.lifetime
+          ? null
+          : now.add(Duration(
+              days: product.trialDays > 0
+                  ? product.trialDays
+                  : (product.plan == SubscriptionPlan.yearly ? 365 : 30))),
     );
     _controller.add(_status);
     return PurchaseResult(success: true, isTrial: product.trialDays > 0);
@@ -210,7 +216,7 @@ class LemonSqueezyBillingGateway implements BillingGateway {
   bool get allowedInStoreBuild => false;
 
   @override
-  Future<List<Product>> fetchProducts() async => const [_yearly, _monthly];
+  Future<List<Product>> fetchProducts() async => const [_lifetime, _monthly];
 
   @override
   Future<PurchaseResult> purchase(Product product) async {

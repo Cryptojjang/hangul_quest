@@ -93,7 +93,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       .textTheme
                       .headlineMedium
                       ?.copyWith(color: HqColors.dancheongGreen)),
-              Text('최대 콤보 ${widget.score.maxCombo}',
+              Text('Best combo ${widget.score.maxCombo}',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 20),
               if (_newCards.isNotEmpty)
@@ -106,7 +106,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                            '도감 카드 ${_newCards.length}장 해금! — '
+                            'New codex cards: ${_newCards.length} · '
                             '${_newCards.map((id) => jamoById[id]!.char).join(' ')}',
                             style:
                                 const TextStyle(fontWeight: FontWeight.w700)),
@@ -120,7 +120,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('다시 만나게 될 소리',
+                      const Text('Sounds to review',
                           style: TextStyle(fontWeight: FontWeight.w700)),
                       const SizedBox(height: 6),
                       Text(
@@ -129,7 +129,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               .join('  ·  '),
                           style: const TextStyle(
                               fontSize: 24, color: HqColors.dancheongRed)),
-                      Text('자주 틀린 자모는 다음 라운드에 더 자주 나와요',
+                      Text('Letters you miss will show up more often',
                           style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
@@ -138,7 +138,7 @@ class _ResultScreenState extends State<ResultScreen> {
               const Spacer(),
               if (hasNext)
                 HqButton(
-                  label: '다음 레벨',
+                  label: 'Next level',
                   expanded: true,
                   onPressed: () => Navigator.of(context).pushReplacement(
                       HqPageRoute(
@@ -148,7 +148,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               const SizedBox(height: 8),
               HqButton(
-                label: '맵으로',
+                label: 'Back to map',
                 color: Colors.white,
                 textColor: HqColors.ink,
                 expanded: true,

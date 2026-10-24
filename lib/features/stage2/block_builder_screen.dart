@@ -144,7 +144,7 @@ class _BlockBuilderScreenState extends State<BlockBuilderScreen>
                 ],
               ),
               const SizedBox(height: 4),
-              Text('소리를 듣고 글자를 조립하세요',
+              Text('Listen and build the syllable',
                   style: Theme.of(context).textTheme.bodySmall),
               const Spacer(),
               _AssemblyBoard(
@@ -193,12 +193,12 @@ class _AssemblyBoard extends StatelessWidget {
             color: color,
             onDrop: onDrop);
 
-    final cho = slot(SlotKind.choseong, puzzle.placedChoseong, '첫소리',
+    final cho = slot(SlotKind.choseong, puzzle.placedChoseong, 'Initial',
         HqColors.choseongBlock);
-    final jung = slot(SlotKind.jungseong, puzzle.placedJungseong, '가운뎃소리',
+    final jung = slot(SlotKind.jungseong, puzzle.placedJungseong, 'Vowel',
         HqColors.jungseongBlock);
     final jong = puzzle.needsJongseong
-        ? slot(SlotKind.jongseong, puzzle.placedJongseong, '받침',
+        ? slot(SlotKind.jongseong, puzzle.placedJongseong, 'Final',
             HqColors.jongseongBlock)
         : null;
 

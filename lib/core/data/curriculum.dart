@@ -53,44 +53,44 @@ const _complexVowels = [
 
 /// Stage 1 — jamo hunt: recognize sounds.
 const List<StageLevel> stage1Levels = [
-  StageLevel(stage: StageId.jamoHunt, level: 1, title: '기본 자음 I', jamoIds: ['c_giyeok', 'c_nieun', 'c_digeut', 'c_rieul', 'c_mieum']),
-  StageLevel(stage: StageId.jamoHunt, level: 2, title: '기본 자음 II', jamoIds: ['c_bieup', 'c_siot', 'c_ieung', 'c_jieut', 'c_hieut']),
-  StageLevel(stage: StageId.jamoHunt, level: 3, title: '거센소리', jamoIds: ['c_chieut', 'c_kieuk', 'c_tieut', 'c_pieup']),
-  StageLevel(stage: StageId.jamoHunt, level: 4, title: '기본 모음 I', jamoIds: ['v_a', 'v_eo', 'v_o', 'v_u', 'v_eu', 'v_i']),
-  StageLevel(stage: StageId.jamoHunt, level: 5, title: '기본 모음 II', jamoIds: ['v_ya', 'v_yeo', 'v_yo', 'v_yu']),
-  StageLevel(stage: StageId.jamoHunt, level: 6, title: '쌍자음', jamoIds: _tenseConsonants),
-  StageLevel(stage: StageId.jamoHunt, level: 7, title: '복합 모음', jamoIds: _complexVowels),
+  StageLevel(stage: StageId.jamoHunt, level: 1, title: 'Basic consonants I', jamoIds: ['c_giyeok', 'c_nieun', 'c_digeut', 'c_rieul', 'c_mieum']),
+  StageLevel(stage: StageId.jamoHunt, level: 2, title: 'Basic consonants II', jamoIds: ['c_bieup', 'c_siot', 'c_ieung', 'c_jieut', 'c_hieut']),
+  StageLevel(stage: StageId.jamoHunt, level: 3, title: 'Aspirated consonants', jamoIds: ['c_chieut', 'c_kieuk', 'c_tieut', 'c_pieup']),
+  StageLevel(stage: StageId.jamoHunt, level: 4, title: 'Basic vowels I', jamoIds: ['v_a', 'v_eo', 'v_o', 'v_u', 'v_eu', 'v_i']),
+  StageLevel(stage: StageId.jamoHunt, level: 5, title: 'Basic vowels II', jamoIds: ['v_ya', 'v_yeo', 'v_yo', 'v_yu']),
+  StageLevel(stage: StageId.jamoHunt, level: 6, title: 'Tense consonants', jamoIds: _tenseConsonants),
+  StageLevel(stage: StageId.jamoHunt, level: 7, title: 'Compound vowels', jamoIds: _complexVowels),
 ];
 
 /// Stage 2 — block builder: assemble syllables. Levels 1–5 free, 6+ premium
 /// (boundary enforced by ContentGate, not here).
 const List<StageLevel> stage2Levels = [
-  StageLevel(stage: StageId.blockBuilder, level: 1, title: '첫 글자', jamoIds: ['c_giyeok', 'c_nieun', 'v_a', 'v_i'], syllableTargets: ['가', '나', '기', '니']),
-  StageLevel(stage: StageId.blockBuilder, level: 2, title: '세로 모음', jamoIds: ['c_mieum', 'c_bieup', 'v_a', 'v_eo', 'v_i'], syllableTargets: ['마', '버', '미', '비', '머']),
-  StageLevel(stage: StageId.blockBuilder, level: 3, title: '가로 모음', jamoIds: ['c_giyeok', 'c_siot', 'v_o', 'v_u', 'v_eu'], syllableTargets: ['고', '구', '소', '수', '스']),
-  StageLevel(stage: StageId.blockBuilder, level: 4, title: '첫 받침', jamoIds: ['f_nieun', 'f_rieul', 'f_mieum'], syllableTargets: ['간', '길', '김', '물', '문']),
-  StageLevel(stage: StageId.blockBuilder, level: 5, title: '받침 이응', jamoIds: ['f_ieung', 'f_bieup'], syllableTargets: ['강', '방', '집', '밥', '상']),
-  StageLevel(stage: StageId.blockBuilder, level: 6, title: '거센소리 글자', jamoIds: ['c_chieut', 'c_kieuk', 'c_tieut', 'c_pieup'], syllableTargets: ['차', '코', '토', '파', '피']),
-  StageLevel(stage: StageId.blockBuilder, level: 7, title: '쌍자음 글자', jamoIds: _tenseConsonants, syllableTargets: ['까', '떡', '빵', '쌀', '찌']),
-  StageLevel(stage: StageId.blockBuilder, level: 8, title: '복합 모음 글자', jamoIds: ['v_wa', 'v_wi', 'v_ae', 'v_e'], syllableTargets: ['과', '귀', '개', '게', '왜']),
-  StageLevel(stage: StageId.blockBuilder, level: 9, title: '겹받침', jamoIds: ['f_lg', 'f_bs', 'f_nh'], syllableTargets: ['닭', '값', '많']),
+  StageLevel(stage: StageId.blockBuilder, level: 1, title: 'First syllables', jamoIds: ['c_giyeok', 'c_nieun', 'v_a', 'v_i'], syllableTargets: ['가', '나', '기', '니']),
+  StageLevel(stage: StageId.blockBuilder, level: 2, title: 'Vertical vowels', jamoIds: ['c_mieum', 'c_bieup', 'v_a', 'v_eo', 'v_i'], syllableTargets: ['마', '버', '미', '비', '머']),
+  StageLevel(stage: StageId.blockBuilder, level: 3, title: 'Horizontal vowels', jamoIds: ['c_giyeok', 'c_siot', 'v_o', 'v_u', 'v_eu'], syllableTargets: ['고', '구', '소', '수', '스']),
+  StageLevel(stage: StageId.blockBuilder, level: 4, title: 'First batchim', jamoIds: ['f_nieun', 'f_rieul', 'f_mieum'], syllableTargets: ['간', '길', '김', '물', '문']),
+  StageLevel(stage: StageId.blockBuilder, level: 5, title: 'Batchim ㅇ and ㅂ', jamoIds: ['f_ieung', 'f_bieup'], syllableTargets: ['강', '방', '집', '밥', '상']),
+  StageLevel(stage: StageId.blockBuilder, level: 6, title: 'Aspirated syllables', jamoIds: ['c_chieut', 'c_kieuk', 'c_tieut', 'c_pieup'], syllableTargets: ['차', '코', '토', '파', '피']),
+  StageLevel(stage: StageId.blockBuilder, level: 7, title: 'Tense syllables', jamoIds: _tenseConsonants, syllableTargets: ['까', '떡', '빵', '쌀', '찌']),
+  StageLevel(stage: StageId.blockBuilder, level: 8, title: 'Compound vowel syllables', jamoIds: ['v_wa', 'v_wi', 'v_ae', 'v_e'], syllableTargets: ['과', '귀', '개', '게', '왜']),
+  StageLevel(stage: StageId.blockBuilder, level: 9, title: 'Double batchim', jamoIds: ['f_lg', 'f_bs', 'f_nh'], syllableTargets: ['닭', '값', '많']),
 ];
 
 /// Stage 3 — word rush (premium).
 const List<StageLevel> stage3Levels = [
-  StageLevel(stage: StageId.wordRush, level: 1, title: '음식', jamoIds: [], wordIds: ['w_kimchi', 'w_bap', 'w_mul', 'w_uyu', 'w_tteok', 'w_sagwa']),
-  StageLevel(stage: StageId.wordRush, level: 2, title: '한식 한 상', jamoIds: [], wordIds: ['w_bibimbap', 'w_bulgogi', 'w_ramyeon', 'w_gimbap', 'w_chimaek', 'w_coffee']),
-  StageLevel(stage: StageId.wordRush, level: 3, title: '감정', jamoIds: [], wordIds: ['w_sarang', 'w_haengbok', 'w_gibun', 'w_nunmul', 'w_useum', 'w_maeum', 'w_kkum']),
-  StageLevel(stage: StageId.wordRush, level: 4, title: '일상 표현', jamoIds: [], wordIds: ['w_annyeong', 'w_gamsa', 'w_chingu', 'w_jip', 'w_hakgyo', 'w_beoseu']),
-  StageLevel(stage: StageId.wordRush, level: 5, title: '일상 II', jamoIds: [], wordIds: ['w_jeonhwa', 'w_norae', 'w_chum', 'w_haneul', 'w_bada']),
-  StageLevel(stage: StageId.wordRush, level: 6, title: 'K-컬처', jamoIds: [], wordIds: ['w_hanbok', 'w_deurama', 'w_yeonghwa', 'w_gasu', 'w_baeu', 'w_eungwon', 'w_mudae', 'w_paen']),
+  StageLevel(stage: StageId.wordRush, level: 1, title: 'Food', jamoIds: [], wordIds: ['w_kimchi', 'w_bap', 'w_mul', 'w_uyu', 'w_tteok', 'w_sagwa']),
+  StageLevel(stage: StageId.wordRush, level: 2, title: 'Korean dishes', jamoIds: [], wordIds: ['w_bibimbap', 'w_bulgogi', 'w_ramyeon', 'w_gimbap', 'w_chimaek', 'w_coffee']),
+  StageLevel(stage: StageId.wordRush, level: 3, title: 'Feelings', jamoIds: [], wordIds: ['w_sarang', 'w_haengbok', 'w_gibun', 'w_nunmul', 'w_useum', 'w_maeum', 'w_kkum']),
+  StageLevel(stage: StageId.wordRush, level: 4, title: 'Everyday words', jamoIds: [], wordIds: ['w_annyeong', 'w_gamsa', 'w_chingu', 'w_jip', 'w_hakgyo', 'w_beoseu']),
+  StageLevel(stage: StageId.wordRush, level: 5, title: 'Everyday words II', jamoIds: [], wordIds: ['w_jeonhwa', 'w_norae', 'w_chum', 'w_haneul', 'w_bada']),
+  StageLevel(stage: StageId.wordRush, level: 6, title: 'K-culture', jamoIds: [], wordIds: ['w_hanbok', 'w_deurama', 'w_yeonghwa', 'w_gasu', 'w_baeu', 'w_eungwon', 'w_mudae', 'w_paen']),
 ];
 
 /// Stage 4 — pronunciation challenge (premium): re-uses stage1/2/3 items.
 const List<StageLevel> stage4Levels = [
-  StageLevel(stage: StageId.pronunciation, level: 1, title: '자음 발음', jamoIds: _basicConsonants),
-  StageLevel(stage: StageId.pronunciation, level: 2, title: '모음 발음', jamoIds: _basicVowels),
-  StageLevel(stage: StageId.pronunciation, level: 3, title: '단어 발음', jamoIds: [], wordIds: ['w_annyeong', 'w_gamsa', 'w_sarang', 'w_kimchi', 'w_chingu']),
+  StageLevel(stage: StageId.pronunciation, level: 1, title: 'Consonant sounds', jamoIds: _basicConsonants),
+  StageLevel(stage: StageId.pronunciation, level: 2, title: 'Vowel sounds', jamoIds: _basicVowels),
+  StageLevel(stage: StageId.pronunciation, level: 3, title: 'Word sounds', jamoIds: [], wordIds: ['w_annyeong', 'w_gamsa', 'w_sarang', 'w_kimchi', 'w_chingu']),
 ];
 
 List<StageLevel> levelsFor(StageId stage) => switch (stage) {

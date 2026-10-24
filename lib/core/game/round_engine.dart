@@ -239,12 +239,12 @@ class AssemblyPuzzle {
   /// Teaching hint for a rejected placement (design spec: reject + 1-line why).
   String hintFor(Jamo block, SlotKind slot) {
     if (block.role == JamoRole.jungseong && slot != SlotKind.jungseong) {
-      return '모음은 가운데 소리 자리에만 올 수 있어요';
+      return 'Vowels only go in the middle slot';
     }
     if (block.role != JamoRole.jungseong && slot == SlotKind.jungseong) {
-      return '자음은 가운데 소리 자리에 올 수 없어요';
+      return 'Consonants cannot go in the middle slot';
     }
-    return block.hint ?? '이 소리가 아니에요 — 발음을 다시 들어보세요';
+    return block.hint ?? 'Not this sound. Listen again';
   }
 }
 

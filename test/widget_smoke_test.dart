@@ -46,32 +46,32 @@ void main() {
     await tester.tap(find.text('Skip'));
     await tester.pumpAndSettle();
 
-    expect(find.text('한글퀘스트'), findsOneWidget);
-    expect(find.textContaining('7일 한글 완독'), findsOneWidget);
-    expect(find.text('자모 사냥'), findsOneWidget);
-    expect(find.text('글자 조립'), findsOneWidget);
-    expect(find.text('자모 도감'), findsOneWidget);
+    expect(find.text('Hangul Bricks'), findsOneWidget);
+    expect(find.textContaining('READ HANGUL IN 7 DAYS'), findsOneWidget);
+    expect(find.text('Jamo Hunt'), findsOneWidget);
+    expect(find.text('Letter Builder'), findsOneWidget);
+    expect(find.text('Letter Codex'), findsOneWidget);
     expect(state.progress.onboardingDone, isTrue);
   });
 
   testWidgets('home → mini lesson → jamo hunt gameplay', (tester) async {
     await pumpApp(tester);
 
-    await tester.tap(find.text('자모 사냥'));
+    await tester.tap(find.text('Jamo Hunt'));
     await tester.pumpAndSettle();
-    expect(find.text('플레이'), findsOneWidget,
+    expect(find.text('Play'), findsOneWidget,
         reason: 'mini lesson gates the stage');
-    expect(find.text('건너뛰기 →'), findsOneWidget);
+    expect(find.text('Skip →'), findsOneWidget);
 
-    await tester.tap(find.text('플레이'));
+    await tester.tap(find.text('Play'));
     await settleRoute(tester);
-    expect(find.text('이 소리의 자모를 찾으세요'), findsOneWidget);
+    expect(find.text('Find the letter for this sound'), findsOneWidget);
     expect(find.byIcon(Icons.volume_up), findsOneWidget);
 
     // Leave the stage (cancels round timers).
     await tester.tap(find.byIcon(Icons.close));
     await tester.pumpAndSettle();
-    expect(find.text('한글퀘스트'), findsOneWidget);
+    expect(find.text('Hangul Bricks'), findsOneWidget);
   });
 
   testWidgets('codex opens with locked cards; review teaser opens',
@@ -79,17 +79,17 @@ void main() {
     final state = await pumpApp(tester);
     state.progress.unlockCodex('c_giyeok');
 
-    await tester.tap(find.text('자모 도감'));
+    await tester.tap(find.text('Letter Codex'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('자모 도감  1/'), findsOneWidget);
+    expect(find.textContaining('Letter Codex  1/'), findsOneWidget);
     expect(find.text('기역'), findsOneWidget);
-    expect(find.text('미발견'), findsWidgets);
+    expect(find.text('Locked'), findsWidgets);
     await tester.pageBack();
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('스마트 복습'));
+    await tester.tap(find.text('Smart Review'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('스마트 복습  1/'), findsOneWidget);
+    expect(find.textContaining('Smart Review  1/'), findsOneWidget);
     await tester.tap(find.byIcon(Icons.close));
     await tester.pumpAndSettle();
   });
@@ -98,36 +98,36 @@ void main() {
       (tester) async {
     final state = await pumpApp(tester);
 
-    await tester.tap(find.text('단어 러시'));
+    await tester.tap(find.text('Word Rush'));
     await tester.pumpAndSettle();
 
     // Paywall with required disclosures.
-    expect(find.text('한글, 끝까지 읽어내세요'), findsOneWidget);
-    expect(find.text('7일 무료로 시작하기'), findsOneWidget);
-    expect(find.text('구매 복원'), findsOneWidget);
-    expect(find.text('해지 안내'), findsOneWidget);
-    expect(find.text('개인정보 처리방침'), findsOneWidget);
-    expect(find.text('이용약관'), findsOneWidget);
-    expect(find.text('연간 플랜'), findsOneWidget);
+    expect(find.text('Read Hangul all the way'), findsOneWidget);
+    expect(find.text('Unlock Premium'), findsOneWidget);
+    expect(find.text('Restore purchase'), findsOneWidget);
+    expect(find.text('How to cancel'), findsOneWidget);
+    expect(find.text('Privacy Policy'), findsOneWidget);
+    expect(find.text('Terms of Use'), findsOneWidget);
+    expect(find.text('Lifetime'), findsOneWidget);
 
-    await tester.tap(find.text('이용약관'));
+    await tester.tap(find.text('Terms of Use'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('자동 갱신'), findsOneWidget);
+    expect(find.textContaining('One-time payment'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
-    expect(find.text('SAVE 52%'), findsOneWidget);
+    expect(find.text('BEST VALUE'), findsOneWidget);
 
-    await tester.tap(find.text('7일 무료로 시작하기'));
+    await tester.tap(find.text('Unlock Premium'));
     await tester.pumpAndSettle();
     expect(state.isPremium, isTrue);
 
     // Stage 3 now opens: mini lesson instead of paywall.
-    await tester.tap(find.text('단어 러시'));
+    await tester.tap(find.text('Word Rush'));
     await tester.pumpAndSettle();
-    expect(find.text('플레이'), findsOneWidget);
-    await tester.tap(find.text('건너뛰기 →'));
+    expect(find.text('Play'), findsOneWidget);
+    await tester.tap(find.text('Skip →'));
     await settleRoute(tester);
-    expect(find.text('읽고, 맞는 그림을 고르세요'), findsOneWidget);
+    expect(find.text('Read it, then pick the matching picture'), findsOneWidget);
     await tester.tap(find.byIcon(Icons.close));
     await tester.pumpAndSettle();
   });
@@ -137,16 +137,16 @@ void main() {
 
     await tester.tap(find.byIcon(Icons.settings_outlined));
     await tester.pumpAndSettle();
-    expect(find.text('구독 관리 · 해지 안내'), findsOneWidget);
+    expect(find.text('Manage subscription'), findsOneWidget);
 
-    await tester.tap(find.text('구독 관리 · 해지 안내'));
+    await tester.tap(find.text('Manage subscription'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('구독 취소'), findsOneWidget);
+    expect(find.textContaining('Apple ID → Subscriptions'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('개인정보 처리방침'));
+    await tester.tap(find.text('Privacy Policy'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('온디바이스'), findsOneWidget);
+    expect(find.textContaining('on-device'), findsOneWidget);
   });
 }

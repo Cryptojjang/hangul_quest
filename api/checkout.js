@@ -1,6 +1,6 @@
-// Creates a Lemon Squeezy checkout for the chosen plan. The 7-day free trial
-// is configured on each subscription variant in the Lemon Squeezy dashboard.
-// POST {plan: "yearly" | "monthly"} → {url}  (opened in the Lemon.js overlay)
+// Creates a Lemon Squeezy checkout for the chosen plan.
+// POST {plan: "lifetime" | "monthly" | "yearly"} → {url}  (opened in the
+// Lemon.js overlay). "lifetime" is a single-payment variant.
 const { env, ls } = require('./_lib/lemonsqueezy');
 
 module.exports = async (req, res) => {
@@ -14,8 +14,15 @@ module.exports = async (req, res) => {
     return;
   }
   try {
-    const plan = (req.body && req.body.plan) === 'monthly' ? 'monthly' : 'yearly';
-    const variant = plan === 'monthly' ? e.variantMonthly : e.variantYearly;
+    const asked = req.body && req.body.plan;
+    const plan =
+      asked === 'monthly' ? 'monthly'
+      : asked === 'yearly' && e.variantYearly ? 'yearly'
+      : 'lifetime';
+    const variant =
+      plan === 'monthly' ? e.variantMonthly
+      : plan === 'yearly' ? e.variantYearly
+      : e.variantLifetime;
     const origin = req.headers.origin || `https://${req.headers.host}`;
 
     const body = await ls(e.apiKey, '/checkouts', {

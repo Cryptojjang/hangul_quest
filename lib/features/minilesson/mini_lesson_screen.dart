@@ -34,28 +34,28 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
   /// tapping; single jamo/syllable frames play their sound.
   static const _lessons = {
     StageId.jamoHunt: (
-      '소리를 그린 문자',
-      'ㄱ은 혀뿌리가 목을 막는 모양, ㅁ은 입술 모양이에요.\n한글 자음은 발음 기관을 그린 그림이에요.',
+      'Letters that draw sounds',
+      'ㄱ shows the tongue blocking the throat, ㅁ shows the lips.\nKorean consonants are pictures of your mouth.',
       ['ㄱ', 'ㄴ', 'ㅁ', 'ㅅ', 'ㅇ'],
-      '탭해서 소리를 들어 보세요',
+      'Tap to hear the sound',
     ),
     StageId.blockBuilder: (
-      '한글은 왜 블록처럼 조립될까?',
-      '첫소리 + 가운뎃소리 + 받침을 옆으로 늘어놓지 않고\n한 칸에 쌓아요. 모음 모양에 따라 자리가 달라져요.',
+      'Why does Hangul stack like blocks?',
+      'Initial, vowel and final letters stack into one block.\nThe shape of the vowel decides the layout.',
       ['ㄱ', 'ㄱ + ㅏ', '가', '가 + ㅇ', '강'],
-      '탭해서 글자를 조립해 보세요',
+      'Tap to build the syllable',
     ),
     StageId.wordRush: (
-      '이제 진짜 단어를 읽어요',
-      '조립할 수 있으면 읽을 수 있어요.\n최대한 빨리 읽고 맞는 그림을 고르세요.',
+      'Now read real words',
+      'If you can build it, you can read it.\nRead fast and pick the matching picture.',
       ['김', '김 + 치', '김치'],
-      '탭해서 단어를 만들어 보세요',
+      'Tap to make the word',
     ),
     StageId.pronunciation: (
-      '이제 소리 내어 볼까요?',
-      '마지막은 말하기예요. 마이크에 대고 발음하면\n기기 안에서만 분석해 어떤 소리가 좋았는지 알려드려요.',
+      'Ready to say it out loud?',
+      'Last comes speaking. Say it into the mic and\nyour device checks which sounds you nailed.',
       ['안', '녕', '안녕'],
-      '탭해서 먼저 들어 보세요',
+      'Tap to listen first',
     ),
   };
 
@@ -100,7 +100,7 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: _start,
-                  child: const Text('건너뛰기 →',
+                  child: const Text('Skip →',
                       style: TextStyle(color: HqColors.inkSoft)),
                 ),
               ),
@@ -111,10 +111,10 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
               const SizedBox(height: 12),
               Text(body, style: Theme.of(context).textTheme.bodyMedium),
               const Spacer(),
-              HqButton(label: '플레이', expanded: true, onPressed: _start),
+              HqButton(label: 'Play', expanded: true, onPressed: _start),
               const SizedBox(height: 8),
               Center(
-                child: Text('${_maxSeconds - _elapsed}초 후 자동 시작',
+                child: Text('Starts in ${_maxSeconds - _elapsed}s',
                     style: Theme.of(context).textTheme.bodySmall),
               ),
             ],
@@ -198,7 +198,7 @@ class _TapDemoState extends State<_TapDemo> {
             const SizedBox(width: 4),
             Text(
                 last
-                    ? '다시 보려면 탭'
+                    ? 'Tap to replay'
                     : '${widget.prompt}  ${_i + 1}/${widget.frames.length}',
                 style: Theme.of(context).textTheme.bodySmall),
           ],

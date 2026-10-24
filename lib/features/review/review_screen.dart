@@ -139,22 +139,22 @@ class _ReviewScreenState extends State<ReviewScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('복습 완료!',
+              Text('Review complete!',
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 8),
-              Text('$_correct / ${_session!.length} 정답',
+              Text('$_correct / ${_session!.length} correct',
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: HqColors.dancheongGreen)),
               const SizedBox(height: 16),
               if (!isPremium) ...[
-                Text('오늘의 무료 복습을 다 썼어요.\n프리미엄은 필요한 만큼 무제한으로 복습해요.',
+                Text('Free review used for today.\nPremium unlocks unlimited reviews.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall),
                 const SizedBox(height: 12),
                 HqButton(
-                  label: '무제한 복습 열기',
+                  label: 'Unlock unlimited review',
                   expanded: true,
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -166,7 +166,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 const SizedBox(height: 8),
               ],
               HqButton(
-                label: '맵으로',
+                label: 'Back to map',
                 color: Colors.white,
                 textColor: HqColors.ink,
                 expanded: true,
@@ -197,7 +197,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       icon: const Icon(Icons.close, color: HqColors.inkSoft),
                       onPressed: () => Navigator.of(context).pop()),
                   Expanded(
-                    child: Text('스마트 복습  ${_cursor + 1}/${_session!.length}',
+                    child: Text('Smart Review  ${_cursor + 1}/${_session!.length}',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleMedium),
                   ),
@@ -217,7 +217,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text('어떤 자모의 소리일까요?',
+              Text('Which letter makes this sound?',
                   style: Theme.of(context).textTheme.bodySmall),
               const Spacer(),
               Wrap(

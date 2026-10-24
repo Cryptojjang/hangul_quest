@@ -141,17 +141,17 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
               children: [
                 const Icon(Icons.mic_off, size: 64, color: HqColors.inkSoft),
                 const SizedBox(height: 16),
-                Text('마이크 권한이 필요해요',
+                Text('Microphone access needed',
                     style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 Text(
-                  '발음 채점은 기기 안에서만 처리되고\n음성은 저장·전송되지 않아요.\n설정에서 마이크를 허용해 주세요.',
+                  'Scoring happens on your device and\naudio is never stored or sent.\nPlease allow the microphone in Settings.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 24),
                 HqButton(
-                    label: '맵으로 돌아가기',
+                    label: 'Back to map',
                     onPressed: () => Navigator.of(context).pop()),
               ],
             ),
@@ -195,7 +195,7 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
                       fontWeight: FontWeight.w800,
                       color: HqColors.ink)),
               const SizedBox(height: 8),
-              Text('듣고, 따라 말해보세요',
+              Text('Listen, then say it',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 24),
               if (_lastScore != null) _ScoreRing(score: _lastScore!, feedback: _feedback),
@@ -227,7 +227,7 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
               const SizedBox(height: 16),
               if (_lastScore != null)
                 HqButton(
-                    label: _lastScore! >= 60 ? '다음' : '한 번 더 / 다음',
+                    label: _lastScore! >= 60 ? 'Next' : 'Try again / Next',
                     expanded: true,
                     onPressed: _next),
               const SizedBox(height: 12),
@@ -289,7 +289,7 @@ class _ScoreRing extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  '${jamoById[e.key]?.char ?? e.key} ${e.value ? '좋아요' : '아쉬워요'}',
+                  '${jamoById[e.key]?.char ?? e.key} ${e.value ? 'Nice!' : 'Almost'}',
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,

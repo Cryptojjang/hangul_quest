@@ -27,7 +27,7 @@ class HangulQuestApp extends StatelessWidget {
       child: AnimatedBuilder(
         animation: state,
         builder: (context, _) => MaterialApp(
-          title: 'HangulQuest',
+          title: 'Hangul Bricks',
           debugShowCheckedModeBanner: false,
           theme: HqTheme.light(),
           home: state.progress.onboardingDone

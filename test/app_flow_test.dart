@@ -120,10 +120,10 @@ void main() {
     // -- purchase through the mock gateway ----------------------------------
     final products = await app.services.billing.fetchProducts();
     final result = await app
-        .purchase(products.firstWhere((p) => p.plan == SubscriptionPlan.yearly));
+        .purchase(products.firstWhere((p) => p.plan == SubscriptionPlan.lifetime));
     expect(result.success, isTrue);
     expect(app.isPremium, isTrue);
-    expect(logOf(app).log.any((e) => e.name == Events.trialStart), isTrue);
+    expect(logOf(app).log.any((e) => e.name == Events.subscribe), isTrue);
 
     // wall opens without any other change
     expect(

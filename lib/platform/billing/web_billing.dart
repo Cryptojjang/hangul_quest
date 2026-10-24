@@ -74,17 +74,17 @@ class WebBillingGateway implements BillingGateway {
     if (_demo != null) return _demo!.fetchProducts();
     return const [
       Product(
-        id: 'hq_premium_yearly',
-        plan: SubscriptionPlan.yearly,
-        priceLabel: r'$39.99/yr',
-        trialDays: 7,
-        savingsLabel: 'SAVE 52%',
+        id: 'hq_premium_lifetime',
+        plan: SubscriptionPlan.lifetime,
+        priceLabel: r'$12.99 once',
+        trialDays: 0,
+        savingsLabel: 'BEST VALUE',
       ),
       Product(
         id: 'hq_premium_monthly',
         plan: SubscriptionPlan.monthly,
-        priceLabel: r'$6.99/mo',
-        trialDays: 7,
+        priceLabel: r'$4.99/mo',
+        trialDays: 0,
       ),
     ];
   }
@@ -100,7 +100,7 @@ class WebBillingGateway implements BillingGateway {
     final lemon = js_util.getProperty<Object?>(html.window, 'LemonSqueezy');
     if (lemon == null) {
       return const PurchaseResult(
-          success: false, error: '결제 모듈을 불러오지 못했어요. 새로고침해 주세요');
+          success: false, error: 'Could not load checkout. Please refresh');
     }
     final res = await _api('/api/checkout', {'plan': product.plan.name});
     final url = res['url'] as String?;
@@ -111,7 +111,7 @@ class WebBillingGateway implements BillingGateway {
 
     final token = await _openOverlay(lemon, url);
     if (token == null) {
-      return const PurchaseResult(success: false, error: '결제가 취소되었어요');
+      return const PurchaseResult(success: false, error: 'Checkout cancelled');
     }
     saveCustomerId(token);
     final status = await _verify(token);
@@ -119,7 +119,7 @@ class WebBillingGateway implements BillingGateway {
     return status.isActive
         ? PurchaseResult(success: true, isTrial: status.inTrial)
         : const PurchaseResult(
-            success: false, error: '결제 확인에 실패했어요. 구매 복원을 눌러 주세요');
+            success: false, error: 'Could not confirm payment. Tap Restore purchase');
   }
 
   /// Opens the Lemon.js overlay and resolves with the restore token on
@@ -180,6 +180,7 @@ class WebBillingGateway implements BillingGateway {
       SubscriptionStatus(
         isActive: m['isActive'] == true,
         plan: switch (m['plan'] as String?) {
+          'lifetime' => SubscriptionPlan.lifetime,
           'yearly' => SubscriptionPlan.yearly,
           'monthly' => SubscriptionPlan.monthly,
           _ => null,

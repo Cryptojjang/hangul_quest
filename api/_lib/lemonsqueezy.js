@@ -6,10 +6,13 @@ function env() {
   const e = {
     apiKey: process.env.LEMONSQUEEZY_API_KEY,
     storeId: process.env.LEMONSQUEEZY_STORE_ID,
-    variantYearly: process.env.LEMONSQUEEZY_VARIANT_YEARLY,
+    // One-time "lifetime" unlock (single payment variant) + monthly
+    // subscription. Yearly is optional and kept only for legacy orders.
+    variantLifetime: process.env.LEMONSQUEEZY_VARIANT_LIFETIME,
     variantMonthly: process.env.LEMONSQUEEZY_VARIANT_MONTHLY,
+    variantYearly: process.env.LEMONSQUEEZY_VARIANT_YEARLY || null,
   };
-  return e.apiKey && e.storeId && e.variantYearly && e.variantMonthly ? e : null;
+  return e.apiKey && e.storeId && e.variantLifetime && e.variantMonthly ? e : null;
 }
 
 async function ls(apiKey, path, init = {}) {

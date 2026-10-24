@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text('한글퀘스트',
+                  child: Text('Hangul Bricks',
                       style: Theme.of(context).textTheme.headlineMedium),
                 ),
                 _StreakFlame(days: state.progress.streakDays),
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 context, StageId.jamoHunt,
                 level: state.progress.cleared(StageId.jamoHunt.name) + 1)),
             const SizedBox(height: 16),
-            Text('스테이지', style: Theme.of(context).textTheme.titleMedium),
+            Text('Stages', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             for (final stage in StageId.values) ...[
               _StageNode(stage: stage),
@@ -65,9 +65,9 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const HqIconTile(icon: Icons.menu_book_rounded),
                         const SizedBox(height: 4),
-                        const Text('자모 도감',
+                        const Text('Letter Codex',
                             style: TextStyle(fontWeight: FontWeight.w700)),
-                        Text('${state.progress.codex.length} / 67 카드',
+                        Text('${state.progress.codex.length} / 67 cards',
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
@@ -81,12 +81,12 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const HqIconTile(icon: Icons.psychology_rounded),
                         const SizedBox(height: 4),
-                        const Text('스마트 복습',
+                        const Text('Smart Review',
                             style: TextStyle(fontWeight: FontWeight.w700)),
                         Text(
                             state.isPremium
-                                ? '무제한'
-                                : '오늘 맛보기 ${state.entitlements.reviewTeasersUsedToday}/1',
+                                ? 'Unlimited'
+                                : 'Free today ${state.entitlements.reviewTeasersUsedToday}/1',
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
@@ -125,7 +125,7 @@ class HomeScreen extends StatelessWidget {
         PaywallScreen.show(context, trigger: trigger);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('이 기기에서는 발음 도전을 지원하지 않아요')));
+            content: Text('Pronunciation is not supported on this device')));
       }
       return;
     }
@@ -175,19 +175,19 @@ class _TrackerCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('7일 한글 완독 — DAY ${day.day}',
+          Text('READ HANGUL IN 7 DAYS · DAY ${day.day}',
               style: const TextStyle(
                   color: Colors.white70,
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 1.2)),
           const SizedBox(height: 6),
-          Text(day.title,
+          Text(day.titleEn,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w800)),
-          Text(day.goal, style: const TextStyle(color: Colors.white70)),
+          Text(day.goalEn, style: const TextStyle(color: Colors.white70)),
           const SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
@@ -222,15 +222,15 @@ class _DailyChallengeCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('데일리 챌린지',
+                const Text('Daily Challenge',
                     style: TextStyle(fontWeight: FontWeight.w700)),
-                Text('오늘의 믹스 라운드로 스트릭을 지켜요',
+                Text('Keep your streak with a mixed round',
                     style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),
           const SizedBox(width: 8),
-          HqButton(label: '도전', onPressed: onPlay),
+          HqButton(label: 'Go', onPressed: onPlay),
         ],
       ),
     );
@@ -243,10 +243,10 @@ class _StageNode extends StatelessWidget {
   final StageId stage;
 
   static const _meta = {
-    StageId.jamoHunt: (Icons.hearing_rounded, '자모 사냥', '발음 듣고 자모 맞히기'),
-    StageId.blockBuilder: (Icons.extension_rounded, '글자 조립', '초성+중성+종성 퍼즐'),
-    StageId.wordRush: (Icons.image_search_rounded, '단어 러시', '단어 읽고 이미지 매칭'),
-    StageId.pronunciation: (Icons.mic_rounded, '발음 도전', '내 발음 채점받기'),
+    StageId.jamoHunt: (Icons.hearing_rounded, 'Jamo Hunt', 'Hear a sound, tap the letter'),
+    StageId.blockBuilder: (Icons.extension_rounded, 'Letter Builder', 'Snap letters into syllables'),
+    StageId.wordRush: (Icons.image_search_rounded, 'Word Rush', 'Read words, match pictures'),
+    StageId.pronunciation: (Icons.mic_rounded, 'Pronunciation', 'Get your pronunciation scored'),
   };
 
   @override
@@ -284,7 +284,7 @@ class _StageNode extends StatelessWidget {
                 ]),
                 Text(
                     speechGone
-                        ? '이 기기에서 지원되지 않음'
+                        ? 'Not supported on this device'
                         : subtitle,
                     style: Theme.of(context).textTheme.bodySmall),
               ],
@@ -311,13 +311,13 @@ class _LeagueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rows = [..._bots, ('나', xp)]
+    final rows = [..._bots, ('You', xp)]
       ..sort((a, b) => b.$2.compareTo(a.$2));
     return HqCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('주간 리그 — 청자 리그',
+          const Text('Weekly League · Celadon',
               style: TextStyle(fontWeight: FontWeight.w700)),
           const SizedBox(height: 8),
           for (var i = 0; i < rows.length; i++)
@@ -336,7 +336,7 @@ class _LeagueCard extends StatelessWidget {
                   Expanded(
                       child: Text(rows[i].$1,
                           style: TextStyle(
-                              fontWeight: rows[i].$1 == '나'
+                              fontWeight: rows[i].$1 == 'You'
                                   ? FontWeight.w800
                                   : FontWeight.w400))),
                   Text('${rows[i].$2} XP',
