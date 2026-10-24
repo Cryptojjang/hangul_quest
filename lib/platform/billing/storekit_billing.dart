@@ -40,8 +40,7 @@ class StoreKitBillingGateway implements BillingGateway {
         inTrial: m['inTrial'] as bool? ?? false,
         expiresAt: m['expiresAtMillis'] == null
             ? null
-            : DateTime.fromMillisecondsSinceEpoch(
-                m['expiresAtMillis'] as int),
+            : DateTime.fromMillisecondsSinceEpoch(m['expiresAtMillis'] as int),
       );
 
   @override

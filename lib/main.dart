@@ -42,8 +42,8 @@ Future<void> main() async {
   debugPrint('[boot] audio manifest ready');
   await WordImageResolver.instance.init();
 
-  // Billing: web deploys use Stripe Checkout via /api (demo-mode fallback
-  // when the deployment has no Stripe keys). Non-web dev builds use mock.
+  // Billing: web deploys use Lemon Squeezy checkout via /api (demo-mode
+  // fallback when the deployment has no keys). Non-web dev builds use mock.
   final webBilling = createWebBillingGateway(
     getCustomerId: () => store.state.stripeCustomerId,
     saveCustomerId: (id) {
@@ -66,18 +66,6 @@ Future<void> main() async {
     );
   } else {
     services = AppServices.dev(audio: audio);
-  }
-
-  // Returning from Stripe checkout: verify the session before first frame so
-  // the paywall never re-shows to a fresh subscriber.
-  final sessionId = checkoutSessionFromUrl();
-  if (sessionId != null && webBilling != null) {
-    try {
-      await confirmPendingCheckout(webBilling, sessionId);
-    } catch (_) {
-      // Verification failure is not fatal; restore() retries on init.
-    }
-    clearCheckoutUrl();
   }
 
   final state = AppState(services: services, store: store);

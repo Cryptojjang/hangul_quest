@@ -17,7 +17,7 @@ lib/
     data/          #   커리큘럼·어휘·7일 트래커
     events/        #   이벤트 로깅 계약
   platform/        # 교체 지점 (스토어 종속성 격리)
-    billing/       #   BillingGateway: mock / StoreKit / Play / Stripe
+    billing/       #   BillingGateway: mock / StoreKit / Play / Lemon Squeezy(web)
     speech/        #   SpeechRecognizer + 교체 가능한 발음 채점 모듈
     audio/         #   AudioAssetManager (TTS 플레이스홀더 → 성우 녹음)
     device/        #   햅틱, 푸시

@@ -1,7 +1,8 @@
-/// Web billing gateway — Stripe Checkout via the /api serverless functions
-/// (deploy/api/*.js). When the deployment has no STRIPE_SECRET_KEY, /api/config
-/// reports demo mode and this gateway delegates to [MockBillingGateway] with
-/// a clearly-labeled fake purchase, so the deployed demo stays fully playable.
+/// Web billing gateway — Lemon Squeezy checkout (Lemon.js overlay) via the
+/// /api serverless functions. When the deployment has no Lemon Squeezy env
+/// vars, /api/config reports demo mode and this gateway delegates to
+/// [MockBillingGateway] with a clearly-labeled fake purchase, so the deployed
+/// demo stays fully playable.
 ///
 /// Store rule (spec §5.2): this file is web-only and never ships in store
 /// builds — conditional import in main.dart.
@@ -13,6 +14,8 @@ import 'dart:convert';
 // remains correct for the js-compiled web target we ship today.
 // ignore: deprecated_member_use, avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+// ignore: deprecated_member_use, avoid_web_libraries_in_flutter
+import 'dart:js_util' as js_util;
 
 import 'billing.dart';
 
@@ -23,37 +26,18 @@ BillingGateway? createWebBillingGateway({
     WebBillingGateway(
         getCustomerId: getCustomerId, saveCustomerId: saveCustomerId);
 
-String? checkoutSessionFromUrl() =>
-    Uri.base.queryParameters['session_id'];
-
-/// Verifies a checkout session on the web gateway (type-erased so main.dart
-/// compiles against the non-web stub too).
-Future<void> confirmPendingCheckout(
-    BillingGateway gateway, String sessionId) async {
-  if (gateway is WebBillingGateway) {
-    await gateway.confirmCheckout(sessionId);
-  }
-}
-
-/// Strips the checkout params so a reload doesn't re-verify.
-void clearCheckoutUrl() {
-  final clean = Uri.base.removeFragment().replace(queryParameters: {});
-  final s = clean.toString();
-  html.window.history
-      .replaceState(null, '', s.endsWith('?') ? s.substring(0, s.length - 1) : s);
-}
-
 class WebBillingGateway implements BillingGateway {
   WebBillingGateway({
     required this.getCustomerId,
     required this.saveCustomerId,
   });
 
+  /// Restore token ("orderId:identifier") persisted after a checkout.
   final String? Function() getCustomerId;
   final void Function(String) saveCustomerId;
 
   final _controller = StreamController<SubscriptionStatus>.broadcast();
-  MockBillingGateway? _demo; // set when /api/config says stripe is off
+  MockBillingGateway? _demo; // set when /api/config says payments are off
   bool _configLoaded = false;
 
   Future<Map<String, dynamic>> _api(String path,
@@ -71,7 +55,7 @@ class WebBillingGateway implements BillingGateway {
     if (_configLoaded) return;
     try {
       final config = await _api('/api/config');
-      if (config['stripeEnabled'] != true) _demo = MockBillingGateway();
+      if (config['paymentsEnabled'] != true) _demo = MockBillingGateway();
     } catch (_) {
       _demo = MockBillingGateway(); // no API reachable → demo
     }
@@ -79,7 +63,7 @@ class WebBillingGateway implements BillingGateway {
   }
 
   @override
-  String get backendId => _demo == null ? 'stripe' : 'demo';
+  String get backendId => _demo == null ? 'lemonsqueezy' : 'demo';
 
   @override
   bool get allowedInStoreBuild => false;
@@ -113,41 +97,83 @@ class WebBillingGateway implements BillingGateway {
       if (result.success) _controller.add(await _demo!.restore());
       return result;
     }
+    final lemon = js_util.getProperty<Object?>(html.window, 'LemonSqueezy');
+    if (lemon == null) {
+      return const PurchaseResult(
+          success: false, error: '결제 모듈을 불러오지 못했어요. 새로고침해 주세요');
+    }
     final res = await _api('/api/checkout', {'plan': product.plan.name});
     final url = res['url'] as String?;
     if (url == null) {
       return PurchaseResult(
           success: false, error: res['error'] as String? ?? 'checkout failed');
     }
-    html.window.location.assign(url); // → Stripe-hosted checkout
-    // The page navigates away; this result is never observed.
-    return const PurchaseResult(success: false, error: 'redirecting');
+
+    final token = await _openOverlay(lemon, url);
+    if (token == null) {
+      return const PurchaseResult(success: false, error: '결제가 취소되었어요');
+    }
+    saveCustomerId(token);
+    final status = await _verify(token);
+    _controller.add(status);
+    return status.isActive
+        ? PurchaseResult(success: true, isTrial: status.inTrial)
+        : const PurchaseResult(
+            success: false, error: '결제 확인에 실패했어요. 구매 복원을 눌러 주세요');
   }
 
-  /// Called by main() when the page returns from Stripe with ?session_id=.
-  Future<SubscriptionStatus> confirmCheckout(String sessionId) async {
-    await _ensureConfig();
-    if (_demo != null) return _demo!.restore();
-    final res = await _api('/api/verify', {'sessionId': sessionId});
-    final status = _statusFrom(res);
-    final customerId = res['customerId'] as String?;
-    if (customerId != null) saveCustomerId(customerId);
-    _controller.add(status);
-    return status;
+  /// Opens the Lemon.js overlay and resolves with the restore token on
+  /// success, or null once the overlay is closed without a purchase.
+  /// index.html bridges Lemon.js' Checkout.Success to an `hq-ls-success`
+  /// window event; Lemon.js has no close event, so the overlay's iframe is
+  /// polled instead.
+  Future<String?> _openOverlay(Object lemon, String url) {
+    final done = Completer<String?>();
+    late final StreamSubscription<html.Event> sub;
+    Timer? poll;
+    void finish(String? token) {
+      if (done.isCompleted) return;
+      poll?.cancel();
+      sub.cancel();
+      done.complete(token);
+    }
+
+    sub = html.window.on['hq-ls-success'].listen((e) {
+      final detail = (e as html.CustomEvent).detail;
+      finish(detail is String ? detail : null);
+    });
+    js_util.callMethod<void>(
+        js_util.getProperty<Object>(lemon, 'Url'), 'Open', [url]);
+
+    var seen = false;
+    poll = Timer.periodic(const Duration(milliseconds: 800), (_) {
+      final open =
+          html.document.querySelector('iframe[src*="lemonsqueezy.com"]') !=
+              null;
+      if (open) seen = true;
+      // Grace period: the success event can land just after the overlay closes.
+      if (seen && !open) {
+        Future.delayed(const Duration(milliseconds: 1500), () => finish(null));
+      }
+    });
+    return done.future;
+  }
+
+  Future<SubscriptionStatus> _verify(String token) async {
+    try {
+      return _statusFrom(await _api('/api/verify', {'token': token}));
+    } catch (_) {
+      return SubscriptionStatus.none;
+    }
   }
 
   @override
   Future<SubscriptionStatus> restore() async {
     await _ensureConfig();
     if (_demo != null) return _demo!.restore();
-    final customerId = getCustomerId();
-    if (customerId == null) return SubscriptionStatus.none;
-    try {
-      final res = await _api('/api/verify', {'customerId': customerId});
-      return _statusFrom(res);
-    } catch (_) {
-      return SubscriptionStatus.none;
-    }
+    final token = getCustomerId();
+    if (token == null) return SubscriptionStatus.none;
+    return _verify(token);
   }
 
   static SubscriptionStatus _statusFrom(Map<String, dynamic> m) =>

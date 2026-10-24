@@ -38,6 +38,22 @@
       if (s) { s.style.opacity = '0'; setTimeout(function () { s.remove(); }, 450); }
     });
   </script>
+  <script>
+    // Lemon Squeezy overlay checkout: bridge Checkout.Success to a window
+    // event that lib/platform/billing/web_billing.dart listens for. The
+    // detail is the restore token "<orderId>:<orderIdentifier>".
+    function hqLemonReady() {
+      if (window.createLemonSqueezy) window.createLemonSqueezy();
+      window.LemonSqueezy.Setup({
+        eventHandler: function (e) {
+          if (e.event !== 'Checkout.Success' || !e.data) return;
+          var token = e.data.id + ':' + (e.data.attributes || {}).identifier;
+          window.dispatchEvent(new CustomEvent('hq-ls-success', { detail: token }));
+        }
+      });
+    }
+  </script>
+  <script src="https://app.lemonsqueezy.com/js/lemon.js" defer onload="hqLemonReady()"></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

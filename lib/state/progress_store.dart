@@ -54,7 +54,8 @@ class ProgressState {
 
   bool onboardingDone = false;
 
-  /// Stripe customer id from a completed web checkout — lets restore()
+  /// Web checkout restore token ("orderId:identifier", Lemon Squeezy; key
+  /// name predates the switch from Stripe) — lets restore()
   /// re-verify the subscription without a login (web channel only).
   String? stripeCustomerId;
 

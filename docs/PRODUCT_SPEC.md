@@ -127,7 +127,7 @@
 
 ### 5.2 구독 상품
 - 월간 `hq_premium_monthly` / 연간 `hq_premium_yearly`(할인 강조, 기본 선택). 7일 무료 체험.
-- 결제: 스토어 인앱 구독 정공법. 웹앱 배포 시에만 Stripe. **스토어 빌드에 외부 결제 유도 문구·링크 금지.**
+- 결제: 스토어 인앱 구독 정공법. 웹앱 배포 시에만 Lemon Squeezy(판매 대행, 한국 사업자 계좌 정산 — Stripe는 한국 사업자 미지원). **스토어 빌드에 외부 결제 유도 문구·링크 금지.**
 
 ### 5.3 페이월 (전환율 최적화)
 - 구성: 가치 요약 3줄("경쟁 앱에 없는 발음 피드백", "개인화 복습", "전체 스테이지") → 플랜 선택(연간 기본, 절약률 뱃지) → 7일 체험 CTA → 해지 안내 · 약관 · 처리방침 링크 · 복원 버튼.
@@ -153,14 +153,14 @@
 
 | 기능 | 인터페이스 | 구현체 |
 |---|---|---|
-| 결제 | `BillingGateway` | `MockBilling`(개발 기본) / `StoreKitBilling` / `PlayBilling` / `StripeBilling`(웹 전용) |
+| 결제 | `BillingGateway` | `MockBilling`(개발 기본) / `StoreKitBilling` / `PlayBilling` / `LemonSqueezyBilling`(웹 전용) |
 | 음성인식 | `SpeechRecognizer` | `IosSpeechRecognizer` / `UnsupportedSpeech`(자동 비활성화) |
 | 발음 채점 | `PronunciationScorer` | `JamoSimilarityScorer`(교체 가능) |
 | 햅틱 | `HapticsDriver` | `IosHaptics` / `NoopHaptics` |
 | 푸시 | `PushDriver` | `LocalNotifPush` / `NoopPush` |
 | 오디오 | `AudioAssetManager` | TTS 플레이스홀더 슬롯 → 성우 녹음 에셋 교체 가능 |
 
-전환 조건: App Store 심사 지연 시 Google Play 선출시 또는 Flutter Web + Stripe. **코어 게임·학습 로직 수정 없이** 구현체 교체만으로 전환되어야 하며, 이는 `billing_switch_test.dart`로 검증한다.
+전환 조건: App Store 심사 지연 시 Google Play 선출시 또는 Flutter Web + Lemon Squeezy. **코어 게임·학습 로직 수정 없이** 구현체 교체만으로 전환되어야 하며, 이는 `billing_switch_test.dart`로 검증한다.
 과잉 추상화 금지: 위 표의 교체 지점 외 추상화를 만들지 않는다.
 
 ---

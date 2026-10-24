@@ -1,7 +1,7 @@
 /// Billing abstraction — the store-dependency isolation seam (spec §6).
 ///
 /// Game/learning code depends ONLY on [BillingGateway]. Swapping
-/// mock ↔ StoreKit ↔ Play Billing ↔ Stripe is a construction-time choice in
+/// mock ↔ StoreKit ↔ Play Billing ↔ Lemon Squeezy is a construction-time choice in
 /// [BillingConfig.gatewayFor]; no core logic changes. Verified by
 /// test/billing_switch_test.dart.
 library;
@@ -33,7 +33,8 @@ class Product {
 }
 
 class PurchaseResult {
-  const PurchaseResult({required this.success, this.isTrial = false, this.error});
+  const PurchaseResult(
+      {required this.success, this.isTrial = false, this.error});
 
   final bool success;
   final bool isTrial;
@@ -59,11 +60,11 @@ class SubscriptionStatus {
 /// The seam. Implementations must be side-effect free on construction so the
 /// app can swap them without touching game state.
 abstract class BillingGateway {
-  /// Backend identifier, e.g. 'mock', 'storekit', 'play', 'stripe'.
+  /// Backend identifier, e.g. 'mock', 'storekit', 'play', 'lemonsqueezy'.
   String get backendId;
 
   /// Whether this gateway may run inside a store-distributed build.
-  /// Stripe returns false: App Store builds must never ship external payment
+  /// Lemon Squeezy returns false: App Store builds must never ship external payment
   /// paths (spec §5.2 / review guideline 3.1.1).
   bool get allowedInStoreBuild;
 
@@ -83,7 +84,7 @@ class BillingConfig {
         BuildChannel.dev => MockBillingGateway(),
         BuildChannel.appStore => StoreKitBillingGateway(),
         BuildChannel.playStore => PlayBillingGateway(),
-        BuildChannel.web => StripeBillingGateway(),
+        BuildChannel.web => LemonSqueezyBillingGateway(),
       };
 
   /// Guard used by tests and a debug assert at startup: a store build must
@@ -197,13 +198,13 @@ class PlayBillingGateway implements BillingGateway {
   Future<void> dispose() => _controller.close();
 }
 
-/// Stripe gateway — web deployment ONLY ([allowedInStoreBuild] is false, and
+/// Lemon Squeezy gateway — web deployment ONLY ([allowedInStoreBuild] is false, and
 /// BillingConfig never pairs it with a store channel).
-class StripeBillingGateway implements BillingGateway {
+class LemonSqueezyBillingGateway implements BillingGateway {
   final _controller = StreamController<SubscriptionStatus>.broadcast();
 
   @override
-  String get backendId => 'stripe';
+  String get backendId => 'lemonsqueezy';
 
   @override
   bool get allowedInStoreBuild => false;
@@ -213,8 +214,8 @@ class StripeBillingGateway implements BillingGateway {
 
   @override
   Future<PurchaseResult> purchase(Product product) async {
-    // TODO(web): redirect to Stripe Checkout session.
-    throw UnimplementedError('Stripe checkout not wired in this build');
+    // Real web checkout lives in web_billing.dart (Lemon.js overlay).
+    throw UnimplementedError('Lemon Squeezy checkout not wired in this build');
   }
 
   @override

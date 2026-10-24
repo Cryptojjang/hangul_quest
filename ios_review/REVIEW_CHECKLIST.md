@@ -23,8 +23,8 @@
 ## 3. 결제 규정 (guideline 3.1.1)
 - 스토어 빌드에서 외부 결제 유도 문구·링크 금지 — 코드 레벨 가드:
   `BillingConfig.isValidPairing` + `AppServices` 생성자 어서트
-  (Stripe/mock 게이트웨이는 `allowedInStoreBuild = false`).
-- Stripe는 Flutter Web 배포에서만 사용.
+  (Lemon Squeezy/mock 게이트웨이는 `allowedInStoreBuild = false`).
+- Lemon Squeezy는 Flutter Web 배포에서만 사용.
 
 ## 4. 권한 거부 시 동작
 - 마이크 거부 → 4단계만 비활성(안내 화면), 나머지 기능 전부 정상.

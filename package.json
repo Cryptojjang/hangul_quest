@@ -1,7 +1,5 @@
 {
   "name": "hangulquest-web",
   "private": true,
-  "dependencies": {
-    "stripe": "^16.12.0"
-  }
+  "engines": { "node": ">=18" }
 }

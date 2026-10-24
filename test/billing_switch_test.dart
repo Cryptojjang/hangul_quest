@@ -14,20 +14,22 @@ bool coreLogicSeesPremium(SubscriptionStatus status) {
 
 void main() {
   group('gateway selection per build channel (spec §6)', () {
-    test('dev → mock, appStore → storekit, playStore → play, web → stripe',
+    test(
+        'dev → mock, appStore → storekit, playStore → play, web → lemonsqueezy',
         () {
       expect(BillingConfig.gatewayFor(BuildChannel.dev).backendId, 'mock');
       expect(BillingConfig.gatewayFor(BuildChannel.appStore).backendId,
           'storekit');
       expect(
           BillingConfig.gatewayFor(BuildChannel.playStore).backendId, 'play');
-      expect(BillingConfig.gatewayFor(BuildChannel.web).backendId, 'stripe');
+      expect(
+          BillingConfig.gatewayFor(BuildChannel.web).backendId, 'lemonsqueezy');
     });
 
     test('store builds refuse non-store gateways (guideline 3.1.1)', () {
       expect(
           BillingConfig.isValidPairing(
-              BuildChannel.appStore, StripeBillingGateway()),
+              BuildChannel.appStore, LemonSqueezyBillingGateway()),
           isFalse);
       expect(
           BillingConfig.isValidPairing(
@@ -35,14 +37,15 @@ void main() {
           isFalse);
       expect(
           BillingConfig.isValidPairing(
-              BuildChannel.playStore, StripeBillingGateway()),
+              BuildChannel.playStore, LemonSqueezyBillingGateway()),
           isFalse);
       expect(
           BillingConfig.isValidPairing(
               BuildChannel.appStore, StoreKitBillingGateway()),
           isTrue);
       expect(
-          BillingConfig.isValidPairing(BuildChannel.web, StripeBillingGateway()),
+          BillingConfig.isValidPairing(
+              BuildChannel.web, LemonSqueezyBillingGateway()),
           isTrue);
       expect(
           BillingConfig.isValidPairing(BuildChannel.dev, MockBillingGateway()),
@@ -95,9 +98,12 @@ void main() {
   });
 
   test(
-      'swap mock → stripe: same Product/SubscriptionStatus types flow through, '
+      'swap mock → lemonsqueezy: same Product/SubscriptionStatus types flow through, '
       'core logic untouched', () async {
-    for (final gateway in [MockBillingGateway(), StripeBillingGateway()]) {
+    for (final gateway in [
+      MockBillingGateway(),
+      LemonSqueezyBillingGateway()
+    ]) {
       final products = await gateway.fetchProducts();
       expect(products.map((p) => p.id),
           containsAll(['hq_premium_monthly', 'hq_premium_yearly']),
