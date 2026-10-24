@@ -103,21 +103,21 @@ void main() {
 
     // Paywall with required disclosures.
     expect(find.text('Read Hangul all the way'), findsOneWidget);
-    expect(find.text('Start 7-day free trial'), findsOneWidget);
+    expect(find.text('Unlock Premium'), findsOneWidget);
     expect(find.text('Restore purchase'), findsOneWidget);
     expect(find.text('How to cancel'), findsOneWidget);
     expect(find.text('Privacy Policy'), findsOneWidget);
     expect(find.text('Terms of Use'), findsOneWidget);
-    expect(find.text('Yearly'), findsOneWidget);
+    expect(find.text('Lifetime'), findsOneWidget);
 
     await tester.tap(find.text('Terms of Use'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('auto-renews'), findsOneWidget);
+    expect(find.textContaining('One-time payment'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
-    expect(find.text('SAVE 52%'), findsOneWidget);
+    expect(find.text('BEST VALUE'), findsOneWidget);
 
-    await tester.tap(find.text('Start 7-day free trial'));
+    await tester.tap(find.text('Unlock Premium'));
     await tester.pumpAndSettle();
     expect(state.isPremium, isTrue);
 
