@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/data/lessons.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
 
 class LearnScreen extends StatelessWidget {
@@ -20,12 +21,12 @@ class LearnScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('Learn Hangul · 한글 배우기'),
+        title: Text(context.l.learnTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
         children: [
-          Text('Everything you need to read Korean, in 8 short lessons.',
+          Text(context.l.learnIntro,
               style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 12),
           for (var i = 0; i < hangulCourse.length; i++)
@@ -112,8 +113,8 @@ class LessonScreen extends StatelessWidget {
             ),
           HqButton(
             label: hasNext
-                ? 'Next: ${hangulCourse[index + 1].title}'
-                : 'Back to lessons',
+                ? context.l.learnNext(hangulCourse[index + 1].title)
+                : context.l.learnBackToLessons,
             expanded: true,
             color: hasNext ? HqColors.dancheongRed : HqColors.dancheongBlue,
             onPressed: () => hasNext
@@ -212,7 +213,7 @@ class _JamoRow extends StatelessWidget {
                   if (tip != null)
                     Text(tip, style: Theme.of(context).textTheme.bodySmall),
                   if (jamo.exampleWords.isNotEmpty)
-                    Text('e.g. ${jamo.exampleWords.join(', ')}',
+                    Text(context.l.learnExample(jamo.exampleWords.join(', ')),
                         style: const TextStyle(
                             fontSize: 13, color: HqColors.dancheongBlue)),
                 ],
@@ -322,10 +323,11 @@ class _ComposerState extends State<_Composer> {
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
     final s = compose(_initial, _vowel, _final);
+    final l = context.l;
     final shape = switch (layoutForJungseong(_vowel)) {
-      SyllableLayout.vertical => 'tall vowel: consonant left, vowel right',
-      SyllableLayout.horizontal => 'flat vowel: consonant top, vowel below',
-      SyllableLayout.mixed => 'combined vowel: wraps below and right',
+      SyllableLayout.vertical => l.learnLayoutTall,
+      SyllableLayout.horizontal => l.learnLayoutFlat,
+      SyllableLayout.mixed => l.learnLayoutMixed,
     };
 
     Widget picker(
@@ -386,13 +388,13 @@ class _ComposerState extends State<_Composer> {
             child: Text(shape, style: Theme.of(context).textTheme.bodySmall),
           ),
           const SizedBox(height: 14),
-          picker('1. First consonant', choseongTable, _initial,
+          picker(l.learnPickInitial, choseongTable, _initial,
               (i) => setState(() => _initial = i)),
           const SizedBox(height: 12),
-          picker('2. Vowel', jungseongTable, _vowel,
+          picker(l.learnPickVowel, jungseongTable, _vowel,
               (i) => setState(() => _vowel = i)),
           const SizedBox(height: 12),
-          picker('3. Final consonant (optional)', jongseongTable, _final,
+          picker(l.learnPickFinal, jongseongTable, _final,
               (i) => setState(() => _final = i),
               allowNone: true),
         ],

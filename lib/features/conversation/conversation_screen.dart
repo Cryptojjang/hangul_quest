@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../core/data/conversations.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
 import '../../theme/hq_theme.dart';
 import '../paywall/paywall_screen.dart';
@@ -20,14 +21,12 @@ class ConversationListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('Real-life Korean · 상황별 대화'),
+        title: Text(context.l.talkTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
         children: [
-          Text(
-              'Phrases for the moments you will actually be in — tap any line '
-              'to hear it.',
+          Text(context.l.talkIntro,
               style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 12),
           for (var i = 0; i < conversations.length; i++)
@@ -96,8 +95,8 @@ class _ConversationCard extends StatelessWidget {
                 color: HqColors.dancheongGreen,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('FREE',
-                  style: TextStyle(
+              child: Text(context.l.commonFree,
+                  style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       color: Colors.white)),
@@ -155,7 +154,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
           Row(
             children: [
               const Spacer(),
-              Text('Romanization',
+              Text(context.l.talkRomanization,
                   style: Theme.of(context).textTheme.bodySmall),
               Switch(
                 value: _showRoman,
@@ -172,8 +171,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
               onTap: () => _play(c.lineSlot(i)),
             ),
           const SizedBox(height: 16),
-          const Text('Key phrases',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+          Text(context.l.talkKeyPhrases,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
           const SizedBox(height: 8),
           for (var i = 0; i < c.phrases.length; i++)
             Padding(
@@ -225,8 +224,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Culture tip',
-                          style: TextStyle(fontWeight: FontWeight.w800)),
+                      Text(context.l.talkCultureTip,
+                          style: const TextStyle(fontWeight: FontWeight.w800)),
                       const SizedBox(height: 2),
                       Text(c.cultureTip,
                           style: Theme.of(context)

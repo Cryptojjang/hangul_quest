@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/hangul/hangul.dart';
 import '../../core/srs/srs.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
 import '../../platform/device/device.dart';
 import '../../theme/feedback_fx.dart';
@@ -127,6 +128,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
   void _finish() {
     final state = AppScope.of(context);
     final isPremium = state.isPremium;
+    final l = context.l;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -139,22 +141,22 @@ class _ReviewScreenState extends State<ReviewScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Review complete!',
+              Text(l.reviewComplete,
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 8),
-              Text('$_correct / ${_session!.length} correct',
+              Text(l.reviewScore(_correct, _session!.length),
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: HqColors.dancheongGreen)),
               const SizedBox(height: 16),
               if (!isPremium) ...[
-                Text('Free review used for today.\nPremium unlocks unlimited reviews.',
+                Text(l.reviewTeaserUsed,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall),
                 const SizedBox(height: 12),
                 HqButton(
-                  label: 'Unlock unlimited review',
+                  label: l.reviewUnlockUnlimited,
                   expanded: true,
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -166,7 +168,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 const SizedBox(height: 8),
               ],
               HqButton(
-                label: 'Back to map',
+                label: l.commonBackToMap,
                 color: Colors.white,
                 textColor: HqColors.ink,
                 expanded: true,
@@ -183,6 +185,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
   @override
   Widget build(BuildContext context) {
     final answer = jamoById[_session![_cursor]]!;
+    final l = context.l;
     return Scaffold(
       body: FeedbackFx(
         key: _fx,
@@ -197,7 +200,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       icon: const Icon(Icons.close, color: HqColors.inkSoft),
                       onPressed: () => Navigator.of(context).pop()),
                   Expanded(
-                    child: Text('Smart Review  ${_cursor + 1}/${_session!.length}',
+                    child: Text(l.reviewHeader(_cursor + 1, _session!.length),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleMedium),
                   ),
@@ -217,7 +220,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text('Which letter makes this sound?',
+              Text(l.reviewQuestion,
                   style: Theme.of(context).textTheme.bodySmall),
               const Spacer(),
               Wrap(

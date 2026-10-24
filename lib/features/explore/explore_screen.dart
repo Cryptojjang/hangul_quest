@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/data/explore.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
 
 Future<void> _open(BuildContext context, String url) async {
@@ -14,7 +15,7 @@ Future<void> _open(BuildContext context, String url) async {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   if (!ok && context.mounted) {
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Could not open $url')));
+        .showSnackBar(SnackBar(content: Text(context.l.commonCouldNotOpen(url))));
   }
 }
 
@@ -25,11 +26,12 @@ class ExploreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Store builds must not link out to buy digital services (App Review
     // 3.1.1), so the saju tab exists on the web build only.
+    final l = context.l;
     final tabs = [
-      ('Apps', const _AppsTab()),
-      ('History', const _HistoryTab()),
-      ('Food', const _FoodTab()),
-      if (kIsWeb) ('Saju', const _SajuTab()),
+      (l.exploreTabApps, const _AppsTab()),
+      (l.exploreTabHistory, const _HistoryTab()),
+      (l.exploreTabFood, const _FoodTab()),
+      if (kIsWeb) (l.exploreTabSaju, const _SajuTab()),
     ];
     return DefaultTabController(
       length: tabs.length,
@@ -37,7 +39,7 @@ class ExploreScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           foregroundColor: HqColors.ink,
-          title: const Text('Explore Korea · 한국 둘러보기'),
+          title: Text(l.exploreTitle),
           bottom: TabBar(
             labelColor: HqColors.ink,
             unselectedLabelColor: HqColors.inkSoft,
@@ -60,7 +62,7 @@ class _AppsTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Text('Install these before you fly — they make Korea easy.',
+        Text(context.l.exploreAppsIntro,
             style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 12),
         for (final a in travelApps)
@@ -85,7 +87,7 @@ class _AppsTab extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(a.useFor, style: Theme.of(context).textTheme.bodyMedium),
                   const SizedBox(height: 4),
-                  Text('Tip: ${a.tip}',
+                  Text(context.l.exploreTip(a.tip),
                       style: const TextStyle(
                           fontSize: 13, color: HqColors.dancheongBlue)),
                 ],
@@ -105,7 +107,7 @@ class _HistoryTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Text('5,000 years in 11 stops.',
+        Text(context.l.exploreHistoryIntro,
             style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 12),
         for (var i = 0; i < koreanHistory.length; i++)
@@ -177,17 +179,13 @@ class _FoodTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Text(
-            'Must-try dishes. Tap a map button to see top-rated places '
-            'near you right now — live ratings, never out of date.',
+        Text(context.l.exploreFoodIntro,
             style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 6),
         // Google Maps links open in English (hl=en). Naver has no verified
         // URL language switch; its app follows this setting instead.
-        const Text(
-            'Naver Map in English: in the app go to MY → Settings → '
-            'Language → English.',
-            style: TextStyle(fontSize: 13, color: HqColors.dancheongBlue)),
+        Text(context.l.exploreNaverEnglish,
+            style: const TextStyle(fontSize: 13, color: HqColors.dancheongBlue)),
         const SizedBox(height: 12),
         for (final f in foodPicks)
           Padding(
@@ -201,7 +199,7 @@ class _FoodTab extends StatelessWidget {
                           fontSize: 16, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 4),
                   Text(f.why, style: Theme.of(context).textTheme.bodyMedium),
-                  Text('Where: ${f.whereToTry}',
+                  Text(context.l.exploreWhere(f.whereToTry),
                       style: Theme.of(context).textTheme.bodySmall),
                   const SizedBox(height: 10),
                   Wrap(
@@ -233,10 +231,7 @@ class _SajuTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Text(
-            'Saju (사주) is Korean fortune reading from the "four pillars" of '
-            'your birth year, month, day and hour. Couples check their '
-            'compatibility — 궁합 — before big decisions.',
+        Text(context.l.exploreSajuIntro,
             style:
                 Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.5)),
         const SizedBox(height: 12),
@@ -262,8 +257,8 @@ class _SajuTab extends StatelessWidget {
                         Text(s.description,
                             style: Theme.of(context).textTheme.bodySmall),
                         const SizedBox(height: 4),
-                        const Text('View on Etsy',
-                            style: TextStyle(
+                        Text(context.l.exploreViewOnEtsy,
+                            style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
                                 color: HqColors.dancheongRed)),

@@ -3,6 +3,7 @@
 library;
 
 import 'dart:async';
+import 'dart:ui' show Locale;
 
 import 'package:flutter/foundation.dart';
 
@@ -10,6 +11,7 @@ import '../core/data/curriculum.dart';
 import '../core/economy/content_gate.dart';
 import '../core/events/analytics.dart';
 import '../core/hangul/hangul.dart';
+import '../l10n/l10n.dart';
 import '../platform/audio/audio_asset_manager.dart';
 import '../platform/billing/billing.dart';
 import '../platform/device/device.dart';
@@ -90,6 +92,17 @@ class AppState extends ChangeNotifier {
   ProgressState get progress => store.state;
   SubscriptionStatus get subscription => _subscription;
   bool get isPremium => _subscription.isActive;
+
+  /// The player's chosen UI language, or null to follow the device.
+  Locale? get locale => progress.localeCode == null
+      ? null
+      : localeFromCode(progress.localeCode!);
+
+  void setLocale(Locale? locale) {
+    progress.localeCode = locale == null ? null : codeFromLocale(locale);
+    unawaited(store.save());
+    notifyListeners();
+  }
 
   Future<void> init() async {
     await store.load();

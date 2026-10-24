@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'features/home/home_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
+import 'l10n/l10n.dart';
 import 'state/app_state.dart';
 import 'theme/hq_theme.dart';
 
@@ -30,6 +31,12 @@ class HangulQuestApp extends StatelessWidget {
           title: 'Hangul Bricks',
           debugShowCheckedModeBanner: false,
           theme: HqTheme.light(),
+          // Player's pick wins; otherwise follow the device language.
+          locale: state.locale,
+          supportedLocales: L10n.supportedLocales,
+          localizationsDelegates: L10n.localizationsDelegates,
+          localeListResolutionCallback: (locales, _) =>
+              resolveAppLocale(locales?.firstOrNull),
           // The UI is designed for a phone column. On wide screens (desktop
           // web) keep it at phone width, centered, instead of stretching —
           // stretched grids push content below the fold.

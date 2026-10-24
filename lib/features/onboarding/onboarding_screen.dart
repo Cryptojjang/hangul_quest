@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../core/data/curriculum.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
 import '../home/home_screen.dart';
+import '../settings/language_sheet.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -30,17 +32,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: _finish,
-                child: const Text('Skip',
-                    style: TextStyle(color: HqColors.inkSoft)),
-              ),
+            Row(
+              children: [
+                if (_page == 0)
+                  TextButton.icon(
+                    onPressed: () => showLanguageSheet(context),
+                    icon: const Icon(Icons.language_rounded,
+                        size: 18, color: HqColors.inkSoft),
+                    label: Text(currentLanguageName(context),
+                        style: const TextStyle(color: HqColors.inkSoft)),
+                  ),
+                const Spacer(),
+                TextButton(
+                  onPressed: _finish,
+                  child: Text(l.commonSkip,
+                      style: const TextStyle(color: HqColors.inkSoft)),
+                ),
+              ],
             ),
             Expanded(
               child: PageView(
@@ -77,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 16),
                   HqButton(
-                    label: _page == 2 ? 'Get started' : 'Next',
+                    label: _page == 2 ? l.onbGetStarted : l.commonNext,
                     expanded: true,
                     onPressed: () {
                       if (_page == 2) {
@@ -129,13 +142,11 @@ class _HookPage extends StatelessWidget {
         children: [
           const Text('한', style: TextStyle(fontSize: 120, fontWeight: FontWeight.w800, color: HqColors.dancheongRed)),
           const SizedBox(height: 24),
-          Text('Read the songs you love\nin their own letters',
+          Text(context.l.onbHookTitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 12),
-          Text(
-              "Hangul is the world's easiest script to learn — "
-              'its letters snap together like blocks.',
+          Text(context.l.onbHookBody,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 16),
@@ -151,12 +162,13 @@ class _PromisePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return Padding(
       padding: const EdgeInsets.all(32),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Read Hangul\nin 7 days',
+          Text(l.onbPromiseTitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontSize: 32, color: HqColors.dancheongBlue)),
@@ -183,12 +195,12 @@ class _PromisePage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(day.titleEn,
+                        Text(l.trackerTitle(day.day),
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
                                 color: HqColors.ink)),
-                        Text(day.goalEn,
+                        Text(l.trackerGoal(day.day),
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
@@ -197,7 +209,7 @@ class _PromisePage extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 16),
-          Text('Just play. We handle the rest.',
+          Text(l.onbPromiseFooter,
               style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
@@ -210,6 +222,7 @@ class _NotifPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return Padding(
       padding: const EdgeInsets.all(32),
       child: Column(
@@ -220,18 +233,18 @@ class _NotifPage extends StatelessWidget {
               color: HqColors.obangYellow,
               size: 112),
           const SizedBox(height: 24),
-          Text('5 minutes a day\nkeeps your streak alive',
+          Text(l.onbNotifTitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 12),
-          Text("Want a gentle evening reminder? It's optional.",
+          Text(l.onbNotifBody,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 8),
           const _KoreanEcho('하루 5분, 스트릭을 지켜요'),
           const SizedBox(height: 24),
           HqButton(
-            label: 'Allow reminders',
+            label: l.onbAllowReminders,
             color: HqColors.dancheongBlue,
             onPressed: () async {
               await AppScope.of(context).services.push.requestPermission();

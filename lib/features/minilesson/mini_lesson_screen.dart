@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
 import '../stage1/jamo_hunt_screen.dart';
 import '../stage2/block_builder_screen.dart';
@@ -32,32 +33,34 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
 
   /// (title, body, demo frames, demo prompt). Frames are stepped through by
   /// tapping; single jamo/syllable frames play their sound.
-  static const _lessons = {
-    StageId.jamoHunt: (
-      'Letters that draw sounds',
-      'ㄱ shows the tongue blocking the throat, ㅁ shows the lips.\nKorean consonants are pictures of your mouth.',
-      ['ㄱ', 'ㄴ', 'ㅁ', 'ㅅ', 'ㅇ'],
-      'Tap to hear the sound',
-    ),
-    StageId.blockBuilder: (
-      'Why does Hangul stack like blocks?',
-      'Initial, vowel and final letters stack into one block.\nThe shape of the vowel decides the layout.',
-      ['ㄱ', 'ㄱ + ㅏ', '가', '가 + ㅇ', '강'],
-      'Tap to build the syllable',
-    ),
-    StageId.wordRush: (
-      'Now read real words',
-      'If you can build it, you can read it.\nRead fast and pick the matching picture.',
-      ['김', '김 + 치', '김치'],
-      'Tap to make the word',
-    ),
-    StageId.pronunciation: (
-      'Ready to say it out loud?',
-      'Last comes speaking. Say it into the mic and\nwe score which sounds you nailed.',
-      ['안', '녕', '안녕'],
-      'Tap to listen first',
-    ),
-  };
+  static (String, String, List<String>, String) _lesson(
+          StageId stage, L10n l) =>
+      switch (stage) {
+        StageId.jamoHunt => (
+            l.miniJamoTitle,
+            l.miniJamoBody,
+            const ['ㄱ', 'ㄴ', 'ㅁ', 'ㅅ', 'ㅇ'],
+            l.miniJamoPrompt,
+          ),
+        StageId.blockBuilder => (
+            l.miniBuilderTitle,
+            l.miniBuilderBody,
+            const ['ㄱ', 'ㄱ + ㅏ', '가', '가 + ㅇ', '강'],
+            l.miniBuilderPrompt,
+          ),
+        StageId.wordRush => (
+            l.miniWordTitle,
+            l.miniWordBody,
+            const ['김', '김 + 치', '김치'],
+            l.miniWordPrompt,
+          ),
+        StageId.pronunciation => (
+            l.miniSpeakTitle,
+            l.miniSpeakBody,
+            const ['안', '녕', '안녕'],
+            l.miniSpeakPrompt,
+          ),
+      };
 
   @override
   void initState() {
@@ -87,7 +90,8 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final (title, body, frames, prompt) = _lessons[widget.stage]!;
+    final l = context.l;
+    final (title, body, frames, prompt) = _lesson(widget.stage, l);
     AppScope.of(context).onStageStart(widget.stage, widget.level);
     return Scaffold(
       body: SafeArea(
@@ -100,8 +104,8 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: _start,
-                  child: const Text('Skip →',
-                      style: TextStyle(color: HqColors.inkSoft)),
+                  child: Text(l.miniSkip,
+                      style: const TextStyle(color: HqColors.inkSoft)),
                 ),
               ),
               const Spacer(),
@@ -111,10 +115,10 @@ class _MiniLessonScreenState extends State<MiniLessonScreen> {
               const SizedBox(height: 12),
               Text(body, style: Theme.of(context).textTheme.bodyMedium),
               const Spacer(),
-              HqButton(label: 'Play', expanded: true, onPressed: _start),
+              HqButton(label: l.commonPlay, expanded: true, onPressed: _start),
               const SizedBox(height: 8),
               Center(
-                child: Text('Starts in ${_maxSeconds - _elapsed}s',
+                child: Text(l.miniStartsIn(_maxSeconds - _elapsed),
                     style: Theme.of(context).textTheme.bodySmall),
               ),
             ],
@@ -198,7 +202,7 @@ class _TapDemoState extends State<_TapDemo> {
             const SizedBox(width: 4),
             Text(
                 last
-                    ? 'Tap to replay'
+                    ? context.l.miniTapToReplay
                     : '${widget.prompt}  ${_i + 1}/${widget.frames.length}',
                 style: Theme.of(context).textTheme.bodySmall),
           ],

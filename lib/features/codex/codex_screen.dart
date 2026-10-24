@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
 
 class CodexScreen extends StatelessWidget {
@@ -16,12 +17,13 @@ class CodexScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
     final codex = state.progress.codex;
+    final l = context.l;
     // Grouped by role so the 67 cards read as three sets to complete,
     // not one undifferentiated wall.
-    const sections = [
-      ('Initial consonants', '첫소리', choseongTable),
-      ('Vowels', '가운뎃소리', jungseongTable),
-      ('Final consonants', '받침', jongseongTable),
+    final sections = [
+      (l.codexInitials, '첫소리', choseongTable),
+      (l.codexVowels, '가운뎃소리', jungseongTable),
+      (l.codexFinals, '받침', jongseongTable),
     ];
     final total = sections.fold(0, (n, s) => n + s.$3.length);
 
@@ -29,7 +31,7 @@ class CodexScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: Text('Letter Codex  ${codex.length}/$total'),
+        title: Text(l.codexTitle(codex.length, total)),
       ),
       body: CustomScrollView(
         slivers: [
@@ -83,7 +85,7 @@ class _EmptyHint extends StatelessWidget {
           const HqIconTile(icon: Icons.style_rounded, size: 40),
           const SizedBox(width: 12),
           Expanded(
-            child: Text('Get a sound right in Jamo Hunt to unlock your first card.',
+            child: Text(context.l.codexEmptyHint,
                 style: Theme.of(context).textTheme.bodyMedium),
           ),
         ],
@@ -187,13 +189,13 @@ class _CodexCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(locked ? 'Locked' : jamo.nameKo,
+            Text(locked ? context.l.codexLocked : jamo.nameKo,
                 style: const TextStyle(fontSize: 11, color: HqColors.inkSoft)),
             if (tier == 2)
-              const Padding(
-                padding: EdgeInsets.only(top: 4),
-                child: Text('★ Mastered',
-                    style: TextStyle(
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(context.l.codexMastered,
+                    style: const TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         color: HqColors.obangYellow)),
@@ -211,20 +213,20 @@ class _CardDetail extends StatelessWidget {
   final Jamo jamo;
   final int tier;
 
-  String get _principle {
+  String _principle(L10n l) {
     if (jamo.articulator != null) {
       return switch (jamo.articulator!) {
-        Articulator.velar => 'Shaped like the tongue root blocking the throat',
-        Articulator.alveolar => 'Shaped like the tongue tip touching the gum ridge',
-        Articulator.labial => 'Shaped like the lips',
-        Articulator.dental => 'Shaped like a tooth',
-        Articulator.glottal => 'Shaped like the throat',
+        Articulator.velar => l.codexVelar,
+        Articulator.alveolar => l.codexAlveolar,
+        Articulator.labial => l.codexLabial,
+        Articulator.dental => l.codexDental,
+        Articulator.glottal => l.codexGlottal,
       };
     }
     if (jamo.cheonjiin != null) {
-      return 'Built from sky (ㆍ), earth (ㅡ) and person (ㅣ): ${jamo.cheonjiin}';
+      return l.codexCheonjiin(jamo.cheonjiin!);
     }
-    return 'The sound it makes as a final consonant';
+    return l.codexFinalSound;
   }
 
   @override
@@ -267,7 +269,7 @@ class _CardDetail extends StatelessWidget {
           Text('${jamo.nameKo}  ·  ${jamo.romanization}',
               style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
-          Text(_principle,
+          Text(_principle(context.l),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 12),
@@ -286,7 +288,7 @@ class _CardDetail extends StatelessWidget {
             ),
           const SizedBox(height: 16),
           HqButton(
-            label: 'Hear it',
+            label: context.l.codexHearIt,
             icon: Icons.volume_up_rounded,
             color: HqColors.dancheongBlue,
             onPressed: () => state.playJamo(jamo),

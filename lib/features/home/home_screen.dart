@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/economy/content_gate.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
 import '../codex/codex_screen.dart';
 import '../conversation/conversation_screen.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
+    final l = context.l;
     final (trackerDay, trackerPct) = state.trackerNow();
 
     return Scaffold(
@@ -32,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text('Hangul Bricks',
+                  child: Text(l.appName,
                       style: Theme.of(context).textTheme.headlineMedium),
                 ),
                 _StreakFlame(days: state.progress.streakDays),
@@ -58,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 onPlay: () => _openStage(context, StageId.jamoHunt,
                     level: state.progress.cleared(StageId.jamoHunt.name) + 1)),
             const SizedBox(height: 16),
-            Text('Stages', style: Theme.of(context).textTheme.titleMedium),
+            Text(l.homeStages, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             for (final stage in StageId.values) ...[
               _StageNode(stage: stage),
@@ -75,9 +77,10 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const HqIconTile(icon: Icons.menu_book_rounded),
                         const SizedBox(height: 4),
-                        const Text('Letter Codex',
-                            style: TextStyle(fontWeight: FontWeight.w700)),
-                        Text('${state.progress.codex.length} / 67 cards',
+                        Text(l.homeCodex,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
+                        Text(l.homeCodexCount(state.progress.codex.length),
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
@@ -91,12 +94,14 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const HqIconTile(icon: Icons.psychology_rounded),
                         const SizedBox(height: 4),
-                        const Text('Smart Review',
-                            style: TextStyle(fontWeight: FontWeight.w700)),
+                        Text(l.homeReview,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
                         Text(
                             state.isPremium
-                                ? 'Unlimited'
-                                : 'Free today ${state.entitlements.reviewTeasersUsedToday}/1',
+                                ? l.homeReviewUnlimited
+                                : l.homeReviewFreeToday(state
+                                    .entitlements.reviewTeasersUsedToday),
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
@@ -135,8 +140,8 @@ class HomeScreen extends StatelessWidget {
       if (trigger != null) {
         PaywallScreen.show(context, trigger: trigger);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Pronunciation is not supported on this device')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.l.homeSpeechUnsupported)));
       }
       return;
     }
@@ -181,24 +186,26 @@ class _TrackerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return HqCard(
       color: HqColors.dancheongBlue,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('READ HANGUL IN 7 DAYS · DAY ${day.day}',
+          Text(l.trackerHeader(day.day),
               style: const TextStyle(
                   color: Colors.white70,
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 1.2)),
           const SizedBox(height: 6),
-          Text(day.titleEn,
+          Text(l.trackerTitle(day.day),
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w800)),
-          Text(day.goalEn, style: const TextStyle(color: Colors.white70)),
+          Text(l.trackerGoal(day.day),
+              style: const TextStyle(color: Colors.white70)),
           const SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
@@ -215,29 +222,37 @@ class _TrackerCard extends StatelessWidget {
   }
 }
 
-/// Entry to the free Learn Hangul course — placed above the stages so new
-/// learners find the explanations before the games.
-class _LearnCard extends StatelessWidget {
-  const _LearnCard();
+/// Home entry card: icon tile, title, subtitle, chevron.
+class _EntryCard extends StatelessWidget {
+  const _EntryCard({
+    required this.icon,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    required this.page,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String subtitle;
+  final Widget page;
 
   @override
   Widget build(BuildContext context) {
     return HqCard(
-      onTap: () =>
-          Navigator.of(context).push(HqPageRoute(page: const LearnScreen())),
+      onTap: () => Navigator.of(context).push(HqPageRoute(page: page)),
       child: Row(
         children: [
-          const HqIconTile(
-              icon: Icons.school_rounded, color: HqColors.dancheongBlue),
+          HqIconTile(icon: icon, color: color),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Learn Hangul · 한글 배우기',
-                    style: TextStyle(fontWeight: FontWeight.w700)),
-                Text('Every letter to reading rules · 8 free lessons',
-                    style: Theme.of(context).textTheme.bodySmall),
+                Text(title,
+                    style: const TextStyle(fontWeight: FontWeight.w700)),
+                Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),
@@ -248,38 +263,36 @@ class _LearnCard extends StatelessWidget {
   }
 }
 
+/// Entry to the free Learn Hangul course — placed above the stages so new
+/// learners find the explanations before the games.
+class _LearnCard extends StatelessWidget {
+  const _LearnCard();
+
+  @override
+  Widget build(BuildContext context) => _EntryCard(
+        icon: Icons.school_rounded,
+        color: HqColors.dancheongBlue,
+        title: context.l.homeLearnTitle,
+        subtitle: context.l.homeLearnSubtitle,
+        page: const LearnScreen(),
+      );
+}
+
 /// Entry to the situational conversations (premium; first few free).
 class _TalkCard extends StatelessWidget {
   const _TalkCard();
 
   @override
   Widget build(BuildContext context) {
-    final premium = AppScope.of(context).isPremium;
-    return HqCard(
-      onTap: () => Navigator.of(context)
-          .push(HqPageRoute(page: const ConversationListScreen())),
-      child: Row(
-        children: [
-          const HqIconTile(
-              icon: Icons.forum_rounded, color: HqColors.dancheongRed),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Real-life Korean · 상황별 대화',
-                    style: TextStyle(fontWeight: FontWeight.w700)),
-                Text(
-                    premium
-                        ? 'Café, taxi, K-dramas, fan events and more'
-                        : '3 free conversations · more with Premium',
-                    style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
-          ),
-          const Icon(Icons.chevron_right_rounded, color: HqColors.inkSoft),
-        ],
-      ),
+    final l = context.l;
+    return _EntryCard(
+      icon: Icons.forum_rounded,
+      color: HqColors.dancheongRed,
+      title: l.homeTalkTitle,
+      subtitle: AppScope.of(context).isPremium
+          ? l.homeTalkSubtitlePremium
+          : l.homeTalkSubtitleFree,
+      page: const ConversationListScreen(),
     );
   }
 }
@@ -289,31 +302,13 @@ class _ExploreCard extends StatelessWidget {
   const _ExploreCard();
 
   @override
-  Widget build(BuildContext context) {
-    return HqCard(
-      onTap: () => Navigator.of(context)
-          .push(HqPageRoute(page: const ExploreScreen())),
-      child: Row(
-        children: [
-          const HqIconTile(
-              icon: Icons.travel_explore_rounded, color: HqColors.dancheongGreen),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Explore Korea · 한국 둘러보기',
-                    style: TextStyle(fontWeight: FontWeight.w700)),
-                Text('Travel apps, history and food to try',
-                    style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
-          ),
-          const Icon(Icons.chevron_right_rounded, color: HqColors.inkSoft),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => _EntryCard(
+        icon: Icons.travel_explore_rounded,
+        color: HqColors.dancheongGreen,
+        title: context.l.homeExploreTitle,
+        subtitle: context.l.homeExploreSubtitle,
+        page: const ExploreScreen(),
+      );
 }
 
 class _DailyChallengeCard extends StatelessWidget {
@@ -323,6 +318,7 @@ class _DailyChallengeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return HqCard(
       child: Row(
         children: [
@@ -333,15 +329,15 @@ class _DailyChallengeCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Daily Challenge',
-                    style: TextStyle(fontWeight: FontWeight.w700)),
-                Text('Keep your streak with a mixed round',
+                Text(l.homeDailyTitle,
+                    style: const TextStyle(fontWeight: FontWeight.w700)),
+                Text(l.homeDailySubtitle,
                     style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),
           const SizedBox(width: 8),
-          HqButton(label: 'Go', onPressed: onPlay),
+          HqButton(label: l.commonGo, onPressed: onPlay),
         ],
       ),
     );
@@ -353,17 +349,32 @@ class _StageNode extends StatelessWidget {
 
   final StageId stage;
 
-  static const _meta = {
-    StageId.jamoHunt: (Icons.hearing_rounded, 'Jamo Hunt', 'Hear a sound, tap the letter'),
-    StageId.blockBuilder: (Icons.extension_rounded, 'Letter Builder', 'Snap letters into syllables'),
-    StageId.wordRush: (Icons.image_search_rounded, 'Word Rush', 'Read words, match pictures'),
-    StageId.pronunciation: (Icons.mic_rounded, 'Pronunciation', 'Get your pronunciation scored'),
-  };
-
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
-    final (icon, title, subtitle) = _meta[stage]!;
+    final l = context.l;
+    final (icon, title, subtitle) = switch (stage) {
+      StageId.jamoHunt => (
+          Icons.hearing_rounded,
+          l.stageJamoHunt,
+          l.stageJamoHuntSub
+        ),
+      StageId.blockBuilder => (
+          Icons.extension_rounded,
+          l.stageLetterBuilder,
+          l.stageLetterBuilderSub
+        ),
+      StageId.wordRush => (
+          Icons.image_search_rounded,
+          l.stageWordRush,
+          l.stageWordRushSub
+        ),
+      StageId.pronunciation => (
+          Icons.mic_rounded,
+          l.stagePronunciation,
+          l.stagePronunciationSub
+        ),
+    };
     final levels = levelsFor(stage);
     final cleared = state.progress.cleared(stage.name);
     final nextLevel = (cleared + 1).clamp(1, levels.length);
@@ -385,18 +396,17 @@ class _StageNode extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(children: [
-                  Text(title,
-                      style: const TextStyle(fontWeight: FontWeight.w700)),
+                  Flexible(
+                    child: Text(title,
+                        style: const TextStyle(fontWeight: FontWeight.w700)),
+                  ),
                   if (locked) ...[
                     const SizedBox(width: 6),
                     Icon(speechGone ? Icons.mic_off : Icons.lock,
                         size: 14, color: HqColors.inkSoft),
                   ],
                 ]),
-                Text(
-                    speechGone
-                        ? 'Not supported on this device'
-                        : subtitle,
+                Text(speechGone ? l.homeNotSupported : subtitle,
                     style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
@@ -426,14 +436,16 @@ class _LeagueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rows = [..._bots, ('You', xp)]
+    final l = context.l;
+    // Null name marks the player's own row (its label is localized).
+    final rows = <(String?, int)>[..._bots, (null, xp)]
       ..sort((a, b) => b.$2.compareTo(a.$2));
     return HqCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Weekly League · Celadon',
-              style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(l.homeLeague,
+              style: const TextStyle(fontWeight: FontWeight.w700)),
           const SizedBox(height: 8),
           for (var i = 0; i < rows.length; i++)
             Padding(
@@ -449,9 +461,9 @@ class _LeagueCard extends StatelessWidget {
                                   ? HqColors.obangYellow
                                   : HqColors.inkSoft))),
                   Expanded(
-                      child: Text(rows[i].$1,
+                      child: Text(rows[i].$1 ?? l.homeLeagueYou,
                           style: TextStyle(
-                              fontWeight: rows[i].$1 == 'You'
+                              fontWeight: rows[i].$1 == null
                                   ? FontWeight.w800
                                   : FontWeight.w400))),
                   Text('${rows[i].$2} XP',

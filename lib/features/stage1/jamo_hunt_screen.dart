@@ -13,6 +13,7 @@ import '../../app.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/game/round_engine.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
 import '../../platform/device/device.dart';
 import '../../theme/feedback_fx.dart';
@@ -233,7 +234,7 @@ class _JamoHuntScreenState extends State<JamoHuntScreen>
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text('Find the letter for this sound',
+                Text(context.l.jamoHuntPrompt,
                     style: Theme.of(context).textTheme.bodySmall),
                 const Spacer(),
                 Stack(
@@ -290,7 +291,9 @@ class _ComboBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        active ? 'x${score.multiplier} Combo ${score.combo}' : 'Combo ${score.combo}',
+        active
+            ? context.l.comboActive(score.multiplier, score.combo)
+            : context.l.comboIdle(score.combo),
         style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w800, fontSize: 12),
       ),

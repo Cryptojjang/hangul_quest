@@ -14,6 +14,7 @@ import '../../app.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/game/round_engine.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
 import '../../platform/device/device.dart';
 import '../../theme/feedback_fx.dart';
@@ -144,7 +145,7 @@ class _BlockBuilderScreenState extends State<BlockBuilderScreen>
                 ],
               ),
               const SizedBox(height: 4),
-              Text('Listen and build the syllable',
+              Text(context.l.builderPrompt,
                   style: Theme.of(context).textTheme.bodySmall),
               const Spacer(),
               _AssemblyBoard(
@@ -193,12 +194,12 @@ class _AssemblyBoard extends StatelessWidget {
             color: color,
             onDrop: onDrop);
 
-    final cho = slot(SlotKind.choseong, puzzle.placedChoseong, 'Initial',
+    final cho = slot(SlotKind.choseong, puzzle.placedChoseong, context.l.slotInitial,
         HqColors.choseongBlock);
-    final jung = slot(SlotKind.jungseong, puzzle.placedJungseong, 'Vowel',
+    final jung = slot(SlotKind.jungseong, puzzle.placedJungseong, context.l.slotVowel,
         HqColors.jungseongBlock);
     final jong = puzzle.needsJongseong
-        ? slot(SlotKind.jongseong, puzzle.placedJongseong, 'Final',
+        ? slot(SlotKind.jongseong, puzzle.placedJongseong, context.l.slotFinal,
             HqColors.jongseongBlock)
         : null;
 

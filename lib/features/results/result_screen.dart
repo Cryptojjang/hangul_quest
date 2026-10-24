@@ -8,6 +8,7 @@ import '../../app.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/game/round_engine.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
 import '../../theme/hq_theme.dart';
 import '../home/home_screen.dart';
@@ -64,6 +65,7 @@ class _ResultScreenState extends State<ResultScreen> {
     final weakest = state.progress.errors.weakestItems(limit: 3);
     final levels = levelsFor(widget.stage);
     final hasNext = widget.level < levels.length;
+    final l = context.l;
 
     return Scaffold(
       body: SafeArea(
@@ -88,12 +90,12 @@ class _ResultScreenState extends State<ResultScreen> {
                 }),
               ),
               const SizedBox(height: 8),
-              Text('+${widget.score.points} XP',
+              Text(l.resultXp(widget.score.points),
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
                       ?.copyWith(color: HqColors.dancheongGreen)),
-              Text('Best combo ${widget.score.maxCombo}',
+              Text(l.resultBestCombo(widget.score.maxCombo),
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 20),
               if (_newCards.isNotEmpty)
@@ -106,8 +108,8 @@ class _ResultScreenState extends State<ResultScreen> {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                            'New codex cards: ${_newCards.length} · '
-                            '${_newCards.map((id) => jamoById[id]!.char).join(' ')}',
+                            l.resultNewCards(_newCards.length,
+                                _newCards.map((id) => jamoById[id]!.char).join(' ')),
                             style:
                                 const TextStyle(fontWeight: FontWeight.w700)),
                       ),
@@ -120,8 +122,8 @@ class _ResultScreenState extends State<ResultScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Sounds to review',
-                          style: TextStyle(fontWeight: FontWeight.w700)),
+                      Text(l.resultToReview,
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
                       const SizedBox(height: 6),
                       Text(
                           weakest
@@ -129,7 +131,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               .join('  ·  '),
                           style: const TextStyle(
                               fontSize: 24, color: HqColors.dancheongRed)),
-                      Text('Letters you miss will show up more often',
+                      Text(l.resultMissedHint,
                           style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
@@ -138,7 +140,7 @@ class _ResultScreenState extends State<ResultScreen> {
               const Spacer(),
               if (hasNext)
                 HqButton(
-                  label: 'Next level',
+                  label: l.resultNextLevel,
                   expanded: true,
                   onPressed: () => Navigator.of(context).pushReplacement(
                       HqPageRoute(
@@ -148,7 +150,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               const SizedBox(height: 8),
               HqButton(
-                label: 'Back to map',
+                label: l.commonBackToMap,
                 color: Colors.white,
                 textColor: HqColors.ink,
                 expanded: true,

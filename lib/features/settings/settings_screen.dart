@@ -7,7 +7,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
+import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
+import 'language_sheet.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -21,36 +23,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
     final audio = state.services.audio;
+    final l = context.l;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('Settings'),
+        title: Text(l.settingsTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
           HqCard(
+            child: ListTile(
+              leading: const Icon(Icons.language_rounded,
+                  color: HqColors.inkSoft),
+              title: Text(l.language),
+              subtitle: Text(currentLanguageName(context)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () =>
+                  showLanguageSheet(context, includeFollowDevice: true),
+            ),
+          ),
+          const SizedBox(height: 16),
+          HqCard(
             child: Column(
               children: [
                 _VolumeRow(
-                  label: 'Music',
+                  label: l.settingsMusic,
                   value: audio.bgmVolume,
                   onChanged: (v) => setState(() => audio.bgmVolume = v),
                 ),
                 _VolumeRow(
-                  label: 'Sound effects',
+                  label: l.settingsSfx,
                   value: audio.sfxVolume,
                   onChanged: (v) => setState(() => audio.sfxVolume = v),
                 ),
                 _VolumeRow(
-                  label: 'Voice',
+                  label: l.settingsVoice,
                   value: audio.voiceVolume,
                   onChanged: (v) => setState(() => audio.voiceVolume = v),
                 ),
                 SwitchListTile(
-                  title: const Text('Mute all'),
+                  title: Text(l.settingsMuteAll),
                   value: audio.muted,
                   activeColor: HqColors.dancheongRed,
                   onChanged: (v) => setState(() => audio.muted = v),
@@ -65,29 +80,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ListTile(
                   leading: const Icon(Icons.workspace_premium,
                       color: HqColors.obangYellow),
-                  title: Text(state.isPremium ? 'Premium active' : 'Free plan'),
+                  title: Text(state.isPremium
+                      ? l.settingsPremiumActive
+                      : l.settingsFreePlan),
                   subtitle: Text(state.isPremium
-                      ? 'Billing: ${state.services.billing.backendId}'
-                      : 'Unlock every stage with Premium'),
+                      ? l.settingsBilling(state.services.billing.backendId)
+                      : l.settingsUnlockAll),
                 ),
                 ListTile(
                   leading: const Icon(Icons.manage_accounts,
                       color: HqColors.inkSoft),
-                  title: const Text('Manage subscription'),
+                  title: Text(l.commonManageSubscription),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Navigator.of(context).push(
                       HqPageRoute(page: const ManageSubscriptionScreen())),
                 ),
                 ListTile(
                   leading: const Icon(Icons.restore, color: HqColors.inkSoft),
-                  title: const Text('Restore purchase'),
+                  title: Text(l.commonRestorePurchase),
                   onTap: () async {
                     final status = await state.services.billing.restore();
                     if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(status.isActive
-                            ? 'Subscription restored'
-                            : 'No subscription to restore')));
+                            ? l.commonSubscriptionRestored
+                            : l.commonNoSubscription)));
                   },
                 ),
               ],
@@ -97,7 +114,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           HqCard(
             child: ListTile(
               leading: const Icon(Icons.privacy_tip, color: HqColors.inkSoft),
-              title: const Text('Privacy Policy'),
+              title: Text(l.commonPrivacyPolicy),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context)
                   .push(HqPageRoute(page: const PrivacyPolicyScreen())),
@@ -143,41 +160,35 @@ class ManageSubscriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
+    final l = context.l;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('Manage subscription'),
+        title: Text(l.commonManageSubscription),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('You can cancel anytime',
+            Text(l.cancelTitle,
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 16),
-            const Text(
-              '· Subscriptions renew automatically unless cancelled at least 24 hours before the period ends.\n\n'
-              '· iPhone: Settings → Apple ID → Subscriptions → Hangul Bricks → Cancel\n· Web: use the link in your Lemon Squeezy receipt email\n\n'
-              '· After cancelling, Premium stays active until the paid period ends.\n\n'
-              '· Cancel during the free trial and you will not be charged.',
-            ),
+            Text(l.cancelBody),
             const Spacer(),
             HqButton(
-              label: 'Open subscription settings',
+              label: l.cancelOpenSettings,
               expanded: true,
               onPressed: () {
                 // TODO(ios): open itms-apps://apps.apple.com/account/subscriptions
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content:
-                        Text('Store builds open the OS subscription settings '
-                            '(current channel: dev)')));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(l.cancelStoreNote('dev'))));
               },
             ),
             const SizedBox(height: 8),
             Center(
-              child: Text('Billing: ${state.services.billing.backendId}',
+              child: Text(l.settingsBilling(state.services.billing.backendId),
                   style: Theme.of(context).textTheme.bodySmall),
             ),
           ],
@@ -196,41 +207,24 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('Privacy Policy'),
+        title: Text(l.commonPrivacyPolicy),
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          Text('Summary', style: Theme.of(context).textTheme.titleMedium),
+          Text(l.commonSummary, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           // Web and iOS process speech and payments differently — each build
           // must describe its own behaviour truthfully.
-          const Text(kIsWeb
-              ? '· Your progress and mistakes are saved only in this browser. '
-                  'No account needed.\n\n'
-                  "· For pronunciation scoring, your voice is sent to the browser's "
-                  'speech service (Google in Chrome, Apple in Safari) to be turned '
-                  'into text. It never reaches Hangul Bricks servers and recordings '
-                  'are not stored.\n\n'
-                  '· The microphone is used only for pronunciation scoring. If you '
-                  'deny it, everything else still works.\n\n'
-                  '· Payments are handled by our reseller Lemon Squeezy, and the '
-                  'app never sees your card details.'
-              : '· Your progress and mistakes are saved only on this device. '
-                  'No account needed.\n\n'
-                  '· Pronunciation audio is analyzed on-device only, and '
-                  'recordings are never stored or uploaded.\n\n'
-                  '· The microphone is used only for pronunciation scoring. If you '
-                  'deny it, everything else still works.\n\n'
-                  '· Payments go through App Store in-app purchase, and '
-                  'the app never sees your card details.'),
+          Text(kIsWeb ? l.privacyWeb : l.privacyApp),
           const SizedBox(height: 24),
           HqButton(
-            label: 'Read the full text',
+            label: l.commonReadFullText,
             color: HqColors.dancheongBlue,
             onPressed: () {
               // TODO(release): url_launcher로 policyUrl 열기.
@@ -255,28 +249,22 @@ class TermsOfUseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: const Text('Terms of Use'),
+        title: Text(l.commonTermsOfUse),
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          Text('Summary', style: Theme.of(context).textTheme.titleMedium),
+          Text(l.commonSummary, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
-          const Text(
-            '· Use of Hangul Bricks is covered by the Apple standard EULA '
-            'and our web Terms of Service.\n\n'
-            '· Lifetime: One-time payment — no subscription, no renewal.\n\n'
-            '· The monthly plan renews automatically at the same price unless '
-            'cancelled at least 24 hours before the period ends.\n\n'
-            '· Cancel during the free trial and you will not be charged.',
-          ),
+          Text(l.termsBody),
           const SizedBox(height: 24),
           HqButton(
-            label: 'Read the full text',
+            label: l.commonReadFullText,
             color: HqColors.dancheongBlue,
             onPressed: () {
               // TODO(release): url_launcher로 termsUrl 열기.

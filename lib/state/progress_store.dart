@@ -54,6 +54,10 @@ class ProgressState {
 
   bool onboardingDone = false;
 
+  /// UI language picked by the player (e.g. "ja", "zh_TW"); null = follow
+  /// the device language.
+  String? localeCode;
+
   /// Web checkout restore token ("orderId:identifier", Lemon Squeezy; key
   /// name predates the switch from Stripe) — lets restore()
   /// re-verify the subscription without a login (web channel only).
@@ -162,6 +166,7 @@ class ProgressState {
   Map<String, dynamic> toJson() => {
         'version': 1,
         'onboardingDone': onboardingDone,
+        'localeCode': localeCode,
         'stripeCustomerId': stripeCustomerId,
         'clearedLevels': clearedLevels,
         'codex': codex,
@@ -177,6 +182,7 @@ class ProgressState {
 
   void loadJson(Map<String, dynamic> json) {
     onboardingDone = json['onboardingDone'] as bool? ?? false;
+    localeCode = json['localeCode'] as String?;
     stripeCustomerId = json['stripeCustomerId'] as String?;
     clearedLevels
       ..clear()

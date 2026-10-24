@@ -10,6 +10,7 @@ import '../../core/data/curriculum.dart';
 import '../../core/data/vocab.dart';
 import '../../core/game/round_engine.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/device/device.dart';
 import '../../theme/hq_theme.dart';
 import '../results/result_screen.dart';
@@ -142,17 +143,17 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
               children: [
                 const Icon(Icons.mic_off, size: 64, color: HqColors.inkSoft),
                 const SizedBox(height: 16),
-                Text('Microphone access needed',
+                Text(context.l.pronMicNeeded,
                     style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 Text(
-                  'The mic is used only for scoring and\nrecordings are never stored.\nPlease allow the microphone in your browser or device settings.',
+                  context.l.pronMicBody,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 24),
                 HqButton(
-                    label: 'Back to map',
+                    label: context.l.commonBackToMap,
                     onPressed: () => Navigator.of(context).pop()),
               ],
             ),
@@ -196,7 +197,7 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
                       fontWeight: FontWeight.w800,
                       color: HqColors.ink)),
               const SizedBox(height: 8),
-              Text('Listen, then say it',
+              Text(context.l.pronListenThenSay,
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 24),
               if (_lastScore != null) _ScoreRing(score: _lastScore!, feedback: _feedback),
@@ -228,7 +229,9 @@ class _PronunciationScreenState extends State<PronunciationScreen> {
               const SizedBox(height: 16),
               if (_lastScore != null)
                 HqButton(
-                    label: _lastScore! >= 60 ? 'Next' : 'Try again / Next',
+                    label: _lastScore! >= 60
+                        ? context.l.commonNext
+                        : context.l.pronTryAgainNext,
                     expanded: true,
                     onPressed: _next),
               const SizedBox(height: 12),

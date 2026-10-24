@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/billing/billing.dart';
 import '../../theme/hq_theme.dart';
 import '../settings/settings_screen.dart';
@@ -46,7 +47,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
             orElse: () => products.first);
       });
     }).catchError((Object e) {
-      if (mounted) setState(() => _error = 'Could not load plans');
+      if (mounted) setState(() => _error = context.l.paywallLoadError);
     });
   }
 
@@ -59,10 +60,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
       if (result.success) {
         Navigator.of(context).pop();
       } else {
-        setState(() => _error = result.error ?? 'Payment was not completed');
+        setState(() => _error = result.error ?? context.l.paywallNotCompleted);
       }
     } catch (e) {
-      if (mounted) setState(() => _error = 'Payment error. Please try again shortly');
+      if (mounted) setState(() => _error = context.l.paywallError);
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -73,12 +74,15 @@ class _PaywallScreenState extends State<PaywallScreen> {
     final status = await state.services.billing.restore();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(status.isActive ? 'Subscription restored' : 'No subscription to restore')));
+        content: Text(status.isActive
+            ? context.l.commonSubscriptionRestored
+            : context.l.commonNoSubscription)));
     if (status.isActive) Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -93,7 +97,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              Text('Read Hangul all the way',
+              Text(l.paywallTitle,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
@@ -103,29 +107,28 @@ class _PaywallScreenState extends State<PaywallScreen> {
               // Web has no speech recognition (stage 4 is disabled there), so
               // never advertise pronunciation scoring on the web paywall.
               if (kIsWeb)
-                ...const [
+                ...[
                   _ValueRow(
-                      icon: Icons.mic_rounded,
-                      text: 'Pronunciation scoring (Chrome & Safari)'),
+                      icon: Icons.mic_rounded, text: l.paywallPronWeb),
                   _ValueRow(
                       icon: Icons.psychology_rounded,
-                      text: 'Unlimited Smart Review of the sounds you miss'),
+                      text: l.paywallReviewWeb),
                   _ValueRow(
                       icon: Icons.extension_rounded,
-                      text: 'Every Letter Builder level plus Word Rush'),
+                      text: l.paywallStagesWeb),
                   _ValueRow(
                       icon: Icons.local_fire_department_rounded,
-                      text: 'Streak repair to protect your streak'),
+                      text: l.paywallStreakWeb),
                 ]
               else
-                ...const [
+                ...[
+                  _ValueRow(icon: Icons.mic_rounded, text: l.paywallPronApp),
                   _ValueRow(
-                      icon: Icons.mic_rounded, text: 'Pronunciation scoring for every letter'),
-                  _ValueRow(
-                      icon: Icons.psychology_rounded, text: 'Smart Review of the sounds you miss'),
+                      icon: Icons.psychology_rounded,
+                      text: l.paywallReviewApp),
                   _ValueRow(
                       icon: Icons.extension_rounded,
-                      text: 'Every stage, from building letters to reading words'),
+                      text: l.paywallStagesApp),
                 ],
               const SizedBox(height: 20),
               if (_error != null)
@@ -146,10 +149,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
               const Spacer(),
               HqButton(
                 label: _busy
-                    ? 'Processing…'
+                    ? l.paywallProcessing
                     : (_selected != null && _selected!.trialDays > 0
-                        ? 'Start ${_selected!.trialDays}-day free trial'
-                        : 'Unlock Premium'),
+                        ? l.paywallStartTrial(_selected!.trialDays)
+                        : l.paywallUnlock),
                 expanded: true,
                 onPressed: _busy || _products == null ? null : _buy,
               ),
@@ -158,10 +161,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 _selected == null
                     ? ''
                     : _selected!.plan == SubscriptionPlan.lifetime
-                        ? 'One-time payment · No subscription · Yours forever'
+                        ? l.paywallLifetimeTerms
                         : _selected!.trialDays > 0
-                            ? 'Then ${_selected!.priceLabel}, auto-renews · Cancel anytime'
-                            : '${_selected!.priceLabel}, auto-renews · Cancel anytime',
+                            ? l.paywallTrialTerms(_selected!.priceLabel)
+                            : l.paywallRenewTerms(_selected!.priceLabel),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -169,7 +172,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    'Demo checkout: you will not be charged',
+                    l.paywallDemo,
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
@@ -183,30 +186,26 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 children: [
                   TextButton(
                     onPressed: _restore,
-                    child: const Text('Restore purchase',
-                        style:
-                            TextStyle(fontSize: 12, color: HqColors.inkSoft)),
+                    child: Text(l.commonRestorePurchase,
+                        style: const TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context).push(
                         HqPageRoute(page: const ManageSubscriptionScreen())),
-                    child: const Text('How to cancel',
-                        style:
-                            TextStyle(fontSize: 12, color: HqColors.inkSoft)),
+                    child: Text(l.paywallHowToCancel,
+                        style: const TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context)
                         .push(HqPageRoute(page: const TermsOfUseScreen())),
-                    child: const Text('Terms of Use',
-                        style:
-                            TextStyle(fontSize: 12, color: HqColors.inkSoft)),
+                    child: Text(l.commonTermsOfUse,
+                        style: const TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context)
                         .push(HqPageRoute(page: const PrivacyPolicyScreen())),
-                    child: const Text('Privacy Policy',
-                        style:
-                            TextStyle(fontSize: 12, color: HqColors.inkSoft)),
+                    child: Text(l.commonPrivacyPolicy,
+                        style: const TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
                 ],
               ),
@@ -278,9 +277,9 @@ class _PlanTile extends StatelessWidget {
             Expanded(
               child: Text(
                 switch (product.plan) {
-                  SubscriptionPlan.lifetime => 'Lifetime',
-                  SubscriptionPlan.yearly => 'Yearly',
-                  SubscriptionPlan.monthly => 'Monthly',
+                  SubscriptionPlan.lifetime => context.l.planLifetime,
+                  SubscriptionPlan.yearly => context.l.planYearly,
+                  SubscriptionPlan.monthly => context.l.planMonthly,
                 },
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),

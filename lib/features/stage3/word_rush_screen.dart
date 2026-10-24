@@ -12,6 +12,7 @@ import '../../core/data/curriculum.dart';
 import '../../core/data/vocab.dart';
 import '../../core/game/round_engine.dart';
 import '../../core/hangul/hangul.dart';
+import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
 import '../../platform/device/device.dart';
 import '../../platform/images/word_image_resolver.dart';
@@ -180,7 +181,7 @@ class _WordRushScreenState extends State<WordRushScreen> {
                         fontSize: 64,
                         fontWeight: FontWeight.w800,
                         color: HqColors.ink)),
-                Text('Read it, then pick the matching picture',
+                Text(context.l.wordRushPrompt,
                     style: Theme.of(context).textTheme.bodySmall),
                 const SizedBox(height: 16),
                 // All four options must stay on screen: size the 2×2 grid
