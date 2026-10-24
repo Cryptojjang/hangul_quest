@@ -44,10 +44,25 @@
     // detail is the restore token "<orderId>:<orderIdentifier>".
     function hqLemonReady() {
       if (window.createLemonSqueezy) window.createLemonSqueezy();
+      // Lemon.js has shipped the order in more than one shape
+      // (event.data = order, or event.data.order(.data) = order), so search
+      // for the first object that has both an id and attributes.identifier.
+      function hqFindOrder(x, depth) {
+        if (!x || typeof x !== 'object' || depth > 6) return null;
+        if (x.id != null && x.attributes && x.attributes.identifier) return x;
+        for (var k in x) {
+          if (Object.prototype.hasOwnProperty.call(x, k)) {
+            var found = hqFindOrder(x[k], depth + 1);
+            if (found) return found;
+          }
+        }
+        return null;
+      }
       window.LemonSqueezy.Setup({
         eventHandler: function (e) {
-          if (e.event !== 'Checkout.Success' || !e.data) return;
-          var token = e.data.id + ':' + (e.data.attributes || {}).identifier;
+          if (!e || e.event !== 'Checkout.Success') return;
+          var order = hqFindOrder(e.data, 0) || hqFindOrder(e, 0);
+          var token = order ? order.id + ':' + order.attributes.identifier : '';
           window.dispatchEvent(new CustomEvent('hq-ls-success', { detail: token }));
         }
       });
