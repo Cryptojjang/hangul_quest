@@ -1,4 +1,4 @@
-# HangulQuest (한글퀘스트)
+# Hangul Bricks (formerly HangulQuest)
 
 게임 플레이만으로 자모 인식 → 글자 조합 → 단어 읽기에 도달하는 한글 학습 게임.
 iOS 1차 타깃, Flutter 단일 코드베이스. 문서: [제품 사양서](docs/PRODUCT_SPEC.md) ·

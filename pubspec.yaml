@@ -1,6 +1,6 @@
 name: hangul_quest
 description: >-
-  HangulQuest — learn to read Hangul through play. Jamo recognition,
+  Hangul Bricks — learn to read Hangul through play. Jamo recognition,
   syllable assembly, and word reading as core game mechanics.
 publish_to: "none"
 version: 0.1.0+1
