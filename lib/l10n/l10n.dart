@@ -51,6 +51,9 @@ Locale resolveAppLocale(Locale? device) {
 
 extension L10nContext on BuildContext {
   L10n get l => L10n.of(this);
+
+  /// Resolved UI locale as a code ("ja", "zh_TW") — keys content lookups.
+  String get localeCode => codeFromLocale(Localizations.localeOf(this));
 }
 
 /// 7-day tracker copy by day number (shown on onboarding and home).

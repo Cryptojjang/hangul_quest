@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
+import '../../core/data/content_keys.dart';
 import '../../core/data/lessons.dart';
 import '../../core/hangul/hangul.dart';
 import '../../l10n/l10n.dart';
@@ -48,6 +49,7 @@ class _LessonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lesson = hangulCourse[index];
+    final loc = context.localeCode;
     return HqCard(
       onTap: () => Navigator.of(context)
           .push(HqPageRoute(page: LessonScreen(index: index))),
@@ -68,9 +70,11 @@ class _LessonCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${lesson.title} · ${lesson.titleKo}',
+                Text(
+                    '${ct(loc, lessonKey(lesson.id, 'title'), lesson.title)}'
+                    ' · ${lesson.titleKo}',
                     style: const TextStyle(fontWeight: FontWeight.w700)),
-                Text(lesson.summary,
+                Text(ct(loc, lessonKey(lesson.id, 'summary'), lesson.summary),
                     style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
@@ -91,11 +95,13 @@ class LessonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final lesson = hangulCourse[index];
     final hasNext = index + 1 < hangulCourse.length;
+    final loc = context.localeCode;
+    String titleOf(Lesson x) => ct(loc, lessonKey(x.id, 'title'), x.title);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: Text('${index + 1}. ${lesson.title}'),
+        title: Text('${index + 1}. ${titleOf(lesson)}'),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 4, 20, 28),
@@ -106,14 +112,15 @@ class LessonScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   color: HqColors.dancheongRed)),
           const SizedBox(height: 8),
-          for (final block in lesson.blocks)
+          for (var b = 0; b < lesson.blocks.length; b++)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
-              child: _Block(block: block),
+              child: _Block(
+                  block: lesson.blocks[b], lessonId: lesson.id, index: b),
             ),
           HqButton(
             label: hasNext
-                ? context.l.learnNext(hangulCourse[index + 1].title)
+                ? context.l.learnNext(titleOf(hangulCourse[index + 1]))
                 : context.l.learnBackToLessons,
             expanded: true,
             color: hasNext ? HqColors.dancheongRed : HqColors.dancheongBlue,
@@ -129,16 +136,23 @@ class LessonScreen extends StatelessWidget {
 }
 
 class _Block extends StatelessWidget {
-  const _Block({required this.block});
+  const _Block(
+      {required this.block, required this.lessonId, required this.index});
 
   final LessonBlock block;
+
+  /// Position of this block in its lesson — part of its translation keys.
+  final String lessonId;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     final body = Theme.of(context).textTheme.bodyMedium;
+    final loc = context.localeCode;
+    String tr(String key, String en) => ct(loc, key, en);
     return switch (block) {
-      LessonText(:final text) =>
-        Text(text, style: body?.copyWith(height: 1.55)),
+      LessonText(:final text) => Text(tr(blockKey(lessonId, index), text),
+          style: body?.copyWith(height: 1.55)),
       LessonCallout(:final text) => Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
@@ -153,7 +167,9 @@ class _Block extends StatelessWidget {
               const Icon(Icons.lightbulb_rounded,
                   size: 20, color: HqColors.obangYellow),
               const SizedBox(width: 8),
-              Expanded(child: Text(text, style: body?.copyWith(height: 1.5))),
+              Expanded(
+                  child: Text(tr(blockKey(lessonId, index), text),
+                      style: body?.copyWith(height: 1.5))),
             ],
           ),
         ),
@@ -163,10 +179,34 @@ class _Block extends StatelessWidget {
               if (jamoById[id] case final jamo?) _JamoRow(jamo: jamo),
           ],
         ),
-      LessonTable(:final header, :final rows) =>
-        _LessonTableView(header: header, rows: rows),
-      LessonExamples(:final title, :final items) =>
-        _ExamplesView(title: title, items: items),
+      LessonTable(:final header, :final rows) => _LessonTableView(
+          header: [
+            for (var c = 0; c < header.length; c++)
+              hasEnglish(header[c])
+                  ? tr(headerKey(lessonId, index, c), header[c])
+                  : header[c],
+          ],
+          rows: [
+            for (var r = 0; r < rows.length; r++)
+              [
+                for (var c = 0; c < rows[r].length; c++)
+                  hasEnglish(rows[r][c])
+                      ? tr(cellKey(lessonId, index, r, c), rows[r][c])
+                      : rows[r][c],
+              ],
+          ],
+        ),
+      LessonExamples(:final title, :final items) => _ExamplesView(
+          title: tr(examplesTitleKey(lessonId, index), title),
+          items: [
+            for (var k = 0; k < items.length; k++)
+              (
+                items[k].$1,
+                items[k].$2,
+                tr(exampleMeaningKey(lessonId, index, k), items[k].$3),
+              ),
+          ],
+        ),
       LessonComposer() => const _Composer(),
     };
   }
@@ -179,7 +219,8 @@ class _JamoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tip = jamoTipsEn[jamo.id];
+    final en = jamoTipsEn[jamo.id];
+    final tip = en == null ? null : ct(context.localeCode, tipKey(jamo.id), en);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: HqCard(

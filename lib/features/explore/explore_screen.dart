@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/data/content_keys.dart';
 import '../../core/data/explore.dart';
 import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
@@ -14,8 +15,8 @@ Future<void> _open(BuildContext context, String url) async {
   final ok =
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   if (!ok && context.mounted) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l.commonCouldNotOpen(url))));
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.l.commonCouldNotOpen(url))));
   }
 }
 
@@ -65,7 +66,7 @@ class _AppsTab extends StatelessWidget {
         Text(context.l.exploreAppsIntro,
             style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 12),
-        for (final a in travelApps)
+        for (final (i, a) in travelApps.indexed)
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: HqCard(
@@ -85,9 +86,12 @@ class _AppsTab extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  Text(a.useFor, style: Theme.of(context).textTheme.bodyMedium),
+                  Text(ct(context.localeCode, appKey(i, 'useFor'), a.useFor),
+                      style: Theme.of(context).textTheme.bodyMedium),
                   const SizedBox(height: 4),
-                  Text(context.l.exploreTip(a.tip),
+                  Text(
+                      context.l.exploreTip(
+                          ct(context.localeCode, appKey(i, 'tip'), a.tip)),
                       style: const TextStyle(
                           fontSize: 13, color: HqColors.dancheongBlue)),
                 ],
@@ -144,17 +148,22 @@ class _HistoryTab extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(koreanHistory[i].years,
+                        Text(
+                            ct(context.localeCode, historyKey(i, 'years'),
+                                koreanHistory[i].years),
                             style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
                                 color: HqColors.inkSoft)),
                         Text(
-                            '${koreanHistory[i].era} · ${koreanHistory[i].eraKo}',
+                            '${ct(context.localeCode, historyKey(i, 'era'), koreanHistory[i].era)}'
+                            ' · ${koreanHistory[i].eraKo}',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
                         const SizedBox(height: 2),
-                        Text(koreanHistory[i].story,
+                        Text(
+                            ct(context.localeCode, historyKey(i, 'story'),
+                                koreanHistory[i].story),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -185,21 +194,27 @@ class _FoodTab extends StatelessWidget {
         // Google Maps links open in English (hl=en). Naver has no verified
         // URL language switch; its app follows this setting instead.
         Text(context.l.exploreNaverEnglish,
-            style: const TextStyle(fontSize: 13, color: HqColors.dancheongBlue)),
+            style:
+                const TextStyle(fontSize: 13, color: HqColors.dancheongBlue)),
         const SizedBox(height: 12),
-        for (final f in foodPicks)
+        for (final (i, f) in foodPicks.indexed)
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: HqCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${f.dishKo} · ${f.dish}',
+                  Text(
+                      '${f.dishKo} · '
+                      '${ct(context.localeCode, foodKey(i, 'dish'), f.dish)}',
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 4),
-                  Text(f.why, style: Theme.of(context).textTheme.bodyMedium),
-                  Text(context.l.exploreWhere(f.whereToTry),
+                  Text(ct(context.localeCode, foodKey(i, 'why'), f.why),
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  Text(
+                      context.l.exploreWhere(ct(context.localeCode,
+                          foodKey(i, 'where'), f.whereToTry)),
                       style: Theme.of(context).textTheme.bodySmall),
                   const SizedBox(height: 10),
                   Wrap(
@@ -235,7 +250,7 @@ class _SajuTab extends StatelessWidget {
             style:
                 Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.5)),
         const SizedBox(height: 12),
-        for (final s in sajuLinks)
+        for (final (i, s) in sajuLinks.indexed)
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: HqCard(
@@ -250,11 +265,15 @@ class _SajuTab extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(s.title,
+                        Text(
+                            ct(context.localeCode, sajuKey(i, 'title'),
+                                s.title),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
                         const SizedBox(height: 2),
-                        Text(s.description,
+                        Text(
+                            ct(context.localeCode, sajuKey(i, 'desc'),
+                                s.description),
                             style: Theme.of(context).textTheme.bodySmall),
                         const SizedBox(height: 4),
                         Text(context.l.exploreViewOnEtsy,
