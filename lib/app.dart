@@ -30,6 +30,18 @@ class HangulQuestApp extends StatelessWidget {
           title: 'Hangul Bricks',
           debugShowCheckedModeBanner: false,
           theme: HqTheme.light(),
+          // The UI is designed for a phone column. On wide screens (desktop
+          // web) keep it at phone width, centered, instead of stretching —
+          // stretched grids push content below the fold.
+          builder: (context, child) => ColoredBox(
+            color: HqColors.hanji,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480),
+                child: child,
+              ),
+            ),
+          ),
           home: state.progress.onboardingDone
               ? const HomeScreen()
               : const OnboardingScreen(),

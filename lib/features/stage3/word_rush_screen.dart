@@ -182,22 +182,38 @@ class _WordRushScreenState extends State<WordRushScreen> {
                         color: HqColors.ink)),
                 Text('Read it, then pick the matching picture',
                     style: Theme.of(context).textTheme.bodySmall),
-                const Spacer(),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 1.4,
-                  children: [
-                    for (final option in q.options)
-                      _WordCard(
-                        word: option,
-                        feedback: _feedback[option.id] ?? TileFeedback.none,
-                        onTap: () => _pick(option),
+                const SizedBox(height: 16),
+                // All four options must stay on screen: size the 2×2 grid
+                // from the space left, not from the width alone.
+                Expanded(
+                  flex: 3,
+                  child: LayoutBuilder(builder: (context, box) {
+                    const gap = 12.0;
+                    final cellW = (box.maxWidth - gap) / 2;
+                    final cellH = ((box.maxHeight - gap) / 2)
+                        .clamp(0.0, cellW / 1.1)
+                        .toDouble();
+                    return Align(
+                      alignment: Alignment.bottomCenter,
+                      child: GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: gap,
+                        crossAxisSpacing: gap,
+                        childAspectRatio: cellH > 0 ? cellW / cellH : 1.4,
+                        children: [
+                          for (final option in q.options)
+                            _WordCard(
+                              word: option,
+                              feedback:
+                                  _feedback[option.id] ?? TileFeedback.none,
+                              onTap: () => _pick(option),
+                            ),
+                        ],
                       ),
-                  ],
+                    );
+                  }),
                 ),
                 const SizedBox(height: 20),
               ],
