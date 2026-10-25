@@ -62,6 +62,14 @@ class _BlockBuilderScreenState extends State<BlockBuilderScreen>
     if (p != null) AppScope.of(context).playSyllable(p.target);
   }
 
+  /// Tap-to-place: a tapped block goes to the slot for its role, through the
+  /// same placement rules (and teaching hints) as a drop.
+  static SlotKind _slotFor(Jamo block) => switch (block.role) {
+        JamoRole.choseong => SlotKind.choseong,
+        JamoRole.jungseong => SlotKind.jungseong,
+        JamoRole.jongseong => SlotKind.jongseong,
+      };
+
   Future<void> _onDrop(Jamo block, SlotKind slot) async {
     final state = AppScope.of(context);
     final puzzle = _round!.current!;
@@ -162,7 +170,8 @@ class _BlockBuilderScreenState extends State<BlockBuilderScreen>
                               fontWeight: FontWeight.w600)),
                 ),
                 const Spacer(),
-                _BlockTray(puzzle: puzzle),
+                _BlockTray(
+                    puzzle: puzzle, onTap: (b) => _onDrop(b, _slotFor(b))),
                 const SizedBox(height: 16),
               ],
             ),
@@ -332,9 +341,10 @@ class _Slot extends StatelessWidget {
 }
 
 class _BlockTray extends StatelessWidget {
-  const _BlockTray({required this.puzzle});
+  const _BlockTray({required this.puzzle, required this.onTap});
 
   final AssemblyPuzzle puzzle;
+  final void Function(Jamo) onTap;
 
   bool _isPlaced(Jamo j) =>
       identical(puzzle.placedChoseong, j) ||
@@ -352,16 +362,17 @@ class _BlockTray extends StatelessWidget {
           if (_isPlaced(block))
             const SizedBox(width: 64, height: 64)
           else
-            _DraggableBlock(block: block),
+            _DraggableBlock(block: block, onTap: () => onTap(block)),
       ],
     );
   }
 }
 
 class _DraggableBlock extends StatelessWidget {
-  const _DraggableBlock({required this.block});
+  const _DraggableBlock({required this.block, required this.onTap});
 
   final Jamo block;
+  final VoidCallback onTap;
 
   Color get _color => switch (block.role) {
         JamoRole.choseong => HqColors.choseongBlock,
@@ -400,7 +411,14 @@ class _DraggableBlock extends StatelessWidget {
       },
       feedback: Material(color: Colors.transparent, child: _tile(scale: 1.08)),
       childWhenDragging: _tile(alpha: 0.25),
-      child: _tile(),
+      // A tap (no drag movement) places the block; dragging still works.
+      child: GestureDetector(
+        onTap: () {
+          state.services.audio.playSlot(AudioSlots.blockPick);
+          onTap();
+        },
+        child: _tile(),
+      ),
     );
   }
 }

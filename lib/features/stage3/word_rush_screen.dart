@@ -185,12 +185,12 @@ class _WordRushScreenState extends State<WordRushScreen> {
                 // All four options must stay on screen: size the 2×2 grid
                 // from the space left, not from the width alone.
                 Expanded(
-                  flex: 3,
+                  flex: 6,
                   child: LayoutBuilder(builder: (context, box) {
                     const gap = 12.0;
                     final cellW = (box.maxWidth - gap) / 2;
                     final cellH = ((box.maxHeight - gap) / 2)
-                        .clamp(0.0, cellW / 1.1)
+                        .clamp(0.0, cellW)
                         .toDouble();
                     return Align(
                       alignment: Alignment.bottomCenter,
@@ -271,11 +271,17 @@ class _WordCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _WordArt(word: word),
-                    const SizedBox(height: 4),
+                    // Scales down on small screens instead of overflowing.
+                    Flexible(child: FittedBox(child: _WordArt(word: word))),
+                    const SizedBox(height: 6),
                     Text(ct(context.localeCode, wordKey(word.id), word.english),
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodySmall),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: HqColors.ink)),
                   ],
                 ),
               ),
@@ -308,9 +314,9 @@ class _WordArt extends StatelessWidget {
   Widget build(BuildContext context) {
     final asset = WordImageResolver.instance.resolve(word);
     if (asset != null) {
-      return Image.asset(asset, width: 56, height: 56, fit: BoxFit.contain);
+      return Image.asset(asset, width: 80, height: 80, fit: BoxFit.contain);
     }
     return Text(WordImageResolver.emojiFor(word),
-        style: const TextStyle(fontSize: 40));
+        style: const TextStyle(fontSize: 56));
   }
 }
