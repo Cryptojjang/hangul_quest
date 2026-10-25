@@ -212,7 +212,7 @@
   "cancelBody": "· 除非在當期結束前至少 24 小時取消，否則訂閱會自動續訂。\n\n· iPhone：設定 → Apple ID → 訂閱項目 → Hangul Bricks → 取消\n· 網頁：使用 Lemon Squeezy 收據電子郵件中的連結\n\n· 取消後，Premium 會持續有效至已付費期間結束。\n\n· 在免費試用期間取消，將不會向你收費。",
   "cancelOpenSettings": "開啟訂閱設定",
   "cancelStoreNote": "商店版本會開啟系統的訂閱設定（目前管道：{channel}）",
-  "privacyWeb": "· 你的進度與錯題只會儲存在此瀏覽器中，不需要帳號。\n\n· 進行發音評分時，你的聲音會傳送到瀏覽器的語音服務（Chrome 為 Google，Safari 為 Apple）轉換成文字。聲音絕不會傳到 Hangul Bricks 的伺服器，錄音也不會被儲存。\n\n· 麥克風僅用於發音評分。即使拒絕授權，其他功能仍可正常使用。\n\n· 付款由我們的經銷商 Lemon Squeezy 處理，App 絕不會取得你的卡片資料。",
+  "privacyWeb": "· 你的進度與錯題只會儲存在此瀏覽器中，不需要帳號。\n\n· 進行發音評分時，你的聲音會傳送到瀏覽器的語音服務（Chrome 為 Google，Safari 為 Apple）轉換成文字。聲音絕不會傳到 Hangul Bricks 的伺服器，錄音也不會被儲存。\n\n· 麥克風僅用於發音評分。即使拒絕授權，其他功能仍可正常使用。\n\n· 付款由我們的經銷商 Lemon Squeezy 處理，App 絕不會取得你的卡片資料。\n\n· 如果你使用「透過電子郵件恢復」，你輸入的電子郵件會傳送到 Hangul Bricks 伺服器，用於在 Lemon Squeezy 查詢你的購買紀錄，一次性驗證碼則由我們的郵件服務商 Resend 寄送。電子郵件不會被儲存。",
   "privacyApp": "· 你的進度與錯題只會儲存在此裝置上，不需要帳號。\n\n· 發音音訊僅在裝置上分析，錄音絕不會被儲存或上傳。\n\n· 麥克風僅用於發音評分。即使拒絕授權，其他功能仍可正常使用。\n\n· 付款透過 App Store App 內購買進行，App 絕不會取得你的卡片資料。",
   "termsBody": "· Hangul Bricks 的使用受 Apple 標準 EULA 及我們的網頁服務條款規範。\n\n· 終身方案：一次付費——非訂閱制，不會續訂。\n\n· 除非在當期結束前至少 24 小時取消，否則月繳方案將以相同價格自動續訂。\n\n· 在免費試用期間取消，將不會向你收費。"
 }

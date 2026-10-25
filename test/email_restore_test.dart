@@ -23,6 +23,7 @@ import 'widget_smoke_test.dart' show pumpApp;
 class FakeEmailRestoreGateway extends MockBillingGateway
     implements EmailRestore {
   final requested = <String>[];
+  final langs = <String>[];
   final _status = StreamController<SubscriptionStatus>.broadcast();
   SubscriptionStatus _restored = SubscriptionStatus.none;
 
@@ -30,8 +31,9 @@ class FakeEmailRestoreGateway extends MockBillingGateway
   String get backendId => 'lemonsqueezy';
 
   @override
-  Future<bool> requestRestoreCode(String email) async {
+  Future<bool> requestRestoreCode(String email, {required String lang}) async {
     requested.add(email);
+    langs.add(lang);
     return true;
   }
 
@@ -102,6 +104,7 @@ void main() {
     await tester.tap(find.text('Send code'));
     await tester.pumpAndSettle();
     expect(gateway.requested, ['fan@mail.com']);
+    expect(gateway.langs, ['en']);
     expect(find.textContaining('a code is on its way'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), 'WRONG123');

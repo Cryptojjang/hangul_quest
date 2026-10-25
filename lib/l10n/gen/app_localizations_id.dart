@@ -672,7 +672,7 @@ class L10nId extends L10n {
 
   @override
   String get privacyWeb =>
-      '· Progres dan kesalahanmu hanya disimpan di browser ini. Tidak perlu akun.\n\n· Untuk penilaian pelafalan, suaramu dikirim ke layanan ucapan milik browser (Google di Chrome, Apple di Safari) untuk diubah menjadi teks. Suaramu tidak pernah sampai ke server Hangul Bricks dan rekaman tidak disimpan.\n\n· Mikrofon hanya digunakan untuk penilaian pelafalan. Jika kamu menolaknya, semua fitur lain tetap berfungsi.\n\n· Pembayaran ditangani oleh reseller kami, Lemon Squeezy, dan aplikasi tidak pernah melihat detail kartumu.';
+      '· Progres dan kesalahanmu hanya disimpan di browser ini. Tidak perlu akun.\n\n· Untuk penilaian pelafalan, suaramu dikirim ke layanan ucapan milik browser (Google di Chrome, Apple di Safari) untuk diubah menjadi teks. Suaramu tidak pernah sampai ke server Hangul Bricks dan rekaman tidak disimpan.\n\n· Mikrofon hanya digunakan untuk penilaian pelafalan. Jika kamu menolaknya, semua fitur lain tetap berfungsi.\n\n· Pembayaran ditangani oleh reseller kami, Lemon Squeezy, dan aplikasi tidak pernah melihat detail kartumu.\n\n· Jika kamu memakai \"Pulihkan dengan email\", email yang kamu masukkan dikirim ke server Hangul Bricks untuk mencari pembelianmu di Lemon Squeezy, dan kode sekali pakai dikirim oleh penyedia email kami, Resend. Email tersebut tidak disimpan.';
 
   @override
   String get privacyApp =>

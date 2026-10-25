@@ -1,9 +1,10 @@
 // Restores a web purchase on a new device without accounts: the buyer proves
 // they own the checkout email by typing back a one-time code we mail them.
 //
-// POST {email} → {sent: true, expires}
-//   Same answer whether or not the email bought anything, so this can't be
-//   used to find out who is a customer. The code is only mailed when the
+// POST {email, lang?} → {sent: true, expires}
+//   Same answer, after the same minimum delay, whether or not the email
+//   bought anything, so this can't be used to find out who is a customer.
+//   The code is only mailed (in `lang`, see _lib/restore_mail.js) when the
 //   email has a live entitlement in this store.
 // POST {email, code, expires} → verify.js shape ({isActive, plan, …, token})
 //   or {isActive: false, invalidCode: true}. The token is the usual
@@ -15,6 +16,7 @@
 // infeasible inside the 30-minute window without an attempt counter.
 const crypto = require('crypto');
 const { env, ls, NONE, statusFromSubscription } = require('./_lib/lemonsqueezy');
+const { restoreMail } = require('./_lib/restore_mail');
 
 const TTL_MS = 30 * 60 * 1000;
 const ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // no 0/O, 1/I/L
@@ -36,13 +38,23 @@ async function entitlementFor(e, email) {
   const mine = (a) =>
     String(a.store_id) === String(e.storeId) &&
     String(a.user_email || '').toLowerCase() === key;
-  const q =
-    `filter[store_id]=${e.storeId}` +
-    `&filter[user_email]=${encodeURIComponent(email)}&page[size]=100`;
+  // The API filter may match case-sensitively; most checkouts store the
+  // address lowercased, so also try that spelling.
+  const spellings = email === key ? [email] : [email, key];
+  const list = async (kind) => {
+    const rows = new Map();
+    for (const s of spellings) {
+      const q =
+        `filter[store_id]=${e.storeId}` +
+        `&filter[user_email]=${encodeURIComponent(s)}&page[size]=100`;
+      for (const r of (await ls(e.apiKey, `/${kind}?${q}`)).data) {
+        if (mine(r.attributes)) rows.set(String(r.id), r);
+      }
+    }
+    return [...rows.values()];
+  };
 
-  const orders = (await ls(e.apiKey, `/orders?${q}`)).data.filter((o) =>
-    mine(o.attributes),
-  );
+  const orders = await list('orders');
   const tokenOf = (o) => `${o.id}:${o.attributes.identifier}`;
   const lifetime = orders.find((o) => {
     const a = o.attributes;
@@ -57,9 +69,7 @@ async function entitlementFor(e, email) {
     return { isActive: true, plan: 'lifetime', inTrial: false, token: tokenOf(lifetime) };
   }
 
-  const subs = (await ls(e.apiKey, `/subscriptions?${q}`)).data;
-  for (const sub of subs) {
-    if (!mine(sub.attributes)) continue;
+  for (const sub of await list('subscriptions')) {
     const order = orders.find((o) => String(o.id) === String(sub.attributes.order_id));
     if (!order) continue;
     const status = statusFromSubscription(sub, e, tokenOf(order));
@@ -68,7 +78,8 @@ async function entitlementFor(e, email) {
   return null;
 }
 
-async function sendCode(to, code) {
+async function sendCode(to, code, lang) {
+  const { subject, text } = restoreMail(lang, code);
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -78,12 +89,8 @@ async function sendCode(to, code) {
     body: JSON.stringify({
       from: process.env.RESTORE_EMAIL_FROM,
       to: [to],
-      subject: 'Your Hangul Bricks restore code',
-      text:
-        `Your restore code: ${code.slice(0, 4)}-${code.slice(4)}\n\n` +
-        'Enter it in Hangul Bricks (Restore with email) within 30 minutes ' +
-        'to unlock Premium on that device.\n\n' +
-        "If you didn't ask for this, you can ignore this email.",
+      subject,
+      text,
     }),
   });
   if (!res.ok) throw new Error(`resend ${res.status}`);
@@ -113,16 +120,20 @@ module.exports = async (req, res) => {
 
   try {
     if (body.code === undefined) {
-      const expires = Date.now() + TTL_MS;
+      const started = Date.now();
+      const expires = started + TTL_MS;
       const found = await entitlementFor(e, email);
       if (found) {
         try {
-          await sendCode(email, codeFor(secret, email, expires));
+          await sendCode(email, codeFor(secret, email, expires), String(body.lang || 'en'));
         } catch (err) {
           // Answer as usual: a different reply here would reveal a buyer.
           console.error('restore-email send failed:', err.message);
         }
       }
+      // Pad to a fixed floor so mailing a buyer doesn't take visibly longer.
+      const wait = module.exports.minReplyMs - (Date.now() - started);
+      if (wait > 0) await new Promise((r) => setTimeout(r, wait));
       res.status(200).json({ sent: true, expires });
       return;
     }
@@ -138,3 +149,6 @@ module.exports = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Minimum time for a code request (tests set it to 0).
+module.exports.minReplyMs = 1500;

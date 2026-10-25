@@ -53,7 +53,8 @@ class _EmailRestoreDialogState extends State<EmailRestoreDialog> {
       _busy = true;
       _error = null;
     });
-    final ok = await widget.restore.requestRestoreCode(email);
+    final ok = await widget.restore
+        .requestRestoreCode(email, lang: context.localeCode);
     if (!mounted) return;
     setState(() {
       _busy = false;

@@ -683,7 +683,7 @@ class L10nFr extends L10n {
 
   @override
   String get privacyWeb =>
-      '· Ta progression et tes erreurs sont enregistrées uniquement dans ce navigateur. Aucun compte nécessaire.\n\n· Pour la notation de la prononciation, ta voix est envoyée au service vocal du navigateur (Google dans Chrome, Apple dans Safari) pour être convertie en texte. Elle n\'atteint jamais les serveurs de Hangul Bricks et les enregistrements ne sont pas conservés.\n\n· Le micro sert uniquement à la notation de la prononciation. Si tu le refuses, tout le reste fonctionne quand même.\n\n· Les paiements sont gérés par notre revendeur Lemon Squeezy, et l\'appli n\'a jamais accès aux données de ta carte.';
+      '· Ta progression et tes erreurs sont enregistrées uniquement dans ce navigateur. Aucun compte nécessaire.\n\n· Pour la notation de la prononciation, ta voix est envoyée au service vocal du navigateur (Google dans Chrome, Apple dans Safari) pour être convertie en texte. Elle n\'atteint jamais les serveurs de Hangul Bricks et les enregistrements ne sont pas conservés.\n\n· Le micro sert uniquement à la notation de la prononciation. Si tu le refuses, tout le reste fonctionne quand même.\n\n· Les paiements sont gérés par notre revendeur Lemon Squeezy, et l\'appli n\'a jamais accès aux données de ta carte.\n\n· Si tu utilises « Restaurer par e-mail », l\'adresse saisie est envoyée aux serveurs de Hangul Bricks pour retrouver ton achat chez Lemon Squeezy, et le code à usage unique est envoyé par notre prestataire d\'e-mail Resend. L\'adresse n\'est pas conservée.';
 
   @override
   String get privacyApp =>

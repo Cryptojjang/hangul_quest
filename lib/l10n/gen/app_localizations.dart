@@ -1293,7 +1293,7 @@ abstract class L10n {
   /// No description provided for @privacyWeb.
   ///
   /// In en, this message translates to:
-  /// **'· Your progress and mistakes are saved only in this browser. No account needed.\n\n· For pronunciation scoring, your voice is sent to the browser\'s speech service (Google in Chrome, Apple in Safari) to be turned into text. It never reaches Hangul Bricks servers and recordings are not stored.\n\n· The microphone is used only for pronunciation scoring. If you deny it, everything else still works.\n\n· Payments are handled by our reseller Lemon Squeezy, and the app never sees your card details.'**
+  /// **'· Your progress and mistakes are saved only in this browser. No account needed.\n\n· For pronunciation scoring, your voice is sent to the browser\'s speech service (Google in Chrome, Apple in Safari) to be turned into text. It never reaches Hangul Bricks servers and recordings are not stored.\n\n· The microphone is used only for pronunciation scoring. If you deny it, everything else still works.\n\n· Payments are handled by our reseller Lemon Squeezy, and the app never sees your card details.\n\n· If you use \"Restore with email\", the email you enter is sent to Hangul Bricks servers to look up your purchase in Lemon Squeezy, and the one-time code is delivered by our email provider Resend. The email is not stored.'**
   String get privacyWeb;
 
   /// No description provided for @privacyApp.

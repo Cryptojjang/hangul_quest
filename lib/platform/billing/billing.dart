@@ -79,9 +79,10 @@ abstract class BillingGateway {
 /// proving ownership of the checkout email with a mailed one-time code. No
 /// accounts — the code is checked server-side (api/restore-email.js).
 abstract class EmailRestore {
-  /// Asks the server to mail a code. Completes the same way whether or not
-  /// the email bought anything; false only if the server couldn't be reached.
-  Future<bool> requestRestoreCode(String email);
+  /// Asks the server to mail a code, written in [lang] (an l10n locale code
+  /// such as 'ja' or 'zh_TW'). Completes the same way whether or not the
+  /// email bought anything; false only if the server couldn't be reached.
+  Future<bool> requestRestoreCode(String email, {required String lang});
 
   /// Redeems the mailed [code]; null when it is wrong or expired. An active
   /// status is also pushed on [BillingGateway.statusStream]. Throws when

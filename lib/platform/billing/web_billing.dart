@@ -181,9 +181,10 @@ class WebBillingGateway implements BillingGateway, EmailRestore {
   int? _codeExpires;
 
   @override
-  Future<bool> requestRestoreCode(String email) async {
+  Future<bool> requestRestoreCode(String email, {required String lang}) async {
     try {
-      final res = await _api('/api/restore-email', {'email': email});
+      final res =
+          await _api('/api/restore-email', {'email': email, 'lang': lang});
       _codeExpires = (res['expires'] as num?)?.toInt();
       return res['sent'] == true;
     } catch (_) {

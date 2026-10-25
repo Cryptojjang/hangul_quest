@@ -672,7 +672,7 @@ class L10nVi extends L10n {
 
   @override
   String get privacyWeb =>
-      '· Tiến độ và lỗi sai của bạn chỉ được lưu trong trình duyệt này. Không cần tài khoản.\n\n· Để chấm điểm phát âm, giọng nói của bạn được gửi đến dịch vụ nhận dạng giọng nói của trình duyệt (Google trên Chrome, Apple trên Safari) để chuyển thành văn bản. Giọng nói không bao giờ đến máy chủ của Hangul Bricks và bản ghi âm không được lưu lại.\n\n· Micro chỉ được dùng để chấm điểm phát âm. Nếu bạn từ chối, mọi tính năng khác vẫn hoạt động.\n\n· Thanh toán do đơn vị bán lại của chúng tôi là Lemon Squeezy xử lý, và ứng dụng không bao giờ thấy thông tin thẻ của bạn.';
+      '· Tiến độ và lỗi sai của bạn chỉ được lưu trong trình duyệt này. Không cần tài khoản.\n\n· Để chấm điểm phát âm, giọng nói của bạn được gửi đến dịch vụ nhận dạng giọng nói của trình duyệt (Google trên Chrome, Apple trên Safari) để chuyển thành văn bản. Giọng nói không bao giờ đến máy chủ của Hangul Bricks và bản ghi âm không được lưu lại.\n\n· Micro chỉ được dùng để chấm điểm phát âm. Nếu bạn từ chối, mọi tính năng khác vẫn hoạt động.\n\n· Thanh toán do đơn vị bán lại của chúng tôi là Lemon Squeezy xử lý, và ứng dụng không bao giờ thấy thông tin thẻ của bạn.\n\n· Nếu bạn dùng \"Khôi phục bằng email\", email bạn nhập sẽ được gửi đến máy chủ Hangul Bricks để tìm giao dịch mua của bạn trên Lemon Squeezy, và mã dùng một lần được gửi qua nhà cung cấp email Resend của chúng tôi. Email không được lưu lại.';
 
   @override
   String get privacyApp =>

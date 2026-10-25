@@ -647,7 +647,7 @@ class L10nZh extends L10n {
 
   @override
   String get privacyWeb =>
-      '· 你的学习进度和错题只保存在此浏览器中，无需注册账号。\n\n· 进行发音打分时，你的语音会被发送到浏览器的语音服务（Chrome 使用 Google，Safari 使用 Apple）转换为文字。语音绝不会到达 Hangul Bricks 的服务器，录音也不会被保存。\n\n· 麦克风仅用于发音打分。即使拒绝授权，其他功能也都能正常使用。\n\n· 付款由我们的经销商 Lemon Squeezy 处理，App 绝不会接触你的银行卡信息。';
+      '· 你的学习进度和错题只保存在此浏览器中，无需注册账号。\n\n· 进行发音打分时，你的语音会被发送到浏览器的语音服务（Chrome 使用 Google，Safari 使用 Apple）转换为文字。语音绝不会到达 Hangul Bricks 的服务器，录音也不会被保存。\n\n· 麦克风仅用于发音打分。即使拒绝授权，其他功能也都能正常使用。\n\n· 付款由我们的经销商 Lemon Squeezy 处理，App 绝不会接触你的银行卡信息。\n\n· 如果你使用“通过邮箱恢复”，你输入的邮箱会发送到 Hangul Bricks 服务器，用于在 Lemon Squeezy 中查找你的购买记录，一次性验证码由我们的邮件服务商 Resend 发送。邮箱不会被保存。';
 
   @override
   String get privacyApp =>
@@ -1301,7 +1301,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String get privacyWeb =>
-      '· 你的進度與錯題只會儲存在此瀏覽器中，不需要帳號。\n\n· 進行發音評分時，你的聲音會傳送到瀏覽器的語音服務（Chrome 為 Google，Safari 為 Apple）轉換成文字。聲音絕不會傳到 Hangul Bricks 的伺服器，錄音也不會被儲存。\n\n· 麥克風僅用於發音評分。即使拒絕授權，其他功能仍可正常使用。\n\n· 付款由我們的經銷商 Lemon Squeezy 處理，App 絕不會取得你的卡片資料。';
+      '· 你的進度與錯題只會儲存在此瀏覽器中，不需要帳號。\n\n· 進行發音評分時，你的聲音會傳送到瀏覽器的語音服務（Chrome 為 Google，Safari 為 Apple）轉換成文字。聲音絕不會傳到 Hangul Bricks 的伺服器，錄音也不會被儲存。\n\n· 麥克風僅用於發音評分。即使拒絕授權，其他功能仍可正常使用。\n\n· 付款由我們的經銷商 Lemon Squeezy 處理，App 絕不會取得你的卡片資料。\n\n· 如果你使用「透過電子郵件恢復」，你輸入的電子郵件會傳送到 Hangul Bricks 伺服器，用於在 Lemon Squeezy 查詢你的購買紀錄，一次性驗證碼則由我們的郵件服務商 Resend 寄送。電子郵件不會被儲存。';
 
   @override
   String get privacyApp =>

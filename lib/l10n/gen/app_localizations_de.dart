@@ -679,7 +679,7 @@ class L10nDe extends L10n {
 
   @override
   String get privacyWeb =>
-      '· Dein Fortschritt und deine Fehler werden nur in diesem Browser gespeichert. Kein Konto nötig.\n\n· Für die Aussprachebewertung wird deine Stimme an den Sprachdienst des Browsers (Google in Chrome, Apple in Safari) gesendet und in Text umgewandelt. Sie erreicht niemals die Server von Hangul Bricks, und Aufnahmen werden nicht gespeichert.\n\n· Das Mikrofon wird nur für die Aussprachebewertung genutzt. Wenn du es ablehnst, funktioniert alles andere trotzdem.\n\n· Zahlungen werden von unserem Wiederverkäufer Lemon Squeezy abgewickelt, und die App sieht deine Kartendaten nie.';
+      '· Dein Fortschritt und deine Fehler werden nur in diesem Browser gespeichert. Kein Konto nötig.\n\n· Für die Aussprachebewertung wird deine Stimme an den Sprachdienst des Browsers (Google in Chrome, Apple in Safari) gesendet und in Text umgewandelt. Sie erreicht niemals die Server von Hangul Bricks, und Aufnahmen werden nicht gespeichert.\n\n· Das Mikrofon wird nur für die Aussprachebewertung genutzt. Wenn du es ablehnst, funktioniert alles andere trotzdem.\n\n· Zahlungen werden von unserem Wiederverkäufer Lemon Squeezy abgewickelt, und die App sieht deine Kartendaten nie.\n\n· Wenn du „Per E-Mail wiederherstellen“ nutzt, wird die eingegebene E-Mail-Adresse an die Server von Hangul Bricks gesendet, um deinen Kauf bei Lemon Squeezy zu finden. Der Einmalcode wird über unseren E-Mail-Dienst Resend zugestellt. Die Adresse wird nicht gespeichert.';
 
   @override
   String get privacyApp =>

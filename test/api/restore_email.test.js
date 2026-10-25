@@ -30,8 +30,9 @@ const order = (id, email, variant, extra = {}) => ({
 });
 
 // orders/subs: what Lemon Squeezy "has"; filtering by email mimics the API
-// (case-insensitive) unless ignoreFilter simulates a filter it drops.
-function stub({ orders = [], subs = [], ignoreFilter = false, resendOk = true } = {}) {
+// (case-insensitive unless caseSensitive) unless ignoreFilter simulates a
+// filter it drops.
+function stub({ orders = [], subs = [], ignoreFilter = false, caseSensitive = false, resendOk = true } = {}) {
   const sent = [];
   globalThis.fetch = async (url, init = {}) => {
     const u = new URL(url);
@@ -40,9 +41,10 @@ function stub({ orders = [], subs = [], ignoreFilter = false, resendOk = true } 
       sent.push(JSON.parse(init.body));
       return json(resendOk ? 200 : 500, {});
     }
-    const email = (u.searchParams.get('filter[user_email]') || '').toLowerCase();
+    const raw = u.searchParams.get('filter[user_email]') || '';
+    const norm = (v) => (caseSensitive ? v : v.toLowerCase());
     const pick = (rows) =>
-      ignoreFilter ? rows : rows.filter((r) => r.attributes.user_email.toLowerCase() === email);
+      ignoreFilter ? rows : rows.filter((r) => norm(r.attributes.user_email) === norm(raw));
     if (u.pathname === '/v1/orders') return json(200, { data: pick(orders) });
     if (u.pathname === '/v1/subscriptions') {
       const orderId = u.searchParams.get('filter[order_id]');
@@ -70,7 +72,10 @@ async function call(handler, body, method = 'POST') {
 
 const codeIn = (mail) => mail.text.match(/code: (\w{4})-(\w{4})/).slice(1).join('');
 
-test.beforeEach(() => Object.assign(process.env, ENV));
+test.beforeEach(() => {
+  Object.assign(process.env, ENV);
+  restoreEmail.minReplyMs = 0;
+});
 test.afterEach(() => {
   for (const k of Object.keys(ENV)) delete process.env[k];
 });
@@ -162,6 +167,7 @@ test('an active monthly subscription restores with its order token', async () =>
     orders: [order(5, 'sub@mail.com', 200)],
     subs: [
       {
+        id: '9',
         attributes: {
           store_id: 7,
           user_email: 'sub@mail.com',
@@ -193,4 +199,27 @@ test('verify still resolves a lifetime token (shared helpers)', async () => {
   assert.equal(r.body.plan, 'lifetime');
   const bad = await call(verify, { token: '1:wrong' });
   assert.equal(bad.body.isActive, false);
+});
+
+test('finds a lowercased checkout email when typed with capitals', async () => {
+  const sent = stub({ orders: [order(1, 'fan@mail.com', 100)], caseSensitive: true });
+  await call(restoreEmail, { email: 'Fan@Mail.com' });
+  assert.equal(sent.length, 1);
+});
+
+test('mails the code in the app language, English for unknown ones', async () => {
+  const sent = stub({ orders: [order(1, 'fan@mail.com', 100)] });
+  await call(restoreEmail, { email: 'fan@mail.com', lang: 'ja' });
+  await call(restoreEmail, { email: 'fan@mail.com', lang: '__proto__' });
+  assert.match(sent[0].subject, /復元コード/);
+  assert.match(sent[0].text, /\w{4}-\w{4}/);
+  assert.equal(sent[1].subject, 'Your Hangul Bricks restore code');
+});
+
+test('a stranger waits the same minimum time as a buyer', async () => {
+  stub();
+  restoreEmail.minReplyMs = 60;
+  const t = Date.now();
+  await call(restoreEmail, { email: 'who@mail.com' });
+  assert.ok(Date.now() - t >= 55);
 });

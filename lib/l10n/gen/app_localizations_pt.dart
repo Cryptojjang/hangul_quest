@@ -675,7 +675,7 @@ class L10nPt extends L10n {
 
   @override
   String get privacyWeb =>
-      '· Seu progresso e seus erros são salvos apenas neste navegador. Não é preciso ter conta.\n\n· Para a nota de pronúncia, sua voz é enviada ao serviço de fala do navegador (Google no Chrome, Apple no Safari) para ser convertida em texto. Ela nunca chega aos servidores do Hangul Bricks e as gravações não são armazenadas.\n\n· O microfone é usado apenas para a nota de pronúncia. Se você negar o acesso, todo o resto continua funcionando.\n\n· Os pagamentos são processados pela nossa revendedora Lemon Squeezy, e o app nunca vê os dados do seu cartão.';
+      '· Seu progresso e seus erros são salvos apenas neste navegador. Não é preciso ter conta.\n\n· Para a nota de pronúncia, sua voz é enviada ao serviço de fala do navegador (Google no Chrome, Apple no Safari) para ser convertida em texto. Ela nunca chega aos servidores do Hangul Bricks e as gravações não são armazenadas.\n\n· O microfone é usado apenas para a nota de pronúncia. Se você negar o acesso, todo o resto continua funcionando.\n\n· Os pagamentos são processados pela nossa revendedora Lemon Squeezy, e o app nunca vê os dados do seu cartão.\n\n· Se você usar \"Restaurar por e-mail\", o e-mail digitado é enviado aos servidores do Hangul Bricks para localizar sua compra na Lemon Squeezy, e o código de uso único é entregue pelo nosso provedor de e-mail, Resend. O e-mail não é armazenado.';
 
   @override
   String get privacyApp =>

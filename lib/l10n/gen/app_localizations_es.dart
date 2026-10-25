@@ -682,7 +682,7 @@ class L10nEs extends L10n {
 
   @override
   String get privacyWeb =>
-      '· Tu progreso y tus errores se guardan solo en este navegador. No necesitas una cuenta.\n\n· Para puntuar la pronunciación, tu voz se envía al servicio de voz del navegador (Google en Chrome, Apple en Safari) para convertirla en texto. Nunca llega a los servidores de Hangul Bricks y las grabaciones no se guardan.\n\n· El micrófono se usa solo para puntuar la pronunciación. Si no lo permites, todo lo demás sigue funcionando.\n\n· Los pagos los gestiona nuestro revendedor Lemon Squeezy, y la app nunca ve los datos de tu tarjeta.';
+      '· Tu progreso y tus errores se guardan solo en este navegador. No necesitas una cuenta.\n\n· Para puntuar la pronunciación, tu voz se envía al servicio de voz del navegador (Google en Chrome, Apple en Safari) para convertirla en texto. Nunca llega a los servidores de Hangul Bricks y las grabaciones no se guardan.\n\n· El micrófono se usa solo para puntuar la pronunciación. Si no lo permites, todo lo demás sigue funcionando.\n\n· Los pagos los gestiona nuestro revendedor Lemon Squeezy, y la app nunca ve los datos de tu tarjeta.\n\n· Si usas «Restaurar con email», el email que introduces se envía a los servidores de Hangul Bricks para buscar tu compra en Lemon Squeezy, y el código de un solo uso lo entrega nuestro proveedor de email, Resend. El email no se guarda.';
 
   @override
   String get privacyApp =>
