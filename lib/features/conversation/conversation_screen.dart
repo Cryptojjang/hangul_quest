@@ -5,6 +5,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
+import '../../core/data/content_keys.dart';
 import '../../core/data/conversations.dart';
 import '../../l10n/l10n.dart';
 import '../../platform/audio/audio_asset_manager.dart';
@@ -82,7 +83,7 @@ class _ConversationCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(c.title,
+                Text(ct(context.localeCode, convKey(c.id, 'title'), c.title),
                     style: const TextStyle(fontWeight: FontWeight.w700)),
                 Text(c.titleKo, style: Theme.of(context).textTheme.bodySmall),
               ],
@@ -129,6 +130,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     final c = conversations[widget.index];
+    final loc = context.localeCode;
+    String tr(String key, String en) => ct(loc, key, en);
     // Speakers alternate sides in order of first appearance.
     final speakers = <String>[];
     for (final l in c.lines) {
@@ -139,7 +142,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: HqColors.ink,
-        title: Text(c.title),
+        title: Text(tr(convKey(c.id, 'title'), c.title)),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 28),
@@ -150,7 +153,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   fontWeight: FontWeight.w700,
                   color: HqColors.dancheongRed)),
           const SizedBox(height: 4),
-          Text(c.situation, style: Theme.of(context).textTheme.bodyMedium),
+          Text(tr(convKey(c.id, 'situation'), c.situation),
+              style: Theme.of(context).textTheme.bodyMedium),
           Row(
             children: [
               const Spacer(),
@@ -166,13 +170,16 @@ class _ConversationScreenState extends State<ConversationScreen> {
           for (var i = 0; i < c.lines.length; i++)
             _Bubble(
               line: c.lines[i],
+              speaker: tr(convSpeakerKey(c.id, i), c.lines[i].speaker),
+              english: tr(convLineKey(c.id, i), c.lines[i].english),
               right: speakers.indexOf(c.lines[i].speaker).isOdd,
               showRoman: _showRoman,
               onTap: () => _play(c.lineSlot(i)),
             ),
           const SizedBox(height: 16),
           Text(context.l.talkKeyPhrases,
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+              style:
+                  const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
           const SizedBox(height: 8),
           for (var i = 0; i < c.phrases.length; i++)
             Padding(
@@ -194,7 +201,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                 style: const TextStyle(
                                     fontSize: 13,
                                     color: HqColors.dancheongBlue)),
-                          Text(c.phrases[i].english,
+                          Text(tr(convPhraseKey(c.id, i), c.phrases[i].english),
                               style: Theme.of(context).textTheme.bodySmall),
                         ],
                       ),
@@ -227,7 +234,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       Text(context.l.talkCultureTip,
                           style: const TextStyle(fontWeight: FontWeight.w800)),
                       const SizedBox(height: 2),
-                      Text(c.cultureTip,
+                      Text(tr(convKey(c.id, 'tip'), c.cultureTip),
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -247,12 +254,18 @@ class _ConversationScreenState extends State<ConversationScreen> {
 class _Bubble extends StatelessWidget {
   const _Bubble({
     required this.line,
+    required this.speaker,
+    required this.english,
     required this.right,
     required this.showRoman,
     required this.onTap,
   });
 
   final DialogueLine line;
+
+  /// Localized speaker label and meaning of [line].
+  final String speaker;
+  final String english;
   final bool right;
   final bool showRoman;
   final VoidCallback onTap;
@@ -269,7 +282,7 @@ class _Bubble extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
-            child: Text(line.speaker,
+            child: Text(speaker,
                 style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
@@ -311,8 +324,7 @@ class _Bubble extends StatelessWidget {
                     Text(line.romanization,
                         style: const TextStyle(
                             fontSize: 13, color: HqColors.dancheongBlue)),
-                  Text(line.english,
-                      style: Theme.of(context).textTheme.bodySmall),
+                  Text(english, style: Theme.of(context).textTheme.bodySmall),
                 ],
               ),
             ),

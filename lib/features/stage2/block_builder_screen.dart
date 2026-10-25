@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
+import '../../core/data/content_keys.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/game/round_engine.dart';
 import '../../core/hangul/hangul.dart';
@@ -87,8 +88,7 @@ class _BlockBuilderScreenState extends State<BlockBuilderScreen>
         await state.playSyllable(puzzle.assembled!);
         final pointsBefore = _round!.score.points;
         _round!.completeCurrent();
-        _fx.currentState
-            ?.correct(points: _round!.score.points - pointsBefore);
+        _fx.currentState?.correct(points: _round!.score.points - pointsBefore);
         if (_round!.finished) {
           if (!mounted) return;
           Navigator.of(context).pushReplacement(HqPageRoute(
@@ -123,49 +123,50 @@ class _BlockBuilderScreenState extends State<BlockBuilderScreen>
       body: FeedbackFx(
         key: _fx,
         child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                      icon: const Icon(Icons.close, color: HqColors.inkSoft),
-                      onPressed: () => Navigator.of(context).pop()),
-                  Expanded(
-                    child: Text(
-                        '${round.level.title}  ·  $done/${round.level.syllableTargets.length}',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.titleMedium),
-                  ),
-                  IconButton(
-                      icon: const Icon(Icons.volume_up,
-                          color: HqColors.dancheongBlue),
-                      onPressed: _playTarget),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Text(context.l.builderPrompt,
-                  style: Theme.of(context).textTheme.bodySmall),
-              const Spacer(),
-              _AssemblyBoard(
-                  puzzle: puzzle, celebrate: _celebrate, onDrop: _onDrop),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 40,
-                child: _hint == null
-                    ? null
-                    : Text(_hint!,
-                        style: const TextStyle(
-                            color: HqColors.dancheongRed,
-                            fontWeight: FontWeight.w600)),
-              ),
-              const Spacer(),
-              _BlockTray(puzzle: puzzle),
-              const SizedBox(height: 16),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                        icon: const Icon(Icons.close, color: HqColors.inkSoft),
+                        onPressed: () => Navigator.of(context).pop()),
+                    Expanded(
+                      child: Text(
+                          '${ct(context.localeCode, levelKey(StageId.blockBuilder, round.level.level), round.level.title)}'
+                          '  ·  $done/${round.level.syllableTargets.length}',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.titleMedium),
+                    ),
+                    IconButton(
+                        icon: const Icon(Icons.volume_up,
+                            color: HqColors.dancheongBlue),
+                        onPressed: _playTarget),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(context.l.builderPrompt,
+                    style: Theme.of(context).textTheme.bodySmall),
+                const Spacer(),
+                _AssemblyBoard(
+                    puzzle: puzzle, celebrate: _celebrate, onDrop: _onDrop),
+                const SizedBox(height: 12),
+                SizedBox(
+                  height: 40,
+                  child: _hint == null
+                      ? null
+                      : Text(_hint!,
+                          style: const TextStyle(
+                              color: HqColors.dancheongRed,
+                              fontWeight: FontWeight.w600)),
+                ),
+                const Spacer(),
+                _BlockTray(puzzle: puzzle),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
-        ),
         ),
       ),
     );
@@ -194,10 +195,10 @@ class _AssemblyBoard extends StatelessWidget {
             color: color,
             onDrop: onDrop);
 
-    final cho = slot(SlotKind.choseong, puzzle.placedChoseong, context.l.slotInitial,
-        HqColors.choseongBlock);
-    final jung = slot(SlotKind.jungseong, puzzle.placedJungseong, context.l.slotVowel,
-        HqColors.jungseongBlock);
+    final cho = slot(SlotKind.choseong, puzzle.placedChoseong,
+        context.l.slotInitial, HqColors.choseongBlock);
+    final jung = slot(SlotKind.jungseong, puzzle.placedJungseong,
+        context.l.slotVowel, HqColors.jungseongBlock);
     final jong = puzzle.needsJongseong
         ? slot(SlotKind.jongseong, puzzle.placedJongseong, context.l.slotFinal,
             HqColors.jongseongBlock)
@@ -241,7 +242,8 @@ class _AssemblyBoard extends StatelessWidget {
               const BoxShadow(color: Color(0x1A2B2622), offset: Offset(2, 4)),
               if (t > 0)
                 BoxShadow(
-                    color: HqColors.obangYellow.withValues(alpha: 0.55 * (1 - t)),
+                    color:
+                        HqColors.obangYellow.withValues(alpha: 0.55 * (1 - t)),
                     blurRadius: 40 * t,
                     spreadRadius: 8 * t),
             ],
@@ -321,8 +323,8 @@ class _Slot extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       color: HqColors.ink))
               : Text(label,
-                  style: const TextStyle(
-                      fontSize: 11, color: HqColors.inkSoft)),
+                  style:
+                      const TextStyle(fontSize: 11, color: HqColors.inkSoft)),
         );
       },
     );
@@ -396,8 +398,7 @@ class _DraggableBlock extends StatelessWidget {
         state.services.audio.playSlot(AudioSlots.blockPick);
         state.services.haptics.play(HapticCue.light);
       },
-      feedback: Material(
-          color: Colors.transparent, child: _tile(scale: 1.08)),
+      feedback: Material(color: Colors.transparent, child: _tile(scale: 1.08)),
       childWhenDragging: _tile(alpha: 0.25),
       child: _tile(),
     );

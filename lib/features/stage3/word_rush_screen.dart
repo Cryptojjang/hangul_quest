@@ -8,6 +8,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
+import '../../core/data/content_keys.dart';
 import '../../core/data/curriculum.dart';
 import '../../core/data/vocab.dart';
 import '../../core/game/round_engine.dart';
@@ -77,8 +78,7 @@ class _WordRushScreenState extends State<WordRushScreen> {
     final bool correct;
     if (word == null) {
       // timeout counts as wrong on the answer word
-      _round!.answer(
-          q.options.firstWhere((o) => o.id != q.answer.id),
+      _round!.answer(q.options.firstWhere((o) => o.id != q.answer.id),
           tracker: state.progress.errors);
       correct = false;
     } else {
@@ -101,8 +101,7 @@ class _WordRushScreenState extends State<WordRushScreen> {
           ? AudioSlots.combo(_round!.score.multiplier + 1)
           : AudioSlots.tapCorrect);
       state.services.haptics.play(HapticCue.light);
-      _fx.currentState
-          ?.correct(points: _round!.score.points - pointsBefore);
+      _fx.currentState?.correct(points: _round!.score.points - pointsBefore);
     } else {
       state.services.audio.playSlot(AudioSlots.tapWrong);
       state.services.haptics.play(HapticCue.error);
@@ -115,8 +114,7 @@ class _WordRushScreenState extends State<WordRushScreen> {
       Future.delayed(Duration(milliseconds: delay), () {
         if (!mounted) return;
         final touched = <String>{
-          for (final qq in _round!.questions)
-            ...jamoIdsInWord(qq.answer.korean)
+          for (final qq in _round!.questions) ...jamoIdsInWord(qq.answer.korean)
         }.toList();
         Navigator.of(context).pushReplacement(HqPageRoute(
             page: ResultScreen(
@@ -264,8 +262,7 @@ class _WordCard extends StatelessWidget {
                     blurRadius: 18,
                     spreadRadius: 2)
               else
-                const BoxShadow(
-                    color: Color(0x1A2B2622), offset: Offset(2, 3)),
+                const BoxShadow(color: Color(0x1A2B2622), offset: Offset(2, 3)),
             ],
           ),
           child: Stack(
@@ -276,7 +273,7 @@ class _WordCard extends StatelessWidget {
                   children: [
                     _WordArt(word: word),
                     const SizedBox(height: 4),
-                    Text(word.english,
+                    Text(ct(context.localeCode, wordKey(word.id), word.english),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodySmall),
                   ],

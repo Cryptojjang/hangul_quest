@@ -8,8 +8,11 @@
 library;
 
 import 'content_translations.g.dart';
+import 'conversations.dart';
+import 'curriculum.dart';
 import 'explore.dart';
 import 'lessons.dart';
+import 'vocab.dart';
 
 /// Looks up translated content for [locale] (e.g. "ja", "zh_TW").
 String ct(String locale, String key, String english) =>
@@ -37,6 +40,13 @@ String appKey(int i, String part) => 'app.$i.$part';
 String historyKey(int i, String part) => 'hist.$i.$part';
 String foodKey(int i, String part) => 'food.$i.$part';
 String sajuKey(int i, String part) => 'saju.$i.$part';
+
+String convKey(String convId, String part) => 'conv.$convId.$part';
+String convLineKey(String convId, int i) => 'conv.$convId.l$i';
+String convSpeakerKey(String convId, int i) => 'conv.$convId.s$i';
+String convPhraseKey(String convId, int i) => 'conv.$convId.k$i';
+String wordKey(String wordId) => 'word.$wordId';
+String levelKey(StageId stage, int level) => 'level.${stage.name}.$level';
 
 /// Every translatable content string, keyed — the translation source.
 Map<String, String> englishContent() {
@@ -91,6 +101,30 @@ Map<String, String> englishContent() {
   for (var i = 0; i < sajuLinks.length; i++) {
     out[sajuKey(i, 'title')] = sajuLinks[i].title;
     out[sajuKey(i, 'desc')] = sajuLinks[i].description;
+  }
+  for (final c in conversations) {
+    out[convKey(c.id, 'title')] = c.title;
+    out[convKey(c.id, 'situation')] = c.situation;
+    out[convKey(c.id, 'tip')] = c.cultureTip;
+    for (var i = 0; i < c.lines.length; i++) {
+      out[convLineKey(c.id, i)] = c.lines[i].english;
+      // Role labels ("Staff", "To a stranger") translate; short names
+      // like "A"/"B" don't need to.
+      if (hasEnglish(c.lines[i].speaker)) {
+        out[convSpeakerKey(c.id, i)] = c.lines[i].speaker;
+      }
+    }
+    for (var i = 0; i < c.phrases.length; i++) {
+      out[convPhraseKey(c.id, i)] = c.phrases[i].english;
+    }
+  }
+  for (final w in vocabWords) {
+    out[wordKey(w.id)] = w.english;
+  }
+  for (final stage in StageId.values) {
+    for (final l in levelsFor(stage)) {
+      if (hasEnglish(l.title)) out[levelKey(stage, l.level)] = l.title;
+    }
   }
   return out;
 }
