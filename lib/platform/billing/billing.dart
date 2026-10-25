@@ -75,6 +75,20 @@ abstract class BillingGateway {
   Future<void> dispose();
 }
 
+/// Optional gateway capability (web): restore a purchase on a new device by
+/// proving ownership of the checkout email with a mailed one-time code. No
+/// accounts — the code is checked server-side (api/restore-email.js).
+abstract class EmailRestore {
+  /// Asks the server to mail a code. Completes the same way whether or not
+  /// the email bought anything; false only if the server couldn't be reached.
+  Future<bool> requestRestoreCode(String email);
+
+  /// Redeems the mailed [code]; null when it is wrong or expired. An active
+  /// status is also pushed on [BillingGateway.statusStream]. Throws when
+  /// the server can't be reached.
+  Future<SubscriptionStatus?> redeemRestoreCode(String email, String code);
+}
+
 /// Distribution channel of the running build.
 enum BuildChannel { appStore, playStore, web, dev }
 

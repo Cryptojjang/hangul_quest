@@ -60,6 +60,33 @@ class L10nZh extends L10n {
   String get commonNoSubscription => '没有可恢复的订阅';
 
   @override
+  String get restoreEmailAction => '通过邮箱恢复';
+
+  @override
+  String get restoreEmailBody => '请输入付款时使用的邮箱，我们会发送一次性验证码。';
+
+  @override
+  String get restoreEmailField => '邮箱';
+
+  @override
+  String get restoreEmailSend => '发送验证码';
+
+  @override
+  String get restoreEmailSent => '如果该邮箱有购买记录，验证码已在路上。请查看收件箱（和垃圾邮件）。';
+
+  @override
+  String get restoreEmailCodeField => '验证码';
+
+  @override
+  String get restoreEmailConfirm => '恢复';
+
+  @override
+  String get restoreEmailBadCode => '验证码错误或已过期。';
+
+  @override
+  String get restoreEmailError => '出错了，请重试。';
+
+  @override
   String commonCouldNotOpen(String url) {
     return '无法打开 $url';
   }
@@ -685,6 +712,33 @@ class L10nZhTw extends L10nZh {
 
   @override
   String get commonNoSubscription => '沒有可恢復的訂閱';
+
+  @override
+  String get restoreEmailAction => '透過電子郵件恢復';
+
+  @override
+  String get restoreEmailBody => '請輸入付款時使用的電子郵件，我們會寄送一次性驗證碼。';
+
+  @override
+  String get restoreEmailField => '電子郵件';
+
+  @override
+  String get restoreEmailSend => '寄送驗證碼';
+
+  @override
+  String get restoreEmailSent => '如果此電子郵件有購買紀錄，驗證碼已寄出。請查看收件匣（和垃圾郵件）。';
+
+  @override
+  String get restoreEmailCodeField => '驗證碼';
+
+  @override
+  String get restoreEmailConfirm => '恢復';
+
+  @override
+  String get restoreEmailBadCode => '驗證碼錯誤或已過期。';
+
+  @override
+  String get restoreEmailError => '發生錯誤，請再試一次。';
 
   @override
   String commonCouldNotOpen(String url) {

@@ -60,6 +60,35 @@ class L10nVi extends L10n {
   String get commonNoSubscription => 'Không có gói đăng ký nào để khôi phục';
 
   @override
+  String get restoreEmailAction => 'Khôi phục bằng email';
+
+  @override
+  String get restoreEmailBody =>
+      'Nhập email bạn đã dùng khi thanh toán. Chúng tôi sẽ gửi mã dùng một lần.';
+
+  @override
+  String get restoreEmailField => 'Email';
+
+  @override
+  String get restoreEmailSend => 'Gửi mã';
+
+  @override
+  String get restoreEmailSent =>
+      'Nếu email này có giao dịch mua, mã đang được gửi. Hãy kiểm tra hộp thư (và thư mục spam).';
+
+  @override
+  String get restoreEmailCodeField => 'Mã';
+
+  @override
+  String get restoreEmailConfirm => 'Khôi phục';
+
+  @override
+  String get restoreEmailBadCode => 'Mã không đúng hoặc đã hết hạn.';
+
+  @override
+  String get restoreEmailError => 'Đã xảy ra lỗi. Vui lòng thử lại.';
+
+  @override
   String commonCouldNotOpen(String url) {
     return 'Không thể mở $url';
   }

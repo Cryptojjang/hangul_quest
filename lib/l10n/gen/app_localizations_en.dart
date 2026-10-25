@@ -60,6 +60,35 @@ class L10nEn extends L10n {
   String get commonNoSubscription => 'No subscription to restore';
 
   @override
+  String get restoreEmailAction => 'Restore with email';
+
+  @override
+  String get restoreEmailBody =>
+      'Enter the email you used at checkout. We\'ll send you a one-time code.';
+
+  @override
+  String get restoreEmailField => 'Email';
+
+  @override
+  String get restoreEmailSend => 'Send code';
+
+  @override
+  String get restoreEmailSent =>
+      'If this email has a purchase, a code is on its way. Check your inbox (and spam folder).';
+
+  @override
+  String get restoreEmailCodeField => 'Code';
+
+  @override
+  String get restoreEmailConfirm => 'Restore';
+
+  @override
+  String get restoreEmailBadCode => 'That code is wrong or has expired.';
+
+  @override
+  String get restoreEmailError => 'Something went wrong. Please try again.';
+
+  @override
   String commonCouldNotOpen(String url) {
     return 'Could not open $url';
   }

@@ -11,6 +11,7 @@ import '../../l10n/l10n.dart';
 import '../../platform/billing/billing.dart';
 import '../../theme/hq_theme.dart';
 import '../settings/settings_screen.dart';
+import 'email_restore_dialog.dart';
 
 class PaywallScreen extends StatefulWidget {
   const PaywallScreen({super.key, required this.trigger});
@@ -78,6 +79,14 @@ class _PaywallScreenState extends State<PaywallScreen> {
             ? context.l.commonSubscriptionRestored
             : context.l.commonNoSubscription)));
     if (status.isActive) Navigator.of(context).pop();
+  }
+
+  Future<void> _restoreWithEmail(EmailRestore restore) async {
+    final restored = await EmailRestoreDialog.show(context, restore);
+    if (!mounted || !restored) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.l.commonSubscriptionRestored)));
+    Navigator.of(context).pop();
   }
 
   @override
@@ -189,6 +198,14 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     child: Text(l.commonRestorePurchase,
                         style: const TextStyle(fontSize: 12, color: HqColors.inkSoft)),
                   ),
+                  if (emailRestoreOf(AppScope.of(context).services.billing)
+                      case final restore?)
+                    TextButton(
+                      onPressed: () => _restoreWithEmail(restore),
+                      child: Text(l.restoreEmailAction,
+                          style: const TextStyle(
+                              fontSize: 12, color: HqColors.inkSoft)),
+                    ),
                   TextButton(
                     onPressed: () => Navigator.of(context).push(
                         HqPageRoute(page: const ManageSubscriptionScreen())),

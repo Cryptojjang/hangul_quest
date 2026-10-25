@@ -60,6 +60,36 @@ class L10nDe extends L10n {
   String get commonNoSubscription => 'Kein Abo zum Wiederherstellen';
 
   @override
+  String get restoreEmailAction => 'Per E-Mail wiederherstellen';
+
+  @override
+  String get restoreEmailBody =>
+      'Gib die E-Mail-Adresse ein, die du beim Kauf verwendet hast. Wir schicken dir einen Einmalcode.';
+
+  @override
+  String get restoreEmailField => 'E-Mail';
+
+  @override
+  String get restoreEmailSend => 'Code senden';
+
+  @override
+  String get restoreEmailSent =>
+      'Falls zu dieser E-Mail ein Kauf gehört, ist ein Code unterwegs. Sieh in deinem Posteingang (und Spam-Ordner) nach.';
+
+  @override
+  String get restoreEmailCodeField => 'Code';
+
+  @override
+  String get restoreEmailConfirm => 'Wiederherstellen';
+
+  @override
+  String get restoreEmailBadCode => 'Der Code ist falsch oder abgelaufen.';
+
+  @override
+  String get restoreEmailError =>
+      'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
+
+  @override
   String commonCouldNotOpen(String url) {
     return '$url konnte nicht geöffnet werden';
   }

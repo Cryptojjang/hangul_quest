@@ -60,6 +60,35 @@ class L10nId extends L10n {
   String get commonNoSubscription => 'Tidak ada langganan untuk dipulihkan';
 
   @override
+  String get restoreEmailAction => 'Pulihkan dengan email';
+
+  @override
+  String get restoreEmailBody =>
+      'Masukkan email yang kamu pakai saat membayar. Kami akan mengirim kode sekali pakai.';
+
+  @override
+  String get restoreEmailField => 'Email';
+
+  @override
+  String get restoreEmailSend => 'Kirim kode';
+
+  @override
+  String get restoreEmailSent =>
+      'Jika email ini memiliki pembelian, kode sedang dikirim. Periksa kotak masuk (dan folder spam).';
+
+  @override
+  String get restoreEmailCodeField => 'Kode';
+
+  @override
+  String get restoreEmailConfirm => 'Pulihkan';
+
+  @override
+  String get restoreEmailBadCode => 'Kode salah atau sudah kedaluwarsa.';
+
+  @override
+  String get restoreEmailError => 'Terjadi kesalahan. Coba lagi.';
+
+  @override
   String commonCouldNotOpen(String url) {
     return 'Tidak dapat membuka $url';
   }

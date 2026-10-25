@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../l10n/l10n.dart';
 import '../../theme/hq_theme.dart';
+import '../paywall/email_restore_dialog.dart';
 import 'language_sheet.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -107,6 +108,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             : l.commonNoSubscription)));
                   },
                 ),
+                if (emailRestoreOf(state.services.billing) case final restore?)
+                  ListTile(
+                    leading: const Icon(Icons.mail_outline,
+                        color: HqColors.inkSoft),
+                    title: Text(l.restoreEmailAction),
+                    onTap: () async {
+                      final restored =
+                          await EmailRestoreDialog.show(context, restore);
+                      if (!context.mounted || !restored) return;
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(l.commonSubscriptionRestored)));
+                    },
+                  ),
               ],
             ),
           ),

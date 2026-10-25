@@ -60,6 +60,35 @@ class L10nTh extends L10n {
   String get commonNoSubscription => 'ไม่มีการสมัครสมาชิกให้กู้คืน';
 
   @override
+  String get restoreEmailAction => 'กู้คืนด้วยอีเมล';
+
+  @override
+  String get restoreEmailBody =>
+      'กรอกอีเมลที่ใช้ตอนชำระเงิน แล้วเราจะส่งรหัสแบบใช้ครั้งเดียวให้';
+
+  @override
+  String get restoreEmailField => 'อีเมล';
+
+  @override
+  String get restoreEmailSend => 'ส่งรหัส';
+
+  @override
+  String get restoreEmailSent =>
+      'หากอีเมลนี้มีการซื้อ รหัสกำลังส่งไป ตรวจสอบกล่องจดหมาย (และโฟลเดอร์สแปม)';
+
+  @override
+  String get restoreEmailCodeField => 'รหัส';
+
+  @override
+  String get restoreEmailConfirm => 'กู้คืน';
+
+  @override
+  String get restoreEmailBadCode => 'รหัสไม่ถูกต้องหรือหมดอายุแล้ว';
+
+  @override
+  String get restoreEmailError => 'เกิดข้อผิดพลาด โปรดลองอีกครั้ง';
+
+  @override
   String commonCouldNotOpen(String url) {
     return 'ไม่สามารถเปิด $url ได้';
   }

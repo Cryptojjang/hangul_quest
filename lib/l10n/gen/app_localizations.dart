@@ -216,6 +216,60 @@ abstract class L10n {
   /// **'No subscription to restore'**
   String get commonNoSubscription;
 
+  /// No description provided for @restoreEmailAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore with email'**
+  String get restoreEmailAction;
+
+  /// No description provided for @restoreEmailBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the email you used at checkout. We\'ll send you a one-time code.'**
+  String get restoreEmailBody;
+
+  /// No description provided for @restoreEmailField.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get restoreEmailField;
+
+  /// No description provided for @restoreEmailSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get restoreEmailSend;
+
+  /// No description provided for @restoreEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'If this email has a purchase, a code is on its way. Check your inbox (and spam folder).'**
+  String get restoreEmailSent;
+
+  /// No description provided for @restoreEmailCodeField.
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get restoreEmailCodeField;
+
+  /// No description provided for @restoreEmailConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restoreEmailConfirm;
+
+  /// No description provided for @restoreEmailBadCode.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is wrong or has expired.'**
+  String get restoreEmailBadCode;
+
+  /// No description provided for @restoreEmailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get restoreEmailError;
+
   /// No description provided for @commonCouldNotOpen.
   ///
   /// In en, this message translates to:

@@ -1,5 +1,6 @@
 {
   "name": "hangulquest-web",
   "private": true,
-  "engines": { "node": ">=18" }
+  "engines": { "node": ">=18" },
+  "scripts": { "test:api": "node --test \"test/api/*.test.js\"" }
 }

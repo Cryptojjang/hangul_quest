@@ -60,6 +60,35 @@ class L10nPt extends L10n {
   String get commonNoSubscription => 'Nenhuma assinatura para restaurar';
 
   @override
+  String get restoreEmailAction => 'Restaurar por e-mail';
+
+  @override
+  String get restoreEmailBody =>
+      'Digite o e-mail usado na compra. Enviaremos um código de uso único.';
+
+  @override
+  String get restoreEmailField => 'E-mail';
+
+  @override
+  String get restoreEmailSend => 'Enviar código';
+
+  @override
+  String get restoreEmailSent =>
+      'Se este e-mail tiver uma compra, o código está a caminho. Confira sua caixa de entrada (e o spam).';
+
+  @override
+  String get restoreEmailCodeField => 'Código';
+
+  @override
+  String get restoreEmailConfirm => 'Restaurar';
+
+  @override
+  String get restoreEmailBadCode => 'O código está incorreto ou expirou.';
+
+  @override
+  String get restoreEmailError => 'Algo deu errado. Tente novamente.';
+
+  @override
   String commonCouldNotOpen(String url) {
     return 'Não foi possível abrir $url';
   }

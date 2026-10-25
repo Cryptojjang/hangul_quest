@@ -26,7 +26,7 @@ BillingGateway? createWebBillingGateway({
     WebBillingGateway(
         getCustomerId: getCustomerId, saveCustomerId: saveCustomerId);
 
-class WebBillingGateway implements BillingGateway {
+class WebBillingGateway implements BillingGateway, EmailRestore {
   WebBillingGateway({
     required this.getCustomerId,
     required this.saveCustomerId,
@@ -174,6 +174,36 @@ class WebBillingGateway implements BillingGateway {
     final token = getCustomerId();
     if (token == null) return SubscriptionStatus.none;
     return _verify(token);
+  }
+
+  /// Expiry stamp from the last code request; the server re-derives the
+  /// code from email + expiry, so it must come back with the code.
+  int? _codeExpires;
+
+  @override
+  Future<bool> requestRestoreCode(String email) async {
+    try {
+      final res = await _api('/api/restore-email', {'email': email});
+      _codeExpires = (res['expires'] as num?)?.toInt();
+      return res['sent'] == true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<SubscriptionStatus?> redeemRestoreCode(
+      String email, String code) async {
+    final res = await _api('/api/restore-email',
+        {'email': email, 'code': code, 'expires': _codeExpires});
+    if (res['invalidCode'] == true) return null;
+    final status = _statusFrom(res);
+    final token = res['token'] as String?;
+    if (status.isActive && token != null) {
+      saveCustomerId(token); // later restores on this device skip the email
+      _controller.add(status);
+    }
+    return status;
   }
 
   static SubscriptionStatus _statusFrom(Map<String, dynamic> m) =>

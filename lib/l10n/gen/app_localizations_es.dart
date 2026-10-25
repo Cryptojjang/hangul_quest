@@ -61,6 +61,35 @@ class L10nEs extends L10n {
       'No hay ninguna suscripción para restaurar';
 
   @override
+  String get restoreEmailAction => 'Restaurar con email';
+
+  @override
+  String get restoreEmailBody =>
+      'Introduce el email que usaste al pagar. Te enviaremos un código de un solo uso.';
+
+  @override
+  String get restoreEmailField => 'Email';
+
+  @override
+  String get restoreEmailSend => 'Enviar código';
+
+  @override
+  String get restoreEmailSent =>
+      'Si este email tiene una compra, el código va en camino. Revisa tu bandeja de entrada (y la carpeta de spam).';
+
+  @override
+  String get restoreEmailCodeField => 'Código';
+
+  @override
+  String get restoreEmailConfirm => 'Restaurar';
+
+  @override
+  String get restoreEmailBadCode => 'El código es incorrecto o ha caducado.';
+
+  @override
+  String get restoreEmailError => 'Algo salió mal. Inténtalo de nuevo.';
+
+  @override
   String commonCouldNotOpen(String url) {
     return 'No se pudo abrir $url';
   }

@@ -60,6 +60,34 @@ class L10nJa extends L10n {
   String get commonNoSubscription => '復元できるサブスクリプションがありません';
 
   @override
+  String get restoreEmailAction => 'メールで復元';
+
+  @override
+  String get restoreEmailBody => '購入時に使ったメールアドレスを入力してください。ワンタイムコードをお送りします。';
+
+  @override
+  String get restoreEmailField => 'メールアドレス';
+
+  @override
+  String get restoreEmailSend => 'コードを送信';
+
+  @override
+  String get restoreEmailSent =>
+      'このメールアドレスに購入履歴があれば、コードを送信しました。受信トレイ（と迷惑メールフォルダ）を確認してください。';
+
+  @override
+  String get restoreEmailCodeField => 'コード';
+
+  @override
+  String get restoreEmailConfirm => '復元する';
+
+  @override
+  String get restoreEmailBadCode => 'コードが正しくないか、有効期限が切れています。';
+
+  @override
+  String get restoreEmailError => 'エラーが発生しました。もう一度お試しください。';
+
+  @override
   String commonCouldNotOpen(String url) {
     return '$url を開けませんでした';
   }

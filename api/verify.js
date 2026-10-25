@@ -5,35 +5,7 @@
 // The token comes from the Lemon.js Checkout.Success event and is kept by the
 // client for restore(). Order ids are sequential, so the order's UUID
 // identifier must match too — a guessed id alone unlocks nothing.
-const { env, ls } = require('./_lib/lemonsqueezy');
-
-const NONE = { isActive: false, inTrial: false };
-const LIVE = new Set(['on_trial', 'active', 'past_due']);
-
-function statusFromSubscription(sub, e, token) {
-  if (!sub) return { ...NONE, token };
-  const a = sub.attributes;
-  const endsAt = a.ends_at ? Date.parse(a.ends_at) : null;
-  // A cancelled subscription keeps access until the paid period ends.
-  const active =
-    LIVE.has(a.status) || (a.status === 'cancelled' && endsAt > Date.now());
-  const expires =
-    endsAt ||
-    (a.status === 'on_trial' && a.trial_ends_at && Date.parse(a.trial_ends_at)) ||
-    (a.renews_at && Date.parse(a.renews_at)) ||
-    undefined;
-  return {
-    isActive: active,
-    plan: active
-      ? String(a.variant_id) === String(e.variantYearly)
-        ? 'yearly'
-        : 'monthly'
-      : undefined,
-    inTrial: a.status === 'on_trial',
-    expiresAtMillis: expires,
-    token,
-  };
-}
+const { env, ls, NONE, statusFromSubscription } = require('./_lib/lemonsqueezy');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
