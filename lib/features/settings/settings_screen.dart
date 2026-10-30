@@ -217,7 +217,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   /// Hosted policy URL — surfaced in App Store Connect metadata too.
-  static const policyUrl = 'https://hangulquest-phi.vercel.app/privacy';
+  static const policyUrl = 'https://hangul-bricks.vercel.app/privacy';
 
   @override
   Widget build(BuildContext context) {
